@@ -1,0 +1,9 @@
+markdown: rdiscount
+permalink: /:title/
+url: http://liyafeng.cn
+author: Hanson Li
+pygments: true
+safe: false
+paginate: 5
+auto: true
+
