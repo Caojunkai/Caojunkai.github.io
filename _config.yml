@@ -1,7 +1,7 @@
 markdown: rdiscount
 permalink: /:title/
 url: http://liyafeng.cn
-author: Hanson Li
+author: Laratrvel
 pygments: true
 safe: false
 paginate: 5
