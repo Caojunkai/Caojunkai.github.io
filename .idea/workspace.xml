@@ -1,7 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2126505c-fd7e-4db7-82cf-af53d5587b49" name="Default" comment="" />
+    <list default="true" id="2126505c-fd7e-4db7-82cf-af53d5587b49" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-16-life_essay_1.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-16-life_essay_1.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-17-php_5_static_bind_1.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-17-php_5_static_bind_1.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-17-views_impression_1.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-17-views_impression_1.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-18-a_php_traits_notes_1.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-18-a_php_traits_notes_1.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-18-b_php_5_data_filter_1.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-18-b_php_5_data_filter_1.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-18-web_font_ueditor_1.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-18-web_font_ueditor_1.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-19-git_install_process_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-19-git_install_process_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-19-git_kcreate_repository_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-19-git_kcreate_repository_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-20-git_version_back_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-20-git_version_back_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-21-a_git_work_temporary_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-21-a_git_work_temporary_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-22-git_manage_file_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-22-git_manage_file_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-22-git_n_delete_file_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-22-git_n_delete_file_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-23-git_a_remote_transmission_create_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-23-git_a_remote_transmission_create_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-23-git_b_add_and_clone_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-23-git_b_add_and_clone_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-24-php_a_use_function_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-24-php_a_use_function_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-24-php_b_upload_file_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-24-php_b_upload_file_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-24-q_git_create_and_merge_branch.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-24-q_git_create_and_merge_branch.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-26-git_branch_conflicts_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-26-git_branch_conflicts_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-26-linux_php_install_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-26-linux_php_install_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-27-git_branch_manage_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-27-git_branch_manage_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-27-php_pdo_transaction_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-27-php_pdo_transaction_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-27-unix_dos_crlf_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-27-unix_dos_crlf_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-28-git_bug_branch_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-28-git_bug_branch_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-30-git_delete_unmerge_branch_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-30-git_delete_unmerge_branch_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-02-git_collaboration_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-02-git_collaboration_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-04-git_create_tag_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-04-git_create_tag_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-05-git_gitignore_file_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-05-git_gitignore_file_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-07-git_config_aliase_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-07-git_config_aliase_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-10-life_essay_2.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-10-life_essay_2.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-12-memcached_install_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-12-memcached_install_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-13-js_noscript_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-13-js_noscript_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-13-php_distorted_code.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-13-php_distorted_code.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-14-php_float_false_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-14-php_float_false_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-15-git_create_git_server_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-15-git_create_git_server_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-15-git_summary_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-15-git_summary_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-21-life_essay_3.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-21-life_essay_3.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-28-php_web_pay_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-28-php_web_pay_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-29-memcache_telnet_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-29-memcache_telnet_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-30-memcache_php_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-30-memcache_php_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-08-06-session_safe_notes.md" afterPath="$PROJECT_DIR$/_posts/201408/2014-08-06-session_safe_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-08-11-linux_code_type_note.md" afterPath="$PROJECT_DIR$/_posts/201408/2014-08-11-linux_code_type_note.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-08-11-vim_super_study.md" afterPath="$PROJECT_DIR$/_posts/201408/2014-08-11-vim_super_study.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-08-17-sed_tool_notes.md" afterPath="$PROJECT_DIR$/_posts/201408/2014-08-17-sed_tool_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-08-22-shell_script_source_and_bash.md" afterPath="$PROJECT_DIR$/_posts/201408/2014-08-22-shell_script_source_and_bash.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-09-03-ajax_jsonp_return.md" afterPath="$PROJECT_DIR$/_posts/201409/2014-09-03-ajax_jsonp_return.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-09-05-ajax_upload_progress.md" afterPath="$PROJECT_DIR$/_posts/201409/2014-09-05-ajax_upload_progress.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-09-07-ajax_file_slice_upload.md" afterPath="$PROJECT_DIR$/_posts/201409/2014-09-07-ajax_file_slice_upload.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-09-11-jquery_and_dom.md" afterPath="$PROJECT_DIR$/_posts/201409/2014-09-11-jquery_and_dom.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-09-12-js_function_analysis.md" afterPath="$PROJECT_DIR$/_posts/201409/2014-09-12-js_function_analysis.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-09-23-dropbox_mit_speech.md" afterPath="$PROJECT_DIR$/_posts/201409/2014-09-23-dropbox_mit_speech.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-09-26-details_with_attitude.md" afterPath="$PROJECT_DIR$/_posts/201409/2014-09-26-details_with_attitude.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-10-07-the_regular_expression_look_around.md" afterPath="$PROJECT_DIR$/_posts/201410/2014-10-07-the_regular_expression_look_around.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-10-10-mysql_grant_and_manage_notes.md" afterPath="$PROJECT_DIR$/_posts/201410/2014-10-10-mysql_grant_and_manage_notes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-10-11-php_simulation_asynchroous.md" afterPath="$PROJECT_DIR$/_posts/201410/2014-10-11-php_simulation_asynchroous.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-10-15-check_gif_picture.md" afterPath="$PROJECT_DIR$/_posts/201410/2014-10-15-check_gif_picture.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-10-19-mysql_myisam_data_optimize.md" afterPath="$PROJECT_DIR$/_posts/201410/2014-10-19-mysql_myisam_data_optimize.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-10-21-mysql_mysqlbinlog_dump_note.md" afterPath="$PROJECT_DIR$/_posts/201410/2014-10-21-mysql_mysqlbinlog_dump_note.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-10-22-redis-linux_and_windows-setup.md" afterPath="$PROJECT_DIR$/_posts/201410/2014-10-22-redis-linux_and_windows-setup.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-10-30-how_to_manage_our_time.md" afterPath="$PROJECT_DIR$/_posts/201410/2014-10-30-how_to_manage_our_time.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-11-02-ssl_tls_secure_notes.md" afterPath="$PROJECT_DIR$/_posts/201411/2014-11-02-ssl_tls_secure_notes.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/xiaoyu/index.md" afterPath="$PROJECT_DIR$/xiaoyu/index.md" />
+    </list>
     <ignored path="Caojunkai.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -12,7 +76,6 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -26,6 +89,7 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="Zad" />
         <option value="Laratrvel" />
       </list>
     </option>
@@ -36,25 +100,23 @@
       <list>
         <option value="$PROJECT_DIR$/_config.yml" />
         <option value="$PROJECT_DIR$/_layouts/default.html" />
+        <option value="$PROJECT_DIR$/xiaoyu/index.md" />
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
-  </component>
-  <component name="NamedScopeManager">
-    <order />
+    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpServers">
     <servers />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="width" value="1280" />
+    <option name="height" value="800" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -83,6 +145,8 @@
       <autoscrollToSource />
       <autoscrollFromSource />
       <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
       <pane id="Scratches" />
@@ -101,7 +165,7 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Caojunkai.github.io" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -110,9 +174,9 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="D:/WWW/Yii" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="SearchEverywhereHistoryKey" value="author&#9;null&#9;null" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="78" />
@@ -131,10 +195,22 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1002" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
-    <property name="FullScreen" value="false" />
+    <property name="FullScreen" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/_posts/201411" />
+      <recent name="$PROJECT_DIR$/_posts/201410" />
+      <recent name="$PROJECT_DIR$/_posts/201409" />
+      <recent name="$PROJECT_DIR$/_posts/201408" />
+      <recent name="$PROJECT_DIR$/_posts/201407" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
       <method />
     </configuration>
     <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -152,6 +228,7 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
       <node-options />
       <gulpfile />
       <tasks />
@@ -160,8 +237,30 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui />
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -170,41 +269,47 @@
       <changelist id="2126505c-fd7e-4db7-82cf-af53d5587b49" name="Default" comment="" />
       <created>1443019527114</created>
       <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
       <updated>1443019527114</updated>
+      <workItem from="1471509294313" duration="969000" />
     </task>
     <task id="LOCAL-00001" summary="change">
       <created>1443020169807</created>
       <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
       <updated>1443020169807</updated>
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="969000" />
+  </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18892261" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3224138" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19174758" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3224138" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -220,7 +325,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="change" />
-    <option name="LAST_COMMIT_MESSAGE" value="change" />
+    <MESSAGE value="change constuct" />
+    <option name="LAST_COMMIT_MESSAGE" value="change constuct" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -228,109 +334,174 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/404.md">
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
-      <provider editor-type-id="MultiMarkdownFxHtmlEditor">
-        <state />
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state relative-caret-position="0">
           <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="6" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/highlight.pack.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
+        <state relative-caret-position="0">
           <caret line="0" column="37227" selection-start-line="0" selection-start-column="37227" selection-end-line="0" selection-end-column="37227" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_layouts/post.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6291262">
+        <state relative-caret-position="0">
           <caret line="36" column="55" selection-start-line="36" selection-start-column="40" selection-end-line="36" selection-end-column="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_layouts/page.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.576699">
+        <state relative-caret-position="0">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_layouts/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26213592">
+        <state relative-caret-position="0">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_layouts/default.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26213592">
+        <state relative-caret-position="0">
           <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/about/index.md">
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
-      <provider editor-type-id="MultiMarkdownFxHtmlEditor">
-        <state />
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44262296">
+        <state relative-caret-position="0">
           <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/404.md">
-      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
-        <state />
-      </provider>
-      <provider editor-type-id="MultiMarkdownFxHtmlEditor">
-        <state />
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11218569">
+        <state relative-caret-position="0">
           <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="6" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/201507/xiaoyu01.JPG">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/201507/xiaoyu02.JPG">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/201506/2015-06-20_005338.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/201506/2015-06-20_005428.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/201506/2015-06-12_223756.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/posts/index.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xiaoyu/index.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="189">
+            <caret line="13" column="24" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/201406/2014-06-17-php_5_static_bind_1.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="-21">
+            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/201509/2015-09-23-difference_of_MyISAM_and_Innodb.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="63">
+            <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/201507/2015-07-09-php_use_json_note.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="339">
+            <caret line="63" column="4" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="4" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Rakefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
