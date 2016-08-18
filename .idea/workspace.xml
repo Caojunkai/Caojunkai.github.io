@@ -2,69 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2126505c-fd7e-4db7-82cf-af53d5587b49" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-16-life_essay_1.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-16-life_essay_1.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-17-php_5_static_bind_1.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-17-php_5_static_bind_1.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-17-views_impression_1.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-17-views_impression_1.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-18-a_php_traits_notes_1.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-18-a_php_traits_notes_1.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-18-b_php_5_data_filter_1.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-18-b_php_5_data_filter_1.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-18-web_font_ueditor_1.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-18-web_font_ueditor_1.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-19-git_install_process_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-19-git_install_process_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-19-git_kcreate_repository_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-19-git_kcreate_repository_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-20-git_version_back_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-20-git_version_back_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-21-a_git_work_temporary_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-21-a_git_work_temporary_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-22-git_manage_file_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-22-git_manage_file_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-22-git_n_delete_file_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-22-git_n_delete_file_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-23-git_a_remote_transmission_create_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-23-git_a_remote_transmission_create_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-23-git_b_add_and_clone_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-23-git_b_add_and_clone_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-24-php_a_use_function_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-24-php_a_use_function_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-24-php_b_upload_file_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-24-php_b_upload_file_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-24-q_git_create_and_merge_branch.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-24-q_git_create_and_merge_branch.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-26-git_branch_conflicts_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-26-git_branch_conflicts_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-26-linux_php_install_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-26-linux_php_install_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-27-git_branch_manage_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-27-git_branch_manage_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-27-php_pdo_transaction_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-27-php_pdo_transaction_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-27-unix_dos_crlf_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-27-unix_dos_crlf_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-28-git_bug_branch_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-28-git_bug_branch_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-06-30-git_delete_unmerge_branch_notes.md" afterPath="$PROJECT_DIR$/_posts/201406/2014-06-30-git_delete_unmerge_branch_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-02-git_collaboration_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-02-git_collaboration_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-04-git_create_tag_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-04-git_create_tag_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-05-git_gitignore_file_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-05-git_gitignore_file_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-07-git_config_aliase_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-07-git_config_aliase_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-10-life_essay_2.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-10-life_essay_2.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-12-memcached_install_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-12-memcached_install_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-13-js_noscript_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-13-js_noscript_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-13-php_distorted_code.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-13-php_distorted_code.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-14-php_float_false_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-14-php_float_false_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-15-git_create_git_server_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-15-git_create_git_server_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-15-git_summary_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-15-git_summary_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-21-life_essay_3.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-21-life_essay_3.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-28-php_web_pay_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-28-php_web_pay_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-29-memcache_telnet_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-29-memcache_telnet_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-07-30-memcache_php_notes.md" afterPath="$PROJECT_DIR$/_posts/201407/2014-07-30-memcache_php_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-08-06-session_safe_notes.md" afterPath="$PROJECT_DIR$/_posts/201408/2014-08-06-session_safe_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-08-11-linux_code_type_note.md" afterPath="$PROJECT_DIR$/_posts/201408/2014-08-11-linux_code_type_note.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-08-11-vim_super_study.md" afterPath="$PROJECT_DIR$/_posts/201408/2014-08-11-vim_super_study.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-08-17-sed_tool_notes.md" afterPath="$PROJECT_DIR$/_posts/201408/2014-08-17-sed_tool_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-08-22-shell_script_source_and_bash.md" afterPath="$PROJECT_DIR$/_posts/201408/2014-08-22-shell_script_source_and_bash.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-09-03-ajax_jsonp_return.md" afterPath="$PROJECT_DIR$/_posts/201409/2014-09-03-ajax_jsonp_return.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-09-05-ajax_upload_progress.md" afterPath="$PROJECT_DIR$/_posts/201409/2014-09-05-ajax_upload_progress.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-09-07-ajax_file_slice_upload.md" afterPath="$PROJECT_DIR$/_posts/201409/2014-09-07-ajax_file_slice_upload.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-09-11-jquery_and_dom.md" afterPath="$PROJECT_DIR$/_posts/201409/2014-09-11-jquery_and_dom.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-09-12-js_function_analysis.md" afterPath="$PROJECT_DIR$/_posts/201409/2014-09-12-js_function_analysis.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-09-23-dropbox_mit_speech.md" afterPath="$PROJECT_DIR$/_posts/201409/2014-09-23-dropbox_mit_speech.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-09-26-details_with_attitude.md" afterPath="$PROJECT_DIR$/_posts/201409/2014-09-26-details_with_attitude.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-10-07-the_regular_expression_look_around.md" afterPath="$PROJECT_DIR$/_posts/201410/2014-10-07-the_regular_expression_look_around.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-10-10-mysql_grant_and_manage_notes.md" afterPath="$PROJECT_DIR$/_posts/201410/2014-10-10-mysql_grant_and_manage_notes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-10-11-php_simulation_asynchroous.md" afterPath="$PROJECT_DIR$/_posts/201410/2014-10-11-php_simulation_asynchroous.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-10-15-check_gif_picture.md" afterPath="$PROJECT_DIR$/_posts/201410/2014-10-15-check_gif_picture.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-10-19-mysql_myisam_data_optimize.md" afterPath="$PROJECT_DIR$/_posts/201410/2014-10-19-mysql_myisam_data_optimize.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-10-21-mysql_mysqlbinlog_dump_note.md" afterPath="$PROJECT_DIR$/_posts/201410/2014-10-21-mysql_mysqlbinlog_dump_note.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-10-22-redis-linux_and_windows-setup.md" afterPath="$PROJECT_DIR$/_posts/201410/2014-10-22-redis-linux_and_windows-setup.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-10-30-how_to_manage_our_time.md" afterPath="$PROJECT_DIR$/_posts/201410/2014-10-30-how_to_manage_our_time.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2014-11-02-ssl_tls_secure_notes.md" afterPath="$PROJECT_DIR$/_posts/201411/2014-11-02-ssl_tls_secure_notes.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/xiaoyu/index.md" afterPath="$PROJECT_DIR$/xiaoyu/index.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="Caojunkai.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -101,6 +39,7 @@
         <option value="$PROJECT_DIR$/_config.yml" />
         <option value="$PROJECT_DIR$/_layouts/default.html" />
         <option value="$PROJECT_DIR$/xiaoyu/index.md" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -271,7 +210,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1443019527114</updated>
-      <workItem from="1471509294313" duration="969000" />
+      <workItem from="1471509294313" duration="1100000" />
     </task>
     <task id="LOCAL-00001" summary="change">
       <created>1443020169807</created>
@@ -284,7 +223,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="969000" />
+    <option name="totallyTimeSpent" value="1100000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -435,14 +374,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/posts/index.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -502,6 +433,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
           <folding />
         </state>
       </provider>
