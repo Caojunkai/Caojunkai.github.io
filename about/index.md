@@ -12,8 +12,7 @@ comments: false
 ---
 ###联系我
 
-*	Email: &nbsp;&nbsp;&nbsp;[caojunkaiv@163.com](mailto:maratrix@163.com)
-*	Blog: &nbsp;&nbsp;&nbsp;[http://zade.xyz](http://zade.xyz)
-*	Weibo: &nbsp;&nbsp;&nbsp;[@Laratrvel](http://weibo.com/2963217565)
+*	Email: &nbsp;&nbsp;&nbsp;[caojunkaiv@gmail.com](mailto:caojunkaiv@gmail.com)
+*	Blog: &nbsp;&nbsp;&nbsp;[http://caojunkai.cn](http://caojunkai.cn)
+*	Weibo: &nbsp;&nbsp;&nbsp;[@Fitzi](http://weibo.com/2963217565)
 *	Github: &nbsp;&nbsp;&nbsp;[https://github.com/caojunkai](https://github.com/Caojunkai)
-

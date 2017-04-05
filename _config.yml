@@ -1,9 +1,8 @@
 markdown: rdiscount
 permalink: /:title/
-url: http://liyafeng.cn
-author: Laratrvel
+url: http://caojunkai.cn
+author: Fitz
 pygments: true
 safe: false
 paginate: 5
 auto: true
-
