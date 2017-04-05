@@ -1,0 +1,30 @@
+---
+layout : post
+title : Vue目录结构
+category : Vue
+tags : Vue
+---
+## vuex目录结构
+> |--modules
+|-----saerch.js
+|-----searchGrouop.js
+ |--actions.js
+ |--getters.js
+ |--middlewares.js
+ |--mutation-types.js
+ |--store.js
+
+### 各文件使用说明
+#### modules
+module 也就是vuex概念里的store,这里模块拆分了,存放我们实际项目中要使用的vuex模块,一般可以针对组件级别定义.
+例如这里我们定义了search.js和searchGroup.js 然而module最后会在store.js中统一使用
+#### actions
+这里定义我们vue组件要操作的动作事件, 比如请求一个异步操作,获取其他组件的状态等
+#### getter
+getters 定义公用的getters处理 ,例如正常组件里想computed一个状态但在vuex里面不知道怎么处理，就可以在这里处理
+#### middlewares
+middlewares中间件处理的东西，这里主要开发时候在控制台查看一些处理日志，vuex本身自带,其他没有研究过
+#### mutation-types
+定义mutation里用到的方法常量值，统一处理在这里，一般都是业务字符串常量
+#### store
+store.js核心文件，这里就是vuex基本的写法了，先引用vue和vuex 然后user(Vuex),把定义好的modules,middlewares引入进来然后返回一个Vuex.stor
