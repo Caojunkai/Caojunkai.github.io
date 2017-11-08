@@ -50,7 +50,7 @@ h2{font-family:"Cuprum","Hiragino Sans GB","Microsoft YaHei",sans-serif;font-siz
    margin: 20px 0px 20px; padding: 7px;}
 h3{font-family:"Cuprum","Hiragino Sans GB","Microsoft YaHei",sans-serif;font-size:1.2em;color:#222;}
 h4{font-family:"Cuprum","Hiragino Sans GB","Microsoft YaHei",sans-serif;font-size:1em;color:#333;}
-pre,code{font-family:Menlo,"DejaVu Sans Mono","Bitstream Vera Sans Mono","Andale Mono",Consolas,Menlo,"Andale Mono","Courier New",Monaco,monospace;font-size:11px;}
+pre,code{font-family:'Source Code Pro',Menlo,"DejaVu Sans Mono","Bitstream Vera Sans Mono","Andale Mono",Consolas,Menlo,"Andale Mono","Courier New",Monaco,monospace;font-size:11px;}
 p code{background-color:#f7f7f7; padding: 2px; margin: 2px; border-radius: 3px; border: 1px solid #ddd;}
 embed,object,iframe{display:block;margin:4px auto;}
 .gist{font-size: 12px;line-height:1.6;}
