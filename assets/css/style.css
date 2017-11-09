@@ -1,13 +1,14 @@
 /* @import url(http://fonts.googleapis.com/css?family=Consolas); */
 @import url(http://fonts.googleapis.com/css?family=Source+Code+Pro);
 @import url(http://fonts.googleapis.com/css?family=Electrolize);
+@import url(//fonts.googleapis.com/earlyaccess/notosanslepcha.css);
 @import url(http://fonts.googleapis.com/css?family=Cuprum);
 body{
 	font-size:14px;
 	word-spacing:1px;
 	margin-left:auto;
 	margin-right:auto;
-	font-family:'Source Code Pro',"Microsoft YaHei","微软雅黑","STXihei","华文细黑","Hiragino Sans GB",Trebuchet,"Trebuchet MS",Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif;
+	font-family:'Noto Sans Lepcha','Source Code Pro',"Microsoft YaHei","微软雅黑","STXihei","华文细黑","Hiragino Sans GB",Trebuchet,"Trebuchet MS",Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif;
 	color:#000000;
 	background-color:#e8e8e8;
 }
