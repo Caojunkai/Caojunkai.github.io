@@ -1,0 +1,15 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 永久数据丢失现象 · Hexo</title><meta name="description" content="永久数据丢失现象 - John Doe"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Hexo"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">永久数据丢失现象</h1><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>有时候，在我们使用memcache过程中会出现”数据丢失”的现象， 也就是说明明数据被设为永久有效，却莫名其妙的丢失了，这是怎么回事呢？</p>
+<p>在上一篇博客<a href="http://liyafeng.cn/memcache_item_delete_note/" target="_blank" rel="noopener">Memcache过期数据惰性和LRU删除机制</a>中已经总结了memcache过期数据是如何被删除的以及根据LRU（最近最少使用机制）来从最近未被使用的记录中搜索，并将其空间分配给新的记录。</p>
+<a id="more"></a>
+<p>所以，遇到这种情况我们只需要从以上两方面来分析，即可得到以下结论：</p>
+<p>1、如果Slab中的很多chunk尚未过期， 且非永久数据比较活跃，此时新增item，则永久数据被踢；</p>
+<p>2、如果Slab中的很多chunk已经过期， 且过期前比较活跃以及过期后未被get过，系统不知道他们已经过期，此时新增item， 则永久数据被踢；</p>
+<p>3、如果Slab中的很多chunk已经过期，且被get过，被标记为expire(过期)，此时新增item，则永久数据不会被踢；</p>
+<p>用图表示如下：</p>
+<p><img src="../../images/201503/2015-03-30_155818.jpg" alt=""></p>
+<p>避免永久数据被踢现象的解决方案：</p>
+<blockquote>
+<p>永久数据和非永久数据分开放，具体如何设计，看具体环境。</p>
+</blockquote>
+<p>(end)</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/04/12/201504-2015-04-18-xhprof-php-analyse-tool/" class="prev">PREV</a><a href="/2018/04/12/201503-2015-03-30-memcache-multiget-hole-note/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="http://yoursite.com">John Doe</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Memcache过期数据惰性和LRU删除机制 · Hexo</title><meta name="description" content="Memcache过期数据惰性和LRU删除机制 - John Doe"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Hexo"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Memcache过期数据惰性和LRU删除机制</h1><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>Memcache是缓存，所以数据不会永久保存在服务器上，这也是在服务器上引进Memcache的前提。当我们在memcache中存放数据时会设置超时时间（不设置，默认为永久有效，但不排除会被新数据剔除的可能性），那么当到达超时时间时memcache是如何做到删除数据的呢？这里需要引入<strong>Lazy Expiration</strong>即惰性失效的概念。  </p>
+<a id="more"></a>
+<p>##过期数据的惰性删除</p>
+<p>首先，我们在memcache中存入测试数据：</p>
+<pre><code>telnet 127.0.0.1 11211 //使用telnet做连接测试
+&gt;add aa 0 10 
+&gt;test
+</code></pre><p>此时，我们存入了一个key为aa的测试数据，并且设置超时时间是10s。</p>
+<p>等待10s……滴答滴答……</p>
+<p>这时候，我们使用<code>stats</code>命令在telnet下查看运行状态：</p>
+<p><img src="../../images/201503/2015-03-29_163610.jpg" alt=""></p>
+<p>我们发现，当某个值过期后,并没有从内存删除, 因此,stats 统计时, curr_item仍有其信息。此时，我们使用命令<code>get</code>后，再次stats查看信息，发现内存中已经没有该信息了，也就是说被删掉了。如下图：</p>
+<p><img src="../../images/201503/2015-03-29_163855.jpg" alt=""></p>
+<p>因此，我们可以总结如下：</p>
+<p>1、 当某个值过期后,并没有从内存删除, 因此,stats 统计时, curr_item 有其信息.</p>
+<p>2、 当某个新值去占用他的位置时,当成空chunk 来占用.</p>
+<p>3、 当get 值时,判断是否过期,如果过期,返回空,并且清空, curr_item 就减少了.</p>
+<p>所以，这个时期，memcached内部不会监视记录是否过期，memcache只是让用户看不到数据而已，并没有在过期的瞬间立即从内存删掉数据，而是在get时查看记录的时间戳，检查记录是否过期,这种技术被称为<strong>Lazy Expiration</strong>， 也就是惰性失效。</p>
+<p>那么，有什么好处呢？</p>
+<p>好处就是节省了CPU的时间和检测成本。</p>
+<p>##LRU删除机制</p>
+<p>如果以122byte 大小的chunk举例, 122 的chunk 都满了, 又有新的值(例如长度为120)要加入, 要<br>挤掉谁?</p>
+<p>memcache会优先使用已超时的记录的空间，即便如此，也会出现追加新纪录时空间不足的情况，那该怎么办呢？此时，memcache就要使用名为”LRU”(Least Recently Used, 最近最少使用)机制来分配空间。因此，当memcached的内存空间不足时（无法从slab class 获取到新的空间时），就从最近未被使用的记录中搜索，并将其空间分配给新的记录。</p>
+<p><strong>原理:</strong> </p>
+<blockquote>
+<p>当某个单元被请求时,维护一个计数器,通过计数器来判断最近谁最少被使用.就把谁剔除。</p>
+</blockquote>
+<p>需要<strong>注意</strong>的是: 即使某个key 是设置的永久有效期,也一样会有被踢出来的可能!即<strong>永久数据被踢现象</strong>。这个会在后面总结。</p>
+<p>不过，有些情况下LRU机制反倒会造成麻烦。memcached启动时通过<code>-M</code>参数可以禁止LRU，如下所示：</p>
+<pre><code>$ memcached -M -m 1024
+</code></pre><p>启动时必须注意的是，小写的“-m”选项是用来指定最大内存大小的。不指定具体数值则使用默认值64MB。</p>
+<p>指定<code>-M</code>参数启动后，内存用尽时memcached会返回错误。话说回来，memcached毕竟不是存储器，而是缓存，所以推荐使用LRU。</p>
+<p>(end)</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/04/12/201503-2015-03-30-memcache-multiget-hole-note/" class="prev">PREV</a><a href="/2018/04/12/201503-2015-03-28-memcache-memory-manage-note/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="http://yoursite.com">John Doe</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

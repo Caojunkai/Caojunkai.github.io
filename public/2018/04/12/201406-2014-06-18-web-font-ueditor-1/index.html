@@ -1,0 +1,22 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Web部署UEditor编辑器实现 · Hexo</title><meta name="description" content="Web部署UEditor编辑器实现 - John Doe"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Hexo"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Web部署UEditor编辑器实现</h1><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>当我们部署自己的博客或者其他内容管理系统站点时，都不可或缺的需要发布内容的编辑器来实现编写内容的功能模块，而网站内容发布编辑器有很多，下面介绍下UEditor的使用：</p>
+<p><strong>首先</strong> 到官网下载最新的UEditor发布版本，<a href="http://ueditor.baidu.com/website/download.html" target="_blank" rel="noopener">下载链接</a></p>
+<p><strong>其次</strong> 解压缩下载包到本地的文件夹</p>
+<p><strong>然后</strong> 在html页面中添加js代码</p>
+<pre><code>&lt;js file=&quot;路径/ueditor/ueditor.config.js&quot; /&gt;
+&lt;js file=&quot;路径/ueditor/ueditor.all.min.js&quot; /&gt;
+</code></pre><a id="more"></a>
+<p><strong>再然后</strong> 设置编辑器，并添加编辑器的实例化代码：</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+    window.UEDITOR_HOME_URL = &apos;路径/ueditor/&apos;;
+    window.onload = function () {
+        window.UEDITOR_CONFIG.initialFrameHeight = 600;    //可更改
+        window.UEDITOR_CONFIG.initialFrameWidth = 1200; //可更改
+        UE.getEditor(&apos;content&apos;);
+    }
+&lt;/script&gt;
+</code></pre><p><strong>最后</strong> 如果看到以下这样的编辑器，说明已经部署成功：</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/bd5a4d63gw1ehkj3953ltj20yf043wfq.jpg" alt="图片"></p>
+<hr>
+<p><em>下面是压缩包解压缩后的目录</em></p>
+<p><img src="http://ww3.sinaimg.cn/mw690/bd5a4d63gw1ehkj36avaej208j07nwf3.jpg" alt="图片"></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/04/12/201406-2014-06-19-git-install-process-notes/" class="prev">PREV</a><a href="/2018/04/12/201406-2014-06-17-php-5-static-bind-1/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="http://yoursite.com">John Doe</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

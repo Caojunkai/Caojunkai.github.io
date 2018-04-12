@@ -1,0 +1,51 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> PHP如何正常转换中文json格式字符串 · Hexo</title><meta name="description" content="PHP如何正常转换中文json格式字符串 - John Doe"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Hexo"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">PHP如何正常转换中文json格式字符串</h1><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>如何对json格式的字符串进行转换，在php手册中提供了两个函数：</p>
+<blockquote>
+<p>json_encode : 对变量进行 JSON 编码</p>
+</blockquote>
+<blockquote>
+<p>json_decode : 对 JSON 格式的字符串进行编码</p>
+</blockquote>
+<a id="more"></a>
+<p>下面看个实例：</p>
+<pre><code>$arr = [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;];
+echo json_encode($arr);
+</code></pre><p>输出为：</p>
+<blockquote>
+<p>[“a”,”b”,”c”]</p>
+</blockquote>
+<p>但是，当我们在数组中放入中文的时候，就会出现问题：</p>
+<pre><code>$arr = [
+    &apos;世界&apos;,
+    &apos;你好&apos;,
+];
+echo json_encode($arr);
+</code></pre><p>输出的结果为：</p>
+<blockquote>
+<p>[“\u4e16\u754c”,”\u4f60\u597d”]</p>
+</blockquote>
+<p>这个结果显然不是我们想要的，但是为什么出现这个呢？<br>因为当我们的值中包含中文时，php对他进行json编码时底层会对中文进行unicode编码，导致结果不可读.</p>
+<p><em><strong>那该怎么解决呢？</strong></em></p>
+<p>###方法一<br>可以利用 urlencode 和 urldecode 方法绕过这个转码为 unicode 的过程，先将中文字段进行urlencode，然后json_encode，最后再用urldecode处理结果，便可以正常显示中文。具体代码如下：</p>
+<pre><code>$arr = [
+    &apos;世界&apos;,
+    &apos;你好&apos;,
+];
+echo urldecode(json_encode(array_map(&apos;urlencode&apos;, $arr)));
+</code></pre><p>输出结果为：</p>
+<blockquote>
+<p>[“世界”,”你好”]</p>
+</blockquote>
+<p>###方法二<br>自PHP5.4版本，官方就已经给Json新增了一个选项: <code>JSON_UNESCAPED_UNICODE</code>。加上这个选项后，就不会自动把中文编码了。具体代码如下：</p>
+<pre><code>$arr = [
+    &apos;世界&apos;,
+    &apos;你好&apos;,
+];
+echo json_encode($arr, JSON_UNESCAPED_UNICODE);
+</code></pre><p>输出为：</p>
+<blockquote>
+<p>[“世界”,”你好”]</p>
+</blockquote>
+<p>看吧，这才是我们想要的结果 :)</p>
+<p>###<strong>注意</strong><br>需要我们注意的是，由于 <code>json_encode</code> 和 <code>json_decode</code>只支持<code>utf-8</code>编码的字符，<code>gbk</code>的字符想要用json函数的话就得转换一下喽。</p>
+<p>[end]</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/04/12/201703-2017-03-12-php-web请求流程/" class="prev">PREV</a><a href="/2018/04/12/201509-2015-09-23-difference-of-MyISAM-and-Innodb/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="http://yoursite.com">John Doe</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

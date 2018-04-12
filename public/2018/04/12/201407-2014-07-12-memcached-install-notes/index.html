@@ -1,0 +1,37 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Memcached缓存技术原理与安装 · Hexo</title><meta name="description" content="Memcached缓存技术原理与安装 - John Doe"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Hexo"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Memcached缓存技术原理与安装</h1><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>Memcached 是以LiveJournal旗下Danga Interactive公司的Brad Fitzpatric为首开发的一款内存缓存软件。Memcached是一种缓存技术，它可以把数据放入内存，从而可以通过内存访问提高速度，memcached技术的关键是提速。</p>
+<p>###为什么要使用Memcached</p>
+<p>随着互联网的发展，传统的关系型数据库已经出现了瓶颈，无法满足我们的要求，例如：</p>
+<p>1）<strong>对数据库的高并发读写</strong></p>
+<p>如果对关系型数据库进行高并发读写操作，它是不能承受的。</p>
+<p>2）<strong>对海量数据的处理</strong></p>
+<p>对于大型的SNS网站，每天都有数百万的数据产生（例如微博），如果使用传统关系数据库进行查询数据，将会慢的难以忍受。</p>
+<p>使用Memcached就可以很好的解决上述问题。</p>
+<a id="more"></a>
+<p>###Memcached使用原理</p>
+<p>Memcached是高性能的分布式内存缓存服务器，通过缓存数据库查询结果到内存，以后就可以直接访问内存，减少对数据库的访问次数，进而提高动态网站应用的速度和可扩展性。</p>
+<p>当客户端与memcached建立连接后，接下来就是存储对象了，每个存储的对象都有一个唯一的标识符key与value对应相关联，通过key可以对对象进行存取操作，而对象实际上是保存在内存中的，所以速度比较快。</p>
+<p>下面是memcached模型图：</p>
+<p><img src="http://ww2.sinaimg.cn/mw690/bd5a4d63tw1eiah17n5awj20dg0dcmy0.jpg" alt="pic"></p>
+<p><strong>注意</strong>： 为了提高性能，Memcached把数据存储在内存中。由于数据仅存在内存中，因次重启memcached或者主机都会导致数据丢失。另外，内存容量达到指定值后，就会使用LRU（least recently used）算法自动删除不使用的缓存。memcached本身是为了缓存而设计的服务器，因次并没有过多考虑数据的持久化问题。</p>
+<p>###安装Memcached</p>
+<p>这里只是介绍下在windows下是如何安装的。</p>
+<p>步骤：</p>
+<p>1、下载memcached安装软件</p>
+<p>2、安装</p>
+<p>进入cmd控制台，切换到memcached.exe文件夹下，执行命令：</p>
+<pre><code>memcached.exe -d install
+</code></pre><p>3、启动memcached</p>
+<pre><code>memcached.exe -d start
+</code></pre><p>4、停止服务</p>
+<pre><code>memcached.exe -d stop
+</code></pre><p>5、查看是否安装成功</p>
+<pre><code>netstat -an
+
+TCP    0.0.0.0:11211          0.0.0.0:0              LISTENING
+</code></pre><p>查看11211端口是否被监听，或者查看是否被memcached应用所监听：</p>
+<pre><code>netstat -anb
+
+TCP    [::]:11211             [::]:0                 LISTENIN [memcached.exe]
+</code></pre><p>可以看到，11211端口正被memcached应用程序所监听。</p>
+<p>(完)</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/04/12/201407-2014-07-13-js-noscript-notes/" class="prev">PREV</a><a href="/2018/04/12/201407-2014-07-10-life-essay-2/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="http://yoursite.com">John Doe</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

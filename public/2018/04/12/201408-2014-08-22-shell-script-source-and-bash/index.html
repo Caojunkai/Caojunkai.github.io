@@ -1,0 +1,33 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Shell脚本的执行方式区别 · Hexo</title><meta name="description" content="Shell脚本的执行方式区别 - John Doe"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Hexo"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Shell脚本的执行方式区别</h1><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>不同的Shell脚本执行方式会造成不一样的后果，尤其对bash的环境影响很大。shell脚本的执行方式除了（绝对路径、相对路径、bash、sh）执行外，还可以利用source来执行，那么他们之间有什么不同呢？</p>
+<p>###利用直接执行的方式来执行脚本</p>
+<p>当我们利用直接方式（绝对路径、相对路径）或者使用bash命令（或者sh）来执行script时，该script都会使用一个新的bash环境来执行脚本内命令，也就是说，使用该方式执行时，其实script实在其子进程的bash内执行的。那么，我们首先应该知道：<strong>当子进程完成时，子进程内的各个变量或者操作将会结束而不会传回到其父进程中</strong>，这一点很重要，我们得要先明白。</p>
+<a id="more"></a>
+<p>下面举例说明：</p>
+<p>这个脚本是让用户自己输入名字，并在bash中打印出来：</p>
+<pre><code>#!/bin/bash
+
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+export PATH
+read -p &apos;enther yout name &apos; name
+echo -e &quot;your name is $name&quot;
+</code></pre><p>我们来执行下：</p>
+<pre><code>hanson@linux-host:~/Linux_Demo/shell$ bash sh01.sh 
+</code></pre><p>然后打印下name变量：</p>
+<pre><code>hanson@linux-host:~/Linux_Demo/shell$ echo $name
+    &lt;== name变量怎么不存在了呢？
+</code></pre><p>从结果中，我们可以看出name变量并不存在，明明已经输入了值了呢，怎么回事？</p>
+<p>下面将程序绘制成相关性图来说明，当我们直接来执行时，系统会给予一个新的bash让我们来执行shell中的命令，因此，name变量其实是在子进程中内执行的。当shell执行完毕后，子进程内的所有数据都会被删除。所以，在父进程中输出name变量时，就看不出任何数据了。</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/bd5a4d63jw1ejlb5ikov0j20kn07mdfz.jpg" alt="pic"></p>
+<p>###利用source来执行脚本：在父进程中执行</p>
+<p>如果使用source来执行脚本，那就不一样了。来看实例：</p>
+<pre><code>hanson@linux-host:~/Linux_Demo/shell$ source  sh01.sh
+
+//print name
+
+hanson@linux-host:~/Linux_Demo/shell$ echo $name 
+hanson &lt;== name变量有数值哦
+</code></pre><p>竟然name生效了。因为source执行shell脚本是在父进程中执行的，可以用下图来说明，因此各项操作都会在原本的bash中生效。</p>
+<p><img src="http://ww4.sinaimg.cn/mw690/bd5a4d63jw1ejlb56iuxcj20k805a747.jpg" alt="pic"></p>
+<p>这也是为啥不用注销系统而要让某些写入<code>~/.bashrc</code>内的变量生效时，需要使用<code>source ~/.bashrc</code>而不能使用<code>bash ~/.bashrc</code>的原因了。</p>
+<p>(end)</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/04/12/201409-2014-09-03-ajax-jsonp-return/" class="prev">PREV</a><a href="/2018/04/12/201408-2014-08-11-vim-super-study/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="http://yoursite.com">John Doe</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 网站在线支付总结 · Hexo</title><meta name="description" content="网站在线支付总结 - John Doe"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Hexo"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">网站在线支付总结</h1><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>最近，在做一个购物商城的项目时，其中购买商品用到了关于网站在线支付的技术，就好好研究了下关于网站在线支付的流程与实现原理以及一些特别需要注意的地方。特此总结，备忘，以便查阅！</p>
+<p>大家都知道，在电子商务告诉发展的今天，网上购物已经成为大多数消费者最直接、最便利的消费方式了，但是消费者要想达到真正的“足不出户”，网站在线支付就派上用场了。</p>
+<a id="more"></a>
+<p>在线支付是指卖方与买方通过互联网上的电子商务网站进行交易时，银行为其提供网上资金结算服务的一种业务。它为企业和个人提供了一个安全、快捷、方便的电子商务应用环境和网上资金结算工具。在线支付不仅帮助企业实现了销售款项的快速归集，缩短收款周期，同时也为个人网上银行客户提供了网上消费支付结算方式（摘自<a href="http://baike.baidu.com/link?url=7KptIGkIWdw2j7T0S41j91BcrCJLxRpTiaSdOeE7LGt-Yp_nllQFb9z2DqLTYucc" target="_blank" rel="noopener">百度百科</a>）。</p>
+<p>###在线支付方式</p>
+<ul>
+<li><strong>直接与银行对接</strong></li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/mw690/bd5a4d63jw1eisvnftccgj20if06mt95.jpg" alt="pic"></p>
+<p><strong>优点</strong>：因为直接与银行进行财务结算，交易资金结算比较安全。适合资金流量比较大的企业，这种方案适合于每月结算金额佰万以上的企业。</p>
+<p><strong>缺点</strong>：开发工作量比较大，而且银行会不定期升级交易系统，随着银行系统的升级，企业也需要作 相应改动，所以维护工作量也是比较大的，而且企业每年还需要向银行交纳一定数量的接口使用费。</p>
+<ul>
+<li><strong>第三方支付</strong></li>
+</ul>
+<p><img src="http://ww3.sinaimg.cn/mw690/bd5a4d63jw1eisvy668vpj20jf08ot9y.jpg" alt="pic"></p>
+<p><strong>优点</strong>：开发工作量较少，因为使用的是中间企业提供的接入规范，所以银行升级系统，不需要企业作相应修改，除非中间企业的接入规范发生了改变，企业才作相应修改。相对 前一种接入方案，这种方案的维护工作量比较少的。因为只与一家企业对接，所以接入费用相对比较低。这种方案适合于每月结算金额在几十万以下的中小企业。</p>
+<p><strong>缺点</strong>：因为是与中间企业进行资金结算，目前所有中间企业都是私企，资金安全是个大问题。</p>
+<p>###在线支付流程</p>
+<p>1、首先，商家需要先去第三方支付平台申请注册，获取商户编号以及设置密钥（用于网站和支付平台对接加密使用）。</p>
+<p>2、当客户将商品加入购物车并且点击结算时，后台需要进行商品信息的处理，比如：生成获取商户编号、商品信息、生成hmac签名字符串、指定支付成功后的重定向url地址等等，将处理好的信息按照第三方支付平台的官方文档格式放入表单的隐藏域（切记：必须严格遵守第三方的文档格式编写，否侧会出错！）。</p>
+<p>3、将表单隐藏域中的信息提交给第三方支付平台进行处理，如果有任何错误，都会返回失败，全部通过，才会成功！</p>
+<p>4、重定向页面的信息处理，当支付成功后，根据第三方重定向后返回的信息进行商品发货以及判断是否为恶意网站请求（可通过签名字符串）。</p>
+<p>###什么是签名字符串</p>
+<p>签名字符串，顾名思义，就是一堆字符串，只不过该字符串的生成是有严格要求的。必须严格按照官方文档的说明，将一些信息（比如：商品编号、业务编号、币种、密钥等等）以字符串的形式拼接起来，再经过加密算法生成签名字符串。</p>
+<p>签名字符串是为了防止恶意伪造表单信息进行http请求而用来加密和验证客户合法身份的一种有效方式，其中最重要的就是密钥了，密钥存在于商家和第三方手中，可随时进行更改。由于加密字符串前加入了密钥，所以当与第三方对接时，即使被恶意用户篡改了表单信息，但由于恶意用户不知道密钥，又因为加密字符串的不可逆，所以一旦表单被篡改，第三方就会立马检测出来即使阻止，有效保证了购物的安全性。</p>
+<p>###代码实例</p>
+<p>该事例使用的是易宝支付平台，详细请参考官方文档。</p>
+<p>表单输入订单号和金额（测试使用，可以填写0.01）</p>
+<pre><code>&lt;form method=&quot;POST&quot; action=&quot;payConfirm.php&quot;&gt;
+&lt;table border=&quot;0&quot;&gt;
+    &lt;tr&gt;&lt;td colspan=&quot;4&quot;&gt;订单号：&lt;input type=&quot;text&quot; name=&quot;p2_Order&quot;&gt;支付金额：&lt;input type=&quot;text&quot; name=&quot;p3_Amt&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td colspan=&quot;4&quot;&gt;请选择银行&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;input type=&quot;radio&quot; name=&quot;pd_FrpId&quot; value=&quot;CMBCHINA_NET&quot;&gt;招商银行&lt;/td&gt;
+        &lt;td&gt;&lt;input type=&quot;radio&quot; name=&quot;pd_FrpId&quot; value=&quot;ICBC-NET&quot;&gt;工商银行&lt;/td&gt;
+        &lt;td&gt;&lt;input type=&quot;radio&quot; name=&quot;pd_FrpId&quot; value=&quot;ABC-NET&quot;&gt;农业银行&lt;/td&gt;
+        &lt;td&gt;&lt;input type=&quot;radio&quot; name=&quot;pd_FrpId&quot; value=&quot;CCB-NET&quot;&gt;建设银行&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;&lt;td colspan=&quot;4&quot;&gt;&lt;input type=&quot;submit&quot; value=&quot;确认支付&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/form&gt;
+</code></pre><p>确认信息，以及进行一些信息的处理和生成签名字符串，还有将信息放入表单隐藏域中进行提交。</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=gb2312&quot;&gt;
+    &lt;title&gt;支付测试&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;?php
+        /**
+        获取提交信息
+        */
+        $p0_Cmd = &apos;Buy&apos;;                    //业务编号
+        $p1_MerId = ***;                    //商户编号
+        $p2_Order = $_REQUEST[&apos;p2_Order&apos;];  //商户订单号
+        $p3_Amt = $_REQUEST[&apos;p3_Amt&apos;];      //支付金额
+        $p4_Cur = &apos;CNT&apos;;                    //交易币种
+        $p5_Pid = &apos;&apos;;                       //商品名称，没有可为空
+        $p6_Pcat = &apos;&apos;;                      //种类
+        $p7_Pdesc = &apos;&apos;;                     //商品介绍
+        $p8_Url = &apos;http://localhost:80/pay/res.php&apos;;   //回调url，支付成功后，给这个url返回信息
+        $p9_SAF = 0;                        //是否需要送货地址
+        $pa_MP = &apos;&apos;;                        //商户扩展信息
+        $pd_FrpId = $_REQUEST[&apos;pd_FrpId&apos;];  //支付通道编码
+        $pr_NeedResponse = 1;               //是否需要应答机制
+
+        /**
+          hmac 是一个签名串，是易宝和商家互相确认的关键字，需要使用算法来生成（md5-mac）
+         */
+        //顺序不可错，切记
+        $data = &quot;&quot;;
+        $data .= $p0_Cmd;
+        $data .= $p1_MerId;
+        $data .= $p2_Order;
+        $data .= $p3_Amt;
+        $data .= $p4_Cur;
+        $data .= $p5_Pid;
+        $data .= $p6_Pcat;
+        $data .= $p7_Pdesc;
+        $data .= $p8_Url;
+        $data .= $p9_SAF;
+        $data .= $pa_MP;
+        $data .= $pd_FrpId;
+        $data .= $pr_NeedResponse;
+
+        //密钥
+        $merchantKey = ***;
+
+        //获取hmac签名串
+        $hmac = hash_hmac(&quot;md5&quot;, $data, $merchantKey);
+
+
+    ?&gt;
+
+您的订单号是:&lt;?php echo $p2_Order;?&gt; 支付的金额是：&lt;?php echo $p3_Amt;?&gt;
+
+&lt;!--表单的信息放到hidden中--&gt;
+&lt;form action=&quot;https://www.yeepay.com/app-merchant-proxy/node&quot; method=&quot;POST&quot;&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;p0_Cmd&quot; value=&quot;&lt;?php echo $p0_Cmd;?&gt;&quot; /&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;p1_MerId&quot; value=&quot;&lt;?php echo $p1_MerId;?&gt;&quot; /&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;p2_Order&quot; value=&quot;&lt;?php echo $p2_Order;?&gt;&quot; /&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;p3_Amt&quot; value=&quot;&lt;?php echo $p3_Amt;?&gt;&quot; /&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;p4_Cur&quot; value=&quot;&lt;?php echo $p4_Cur;?&gt;&quot; /&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;p5_Pid&quot; value=&quot;&lt;?php echo $p5_Pid;?&gt;&quot; /&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;p6_Pcat&quot; value=&quot;&lt;?php echo $p6_Pcat;?&gt;&quot; /&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;p7_Pdesc&quot; value=&quot;&lt;?php echo $p7_Pdesc;?&gt;&quot; /&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;p8_Url&quot; value=&quot;&lt;?php echo $p8_Url;?&gt;&quot; /&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;p9_SAF&quot; value=&quot;&lt;?php echo $p9_SAF;?&gt;&quot; /&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;pa_MP&quot; value=&quot;&lt;?php echo $pa_MP;?&gt;&quot; /&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;pd_FrpId&quot; value=&quot;&lt;?php echo $pd_FrpId;?&gt;&quot; /&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;pr_NeedResponse&quot; value=&quot;&lt;?php echo $pr_NeedResponse;?&gt;&quot; /&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;hmac&quot; value=&quot;&lt;?php echo $hmac;?&gt;&quot; /&gt;
+    &lt;input type=&quot;submit&quot;  value=&quot;确认提交&quot;&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>重定向url（省略了判断签名字符串）</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=gb2312&quot;&gt;&lt;title&gt;支付测试&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;?php
+        //res
+        echo &apos;支付成功&apos;;
+    ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>以上模拟了使用易宝第三方支付平台进行在线支付。</p>
+<hr>
+<p>###小结</p>
+<ul>
+<li>发送GET或者POST请求都行</li>
+<li>页面是GBK或者GB2312编码的</li>
+<li>发送的参数请求不是自己随便起的,是接入规范中定义好的</li>
+<li>密钥只能商家和第三方知道</li>
+<li>生成签名字符串时是严格按照官方文档拼接的</li>
+<li><strong>切记：</strong>必须严格按照官方文档规范进行接入</li>
+</ul>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/04/12/201407-2014-07-29-memcache-telnet-notes/" class="prev">PREV</a><a href="/2018/04/12/201407-2014-07-21-life-essay-3/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="http://yoursite.com">John Doe</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

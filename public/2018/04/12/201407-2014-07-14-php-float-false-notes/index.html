@@ -1,0 +1,47 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 0.1+0.2=0.3？ · Hexo</title><meta name="description" content="0.1+0.2=0.3？ - John Doe"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Hexo"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">0.1+0.2=0.3？</h1><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>先看一段程序代码，判断下输出会是什么：</p>
+<pre><code>&lt;?php
+    $a = 0.2; $b = 0.1;
+    if (($a + $b) == 0.3) {
+        echo &apos;值为0.3&apos;;
+    } else {
+           echo &apos;值不为0.3&apos;;
+    }
+?&gt;
+</code></pre><p>结果会输出什么？会输出 <code>值为0.3</code> ？</p>
+<p>错误！正确输出为 <strong><code>值不为0.3</code></strong> ！为什么？</p>
+<a id="more"></a>
+<p>其根本原因是计算机所使用二进制01代码无法准确表示某些带小数位的十进制数据。</p>
+<p>下面，我们来分析下：</p>
+<p>我们知道将一个十进制数值转换为二进制数值，需要通过下面的计算方法：</p>
+<ul>
+<li><p>整数部分：连续用该整数除以2，取余数，然后商再除以2，直到商等于0为止。然后把得到的各个余数按相反的顺序排列。简称”除2取余法”。</p>
+</li>
+<li><p>小数部分：十进制小数转换为二进制小数，采用”乘2取整，顺序排列”法。用2乘以十进制小数，将得到的整数部分取出，再用2乘余下的小数部分，然后再将积 的整数部分取出，如此进行，直到积中的小数部分为0或者达到所要求的精度为止。然后把取出的整数部分按顺序排列起来，即先取出的整数部分作为二进制小数的 高位，后取出的整数部分作为低位有效位。简称”乘2取整法”。</p>
+</li>
+</ul>
+<p>按照上述方法，我们把0.1和0.2分别转换为其对应的二进制数据表示：</p>
+<pre><code>0.1 =&gt; (00011001100110011001100110011001...)2
+0.2 =&gt; (00110011001100110011001100110011...)2
+</code></pre><p>后面的省略号表示已经算不完了，后面在无限重复<code>0011</code> 这段二进制数值。</p>
+<p>目前计算机上存储浮点数值是按照IEEE（电气和电子工程师协会）754浮点存储格式标准来存储的。</p>
+<blockquote>
+<p><strong>以下摘自查阅资料</strong></p>
+</blockquote>
+<blockquote>
+<p>浮点数, 以64位的长度(双精度)为例, 会采用1位符号位(E), 11指数位(Q), 52位尾数(M)表示(一共64位).</p>
+</blockquote>
+<blockquote>
+<p>符号位：最高位表示数据的正负，0表示正数，1表示负数。</p>
+</blockquote>
+<blockquote>
+<p>指数位：表示数据以2为底的幂，指数采用偏移码表示</p>
+</blockquote>
+<blockquote>
+<p>尾数：表示数据小数点后的有效数字.</p>
+</blockquote>
+<p>假设数据类型为双精度浮点数类型，也只能存储52位，该小数的二进制代码已无法正确表示0.1及0.2，根据这个二进制代码肯定无法正确得到结果0.3。</p>
+<p>就像<strong>风雪之隅</strong>一篇博客说的那样：”你看似有穷的小数, 在计算机的二进制表示里却是无穷的”。所以尽量不要去比较浮点数值。</p>
+<hr>
+<p>###小结</p>
+<p>关于浮点数值计算会产生误差的问题，这是使用基于IEEE754数值的浮点计算的通病，PHP并非独此一家，其他使用相同数据格式的语言也存在这个问题！</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/04/12/201407-2014-07-15-git-summary-notes/" class="prev">PREV</a><a href="/2018/04/12/201407-2014-07-13-php-distorted-code/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="http://yoursite.com">John Doe</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

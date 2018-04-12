@@ -1,0 +1,63 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Hexo</title><meta name="description" content="A Blog Powered By Hexo"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Hexo"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201406-2014-06-26-linux-php-install-notes/" class="post-title-link">Linux下搭建PHP环境</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>下面分别介绍使用<code>apt-get</code>方式在Linux下搭建PHP+Mysql+Apache运行环境，如果是root权限的话可不加<code>sudo</code>,普通用户需要使用<code>sudo</code>获取临时root权限来进行安装：</p>
+<p>###安装Mysql</p>
+<pre><code>sudo apt-get install mysql-server
+sudo apt-get install mysql-client
+</code></pre><p>###安装Apache</p>
+<pre><code>sudo apt-get install apache2
+</code></pre></div><a href="/2018/04/12/201406-2014-06-26-linux-php-install-notes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201406-2014-06-24-q-git-create-and-merge-branch/" class="post-title-link">创建与合并分支</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>分支就是科幻电影里面的平行宇宙，当你正在电脑前努力学习Git的时候，另一个你正在另一个平行宇宙里努力学习SVN。</p>
+<p>如果两个平行宇宙互不干扰，那对现在的你也没啥影响。不过，在某个时间点，两个平行宇宙合并了，结果，你既学会了Git又学会了SVN,是不是很棒、很神奇啊！</p>
+<p>一开始的时候，master分支是一条线，Git用master指向最新的提交，再用HEAD指向master，就能确定当前分支，以及当前分支的提交点：</p></div><a href="/2018/04/12/201406-2014-06-24-q-git-create-and-merge-branch/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201406-2014-06-24-php-a-use-function-notes/" class="post-title-link">关于PHP生成验证码字符串的一点思考</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>在PHP中创建验证码很方便，创建好验证字符串和使用GD库函数创建图像就ok了。这里不说明怎么去创建验证码，其中当我们来创建验证字符时，我们是怎么做到的呢？</p>
+<p>下面比较下作者见到的两种方式来生成字符：</p>
+<p><strong>第一种方式</strong></p>
+<pre><code>&lt;?php
+$str = &apos;abcdefghigkmnprstuvwxyABCDEFGHGKLMNPQRSTUVWXY3456789&apos;;    
+$n = 6;        //生成字符的个数
+$code = &apos;&apos;;
+$length = strlen($str);
+for ($i=0; $i &lt; $n; $i++) { 
+    $code .= $str[mt_rand(0, $length-1)];
+}
+echo $code;
+?&gt;
+</code></pre></div><a href="/2018/04/12/201406-2014-06-24-php-a-use-function-notes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201406-2014-06-24-php-b-upload-file-notes/" class="post-title-link">PHP实现文件上传机制</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>在Web开发中，经常需要将本地的文件上传到Web服务器上，也可以从服务器上进行文件的下载。文件的上传和下载十分的广泛，在PHP中可以接受来自几乎所有类型浏览器上传的文件，还允许对服务器的上传和下载进行控制。</p>
+<p>上传文件过程：</p>
+<ul>
+<li>本地浏览器客户端选择磁盘文件，并进行上传；</li>
+<li>服务器接受并处理来自客户端上传的文件。</li>
+</ul>
+<p>##客户端上传设置</p>
+<p>最基本的方法，是使用html的表单选择本地文件并进行提交，在form表单中使用<code>&lt;input type=&quot;file&quot;&gt;</code>标签来选择本地文件。如果想要支持文件上传，还必须在form中加入<code>enctype</code>和<code>method</code>属性：</p></div><a href="/2018/04/12/201406-2014-06-24-php-b-upload-file-notes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201406-2014-06-23-git-b-add-and-clone-notes/" class="post-title-link">添加远程仓库和从远程仓库克隆</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>现在，我们已经在本地创建了一个版本库，那么如何在Github创建了一个仓库，并且让这两个仓库进行远程同步呢？</p>
+<p>##添加远程库</p>
+<p>首先，登陆GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库：</p></div><a href="/2018/04/12/201406-2014-06-23-git-b-add-and-clone-notes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201406-2014-06-23-git-a-remote-transmission-create-notes/" class="post-title-link">Git远程仓库配置</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>首先，我们要了解<a href="https://github.com/" target="_blank" rel="noopener">Github</a>这个神奇的网站，这个网站就是提供Git仓库托管服务的，所以，只要注册一个GitHub账号，就可以免费获得Git远程仓库。所以我们要先注册一个github帐号。</p>
+<p>由于你的本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，下面介绍一下具体的配置：</p>
+<p>第1步：创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），输入命令创建SSH Key：</p>
+<pre><code>$ ssh-keygen -t rsa -C &quot;youremail@example.com&quot;
+</code></pre></div><a href="/2018/04/12/201406-2014-06-23-git-a-remote-transmission-create-notes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201406-2014-06-22-git-n-delete-file-notes/" class="post-title-link">版本库删除文件操作</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>首先，我们要知道在Git中任何的操作都是一个修改，那删除文件肯定也是一个修改操作了，在工作区删除一个文件可以使用<code>rm -f file</code>的命令来操作：</p>
+<pre><code>$ rm -f one.txt
+</code></pre><p>此时，Git已经知道你删除了文件，这时候的工作区和版本库也不一样了，可以使用<code>git status</code>来查看：</p>
+<pre><code>hanson@host-linux:~/learngit$ git status 
+# On branch master
+# Changes not staged for commit:
+#   (use &quot;git add/rm &lt;file&gt;...&quot; to update what will be committed)
+#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+#
+#   deleted:    one.txt
+#
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre></div><a href="/2018/04/12/201406-2014-06-22-git-n-delete-file-notes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201406-2014-06-22-git-manage-file-notes/" class="post-title-link">版本库文件的管理</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>##撤销修改</p>
+<p>现在，我们查看下<code>one.txt</code>文件：</p>
+<pre><code>$ cat one.txt
+git is the best
+I love git
+error content
+</code></pre><p>假如，当我们没提交前，又想撤销这次的修改，那该怎么办呢？这时我们可以直接手动删除修改的内容，恢复到原来的版本。此时，我们可以使用<code>git status</code>查看下：</p></div><a href="/2018/04/12/201406-2014-06-22-git-manage-file-notes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201406-2014-06-21-a-git-work-temporary-notes/" class="post-title-link">Git工作区和暂存区</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>首先，我们要清楚Git和其他版本控制系统如SVN的一个不同之处就是有暂存区的概念。下面来看几个概念：</p>
+<p>###工作区</p>
+<p>工作区就是我们在电脑里看到的目录，比如我的learngit就是一个工作区。</p>
+<p>###版本库</p>
+<p>在工作区中都有一个.git隐藏文件夹，这个就是所谓的Git版本库。</p>
+<p>###暂存区</p>
+<p>Git的版本库里有很多的文件，其中比较重要的就是stage(或者index)文件，这个就是<strong>暂存区</strong>。还有Git为我们自动创建的第一个分支master，以及指向master的一个指针HEAD。</p></div><a href="/2018/04/12/201406-2014-06-21-a-git-work-temporary-notes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201406-2014-06-20-git-version-back-notes/" class="post-title-link">Git实现版本回退功能</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>现在，我们重新修改下文件并添加和提交到版本库：</p>
+<pre><code>$ echo &apos;再次添加新内容&apos; &gt;&gt; readme.md
+$ git add ./readme.md
+$ git commit -m &apos;更新内容&apos;
+</code></pre><p>像这样，我们不断的对文件进行修改，并一次一次的提交到版本库。就像我们在玩游戏时，每过一关我们都会保存当前的状态，以防备哪次被打败了，我们就可以选择重新读取保存的状态，然后可以从最近的地方重新开始玩。Git也是一样的道理，每当你觉得文件修改到一定程度的时候，就可以保存一个<strong>快照</strong>，这个快照在Git中被称为<strong>commit</strong>。一旦你把文件改乱了，或者误删了文件，还可以从最近的一个commit恢复，然后继续工作，而不是把几个月的工作成果全部丢失。</p></div><a href="/2018/04/12/201406-2014-06-20-git-version-back-notes/" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"><a href="/page/7/" class="prev">PREV</a><a href="/page/9/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="http://yoursite.com">John Doe</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

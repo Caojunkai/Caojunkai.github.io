@@ -1,0 +1,78 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Ajax实现带进度条文件上传 · Hexo</title><meta name="description" content="Ajax实现带进度条文件上传 - John Doe"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Hexo"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Ajax实现带进度条文件上传</h1><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>很多情况下，当我们在网站上传文件至远程的服务器时，都会看到一个上传进度条来告诉我们上传的情况、以及是否上传成功，这样可以极好滴提升用户体验程度！</p>
+<p>那么，这个花哨的进度条是如何做到的呢？html5给出了很好的特性来实现带进度条的Ajax上传文件机制。</p>
+<p>废话不多说，直接上代码，留作笔记，以作备忘：</p>
+<a id="more"></a>
+<p><strong>js代码：</strong></p>
+<pre><code>&lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;
+        function pic () {
+            //创建FormData对象
+            var fd = new FormData();
+            //获取文件对象
+            var pic = document.getElementById(&apos;pic&apos;).files[0];
+            //把文件内容追加到form中
+            fd.append(&apos;pic&apos;, pic);
+            //创建Ajax引擎
+            var xhr = new XMLHttpRequest();
+            xhr.open(&apos;post&apos;, &apos;./upload.php&apos;, true);
+            xhr.setRequestHeader(&quot;Content-Type&quot;,&quot;application/x-www-form-urlencoded&quot;);
+            xhr.onreadystatechange = function () {    //指定回调函数
+                if (this.readyState == 4) {
+                    //window.alert(&apos;上传成功！&apos;);
+                    document.getElementById(&apos;p&apos;).innertText = this.responseText;
+                }
+            };
+
+            //利用xhr2的新标准，为上传过程添加一个监听函数,实现进度条上传效果
+            xhr.upload.onprogress = function (event) {
+                if (ev.lengthComputable) {            //true时
+                    var percent = 100 * ev.loaded / ev.total;
+
+                    document.getElementById(&apos;bar&apos;).style.width = percent + &apos;%&apos;;
+                    document.getElementById(&apos;bar&apos;).innerText = parseInt(percent) + &apos;%&apos;;
+                }
+
+               // console.log(event);
+            };
+
+            xhr.send(fd);
+        }
+    &lt;/script&gt;
+</code></pre><p><strong>html代码：</strong></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;!--
+    Ajax 带进度条文件上传
+--&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+    &lt;title&gt;Fileapi&lt;/title&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+        #one {
+            width : 500px;
+            height :20px;
+            border = 1px solid green;
+        }
+        #bar {
+            width : 0%;
+            height : 100%;
+            background-color:green;
+        }
+    &lt;/style&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;input type=&quot;file&quot; name=&quot;pic&quot; value=&quot;&quot; id=&quot;pic&quot; onchange=&quot;pic();&quot;&gt;&lt;br /&gt;
+    &lt;div id=&quot;one&quot;&gt;&lt;div id=&quot;bar&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;p id=&quot;p&quot;&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p><strong>php代码：</strong></p>
+<pre><code>&lt;?php
+    /*
+        服务器端测试打印
+    */
+    echo &apos;upload success&apos;;
+?&gt;
+</code></pre><hr>
+<p>(end)</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/04/12/201409-2014-09-11-jquery-and-dom/" class="prev">PREV</a><a href="/2018/04/12/201409-2014-09-07-ajax-file-slice-upload/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="http://yoursite.com">John Doe</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

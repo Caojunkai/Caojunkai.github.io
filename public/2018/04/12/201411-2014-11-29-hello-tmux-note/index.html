@@ -1,0 +1,34 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 初次认识Tmux · Hexo</title><meta name="description" content="初次认识Tmux - John Doe"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Hexo"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">初次认识Tmux</h1><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>最近，刚接触了命令行神器<a href="http://baike.baidu.com/view/9065064.htm?fr=aladdin" target="_blank" rel="noopener">Tmux</a>,然后瞬间被她的神奇所吸引，真是相见很晚啊！！</p>
+<p>Tmux是一个优秀的终端复用软件，使用它最直观的好处就是，通过一个终端登录远程主机并运行tmux后，在其中可以开启多个控制台而无需再“浪费”多余的终端来连接这台远程主机；当然其功能远不止于此。</p>
+<p>当我们在使用Tmux时，即使非正常掉线，也能保证当前的任务运行，这一点对于远程SSH访问特别有用，网络不好的情况下仍然能保证工作现场不丢失!此外，tmux完全使用键盘控制窗口，实现窗口的切换功能。</p>
+<a id="more"></a>
+<p>由于刚接触Tmux，还不是特别熟悉，先来截个图炫耀下，哈哈：</p>
+<p><img src="../../images/201411/2014-11-29_141142.jpg" alt=""></p>
+<p>下面，我们就先来安装下一定会让你钟情的Tmux。</p>
+<p>CentOS官方软件源中没有tmux，如果不想使用EPEL源或者其他第三方源，就要自己编译安装。tmux依赖于ncurses-devel和libevent-devel，我们使用yum安装来解决依赖：</p>
+<pre><code>yum -y install ncurses-devel
+yum -y install libevent-devel
+</code></pre><p>然后，开始安装Tmux：</p>
+<pre><code>wget http://downloads.sourceforge.net/tmux/tmux-1.9a.tar.gz
+tar -zxvf tmux-1.9a.tar.gz
+cd tmux-1.9a
+./configure --prefix=/usr/local/tmux/
+make
+make install
+</code></pre><p>至此，我们Tmux就安装好了，然后把路径添加到PATH环境变量中：</p>
+<pre><code>vim ~/.bashrc
+PATH=${PATH}:/usr/local/tmux/bin/
+source ~/.bashrc
+</code></pre><p>安装完成后输入命令tmux即可打开软件，界面十分简单，类似一个下方带有状态栏的终端控制台；但根据tmux的定义，在开启了tmux服务器后，会首先创建一个会话，而这个会话则会首先创建一个窗口，其中仅包含一个面板；也就是说，这里看到的所谓终端控制台应该称作tmux的一个面板，虽然其使用方法与终端控制台完全相同。</p>
+<p>##单元模块</p>
+<p><strong>tmux使用C/S模型构建，主要包括以下单元模块：</strong></p>
+<blockquote>
+<ul>
+<li>server 服务器。输入tmux命令时就开启了一个服务器。</li>
+<li>session 会话。一个服务器可以包含多个会话。</li>
+<li>window 窗口。一个会话可以包含多个窗口。</li>
+<li>panel 面板。一个窗口可以包含多个面板。</li>
+</ul>
+</blockquote>
+<p>不出意外，这时候你会跟我第一次一样，觉得tmux没什么牛逼的，没关系，后面我会慢慢更新博客，详细介绍Tmux的强大之处，你们做好拭目以待了吗？哈哈。。。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/04/12/201412-2014-12-01-copy-model-note/" class="prev">PREV</a><a href="/2018/04/12/201411-2014-11-02-ssl-tls-secure-notes/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="http://yoursite.com">John Doe</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

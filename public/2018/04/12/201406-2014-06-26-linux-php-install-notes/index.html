@@ -1,0 +1,35 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Linux下搭建PHP环境 · Hexo</title><meta name="description" content="Linux下搭建PHP环境 - John Doe"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Hexo"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Linux下搭建PHP环境</h1><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>下面分别介绍使用<code>apt-get</code>方式在Linux下搭建PHP+Mysql+Apache运行环境，如果是root权限的话可不加<code>sudo</code>,普通用户需要使用<code>sudo</code>获取临时root权限来进行安装：</p>
+<p>###安装Mysql</p>
+<pre><code>sudo apt-get install mysql-server
+sudo apt-get install mysql-client
+</code></pre><p>###安装Apache</p>
+<pre><code>sudo apt-get install apache2
+</code></pre><a id="more"></a>
+<p>###安装PHP</p>
+<pre><code>sudo apt-get install php5
+sudo apt-get install libapache2-mod-auth-mysql
+sudo apt-get install php5-mysql
+</code></pre><p>到此，基本就已经安装成功了，下面进行一些测试与权限修改：</p>
+<p><strong>检测Mysql是否正常</strong></p>
+<p>在终端中输入：<code>mysql -uusername -ppassword</code>(将username和password替换为你所设置的)看是否可以正常登陆</p>
+<p><strong>检测Apache是否正常</strong></p>
+<p>在浏览器中打开：<a href="http://localhost/" target="_blank" rel="noopener">http://localhost/</a></p>
+<p>如果出现如下信息，则表明正常。</p>
+<pre><code>It works!
+</code></pre><p><strong>检测PHP是否正常</strong></p>
+<p>Ubuntu下Apache的默认安装路径为/var/www/html/，到其目录下新建test.php文件，文件内容为：</p>
+<pre><code>&lt;?php
+    phpinfo();
+?&gt;
+</code></pre><p>然后在浏览器中打开：<a href="http://localhost/test.php" target="_blank" rel="noopener">http://localhost/test.php</a> 看是否正常,若能显示PHP版本等其他模块一些信息则代表正常。</p>
+<p><strong>注意：</strong></p>
+<p>在默认情况下，该/var/www目录是有权限的，只能是root管理员进行修改和创建，<br>我们可以把权限修改下：</p>
+<pre><code>su -
+</code></pre><p>输入root用户密码，然后进入/var目录下，输入：</p>
+<pre><code>chmod -R 0777 ./www/
+</code></pre><p>切回普通用户：</p>
+<pre><code>su - username
+</code></pre><p>查看权限：</p>
+<pre><code>ls -al
+</code></pre><p>普通用户也就有权限了。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/04/12/201406-2014-06-26-git-branch-conflicts-notes/" class="prev">PREV</a><a href="/2018/04/12/201406-2014-06-24-q-git-create-and-merge-branch/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="http://yoursite.com">John Doe</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

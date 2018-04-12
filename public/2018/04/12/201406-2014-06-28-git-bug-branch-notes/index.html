@@ -1,0 +1,68 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 管理Bug分支 · Hexo</title><meta name="description" content="管理Bug分支 - John Doe"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Hexo"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">管理Bug分支</h1><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>在项目开发中，bug就像家常便饭一样，随时都会出现。有了bug就需要修复，在Git中，由于分支是如此的强大，所以，每个bug都可以通过一个新的临时分支来修复，修复后，合并分支，然后将临时分支删除。</p>
+<p>当你接到一个修复一个代号101的bug的任务时，很自然地，你想创建一个分支bug-101来修复它，但是，等等，当前正在dev上进行的工作还没有提交：</p>
+<pre><code>$ git status
+# On branch dev
+# Changes not staged for commit:
+#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+#
+#       modified:   one.md
+#
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre><a id="more"></a>
+<p>并不是你不想提交，而是工作只进行到一半，还没法提交，那咋办？</p>
+<p>Git给我们提供了一个<code>stash</code>功能，可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作：</p>
+<pre><code>$ git stash
+Saved working directory and index state WIP on dev: 98aa0eb merge with no-ff
+HEAD is now at 98aa0eb merge with no-ff
+</code></pre><p>现在，使用<code>git status</code>查看下：</p>
+<pre><code>$ git status
+# On branch dev
+nothing to commit, working directory clean
+</code></pre><p>发现工作区已经是干净的了。我们可以放心的去创建分支来修复bug。</p>
+<p>首先确定要在哪个分支上修复bug，假定需要在master分支上修复，就从master创建临时分支：</p>
+<pre><code>$ git checkout master
+$ git checkout -b bug-101
+Switched to a new branch &apos;bug-101&apos;
+</code></pre><p>现在我们来修复bug，并提交：</p>
+<pre><code>$ git add ./one.md
+$ git commit -m &apos;修复bug101&apos;
+[bug-101 ddc86c4] 修复bug101
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+</code></pre><p>修复完成后，切换到master分支，并完成合并，最后删除bug-101分支：</p>
+<pre><code>$ git checkout master
+$ git merge --no-ff -m &apos;merge bug-101&apos; bug-101
+Merge made by the &apos;recursive&apos; strategy.
+ one.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+$ git branch -d bug-101
+</code></pre><p>太好了，现在已经修复完成了，该回到dev分支工作了。</p>
+<pre><code>$ git checkout dev
+$ git status
+# On branch dev
+nothing to commit (working directory clean)
+</code></pre><p>工作区是干净的，刚才的工作现场存到哪去了？用<code>git stash list</code>命令看看:</p>
+<pre><code>$ git stash list
+stash@{0}: WIP on dev: 98aa0eb merge with no-ff
+</code></pre><p>工作现场还在，Git把stash内容存在某个地方了，但是需要恢复一下，有两个办法：</p>
+<p>一是用<code>git stash apply</code>恢复，但是恢复后，stash内容并不删除，你需要用<code>git stash drop</code>来删除</p>
+<p>另一种方式是用<code>git stash pop</code>，恢复的同时把stash内容也删了：</p>
+<pre><code>$ git stash pop
+# On branch dev
+# Changes not staged for commit:
+#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+#
+#       modified:   one.md
+#
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+Dropped refs/stash@{0} (06be1e02d3a4d183b0585339a3ffc232b031abf1)
+</code></pre><p>可以发现，最后一行已经告诉我们把stash内容删除了。</p>
+<p>现在使用<code>git stash list</code>，可以看到stash是空的。</p>
+<p>也可以多次stash，恢复的时候，先用<code>git stash list</code>查看，然后恢复指定的stash，用命令：</p>
+<pre><code>$ git stash apply stash@{0}
+</code></pre><hr>
+<p>###小结</p>
+<p>修复bug时，我们会通过创建新的bug分支进行修复，然后合并，最后删除；</p>
+<p>当手头工作没有完成时，先把工作现场<code>git stash</code>一下，然后去修复bug，修复后，再<code>git stash pop</code>，回到工作现场。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/04/12/201407-2014-07-02-git-collaboration-notes/" class="prev">PREV</a><a href="/2018/04/12/201406-2014-06-30-git-delete-unmerge-branch-notes/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="http://yoursite.com">John Doe</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 版本控制系统配置别名 · Hexo</title><meta name="description" content="版本控制系统配置别名 - John Doe"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Hexo"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">版本控制系统配置别名</h1><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>有时候，会觉得Git的命令太长又不好记住，那么能不能做到简短呢？答案当然是肯定的啦！</p>
+<p>比如说<code>git status</code>这个命令对有些人来说就很长，不容易记住，如果可以这样<code>git st</code>使用那就好了，我们强大的Git版本控制可是很人性化的哦，已经为你设计好可以为命令设计别名来达到你“偷懒”的目的。</p>
+<p>我们只需要敲一行命令，告诉Git，以后st就表示status：</p>
+<pre><code>$ git config --global alias.st status
+</code></pre><p>ok，现在在命令行敲入<code>git st</code>查看效果吧。</p>
+<a id="more"></a>
+<p>当然还有别的命令可以简写，很多人都用co表示checkout，ci表示commit，br表示branch：</p>
+<pre><code>$ git config --global alias.co checkout
+$ git config --global alias.ci commit
+$ git config --global alias.br branch
+</code></pre><p><code>--global</code>参数是全局参数，也就是这些命令在这台电脑的所有Git仓库下都有用。</p>
+<p>下面是配置别名的格式：</p>
+<pre><code>$ git config --global alias.别名 命令
+</code></pre><p>这样就ok了，你可以尽情的去配置你喜欢的别名，妈妈以后再也不用担心我的学习了:)</p>
+<hr>
+<p>###小结</p>
+<p>给Git配置好别名，就可以输入命令时偷个懒。记住，偷懒不一定是坏事哦！！</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/04/12/201407-2014-07-10-life-essay-2/" class="prev">PREV</a><a href="/2018/04/12/201407-2014-07-05-git-gitignore-file-notes/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="http://yoursite.com">John Doe</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

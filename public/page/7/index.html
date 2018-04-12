@@ -1,0 +1,58 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Hexo</title><meta name="description" content="A Blog Powered By Hexo"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Hexo"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201407-2014-07-07-git-config-aliase-notes/" class="post-title-link">版本控制系统配置别名</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>有时候，会觉得Git的命令太长又不好记住，那么能不能做到简短呢？答案当然是肯定的啦！</p>
+<p>比如说<code>git status</code>这个命令对有些人来说就很长，不容易记住，如果可以这样<code>git st</code>使用那就好了，我们强大的Git版本控制可是很人性化的哦，已经为你设计好可以为命令设计别名来达到你“偷懒”的目的。</p>
+<p>我们只需要敲一行命令，告诉Git，以后st就表示status：</p>
+<pre><code>$ git config --global alias.st status
+</code></pre><p>ok，现在在命令行敲入<code>git st</code>查看效果吧。</p></div><a href="/2018/04/12/201407-2014-07-07-git-config-aliase-notes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201407-2014-07-05-git-gitignore-file-notes/" class="post-title-link">Gitignore忽略特殊文件操作</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>有些时候，你必须把某些文件放到Git工作目录中，但又不能提交它们，比如保存了数据库密码的配置文件啦，等等，每次<code>git status</code>都会显示“<code>Untracked files ...</code>”，有强迫症的心里肯定不爽。</p>
+<p>好在Git考虑到了大家的感受，这个问题解决起来也很简单，在Git工作区的根目录下创建一个特殊的<code>.gitignore</code>文件，然后把要忽略的文件名填进去，Git就会自动忽略这些文件。</p>
+<p>不需要从头写<code>.gitignore</code>文件，GitHub已经为我们准备了各种配置文件，只需要组合一下就可以使用了。</p></div><a href="/2018/04/12/201407-2014-07-05-git-gitignore-file-notes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201407-2014-07-04-git-create-tag-notes/" class="post-title-link">创建标签和操作标签</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>提交一个版本时，我们通常先在版本库中打一个标签，这样，就唯一确定了打标签时刻的版本。将来无论什么时候，取某个标签的版本，就是把那个打标签的时刻的历史版本取出来。所以，标签也是版本库的一个快照。</p>
+<p>###创建标签</p>
+<p>使用<code>git tag name</code>命令来创建新标签：</p>
+<pre><code>$ git tag v1.0
+</code></pre><p>使用<code>git tag</code>来查看所有标签：</p>
+<pre><code>$ git tag
+v1.0
+</code></pre></div><a href="/2018/04/12/201407-2014-07-04-git-create-tag-notes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201407-2014-07-02-git-collaboration-notes/" class="post-title-link">Git推送分支和抓取分支</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>当你从远程仓库克隆时，实际上Git自动把本地的master分支和远程的master分支对应起来了，并且，远程仓库的默认名称是origin。</p>
+<p>要查看远程库的信息，用<code>git remote</code>：</p>
+<pre><code>$ git remote
+origin
+</code></pre><p>可以使用<code>git remote -v</code>查看更详细的信息：</p>
+<pre><code>$ git remote -v
+origin  https://github.com/YourName/YourName.git (fetch)
+origin  https://github.com/YourName/YourName.git (push)
+</code></pre><p>上面显示了可以抓取和推送的origin的地址。如果没有推送权限，就看不到push的地址。</p></div><a href="/2018/04/12/201407-2014-07-02-git-collaboration-notes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201406-2014-06-28-git-bug-branch-notes/" class="post-title-link">管理Bug分支</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>在项目开发中，bug就像家常便饭一样，随时都会出现。有了bug就需要修复，在Git中，由于分支是如此的强大，所以，每个bug都可以通过一个新的临时分支来修复，修复后，合并分支，然后将临时分支删除。</p>
+<p>当你接到一个修复一个代号101的bug的任务时，很自然地，你想创建一个分支bug-101来修复它，但是，等等，当前正在dev上进行的工作还没有提交：</p>
+<pre><code>$ git status
+# On branch dev
+# Changes not staged for commit:
+#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+#
+#       modified:   one.md
+#
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre></div><a href="/2018/04/12/201406-2014-06-28-git-bug-branch-notes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201406-2014-06-30-git-delete-unmerge-branch-notes/" class="post-title-link">Feature分支</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>添加一个新功能时，你肯定不希望因为一些实验性质的代码，把主分支搞乱了，所以，每添加一个新功能，最好新建一个feature分支，在上面开发，完成后，合并，最后，删除该feature分支。</p>
+<p>假设我们创建了一个feature分支来开发新功能：</p>
+<pre><code>$ git checkout -b feature
+</code></pre><p>当我们开发好新功能，并且已经提交完成：</p>
+<pre><code>$ git add two.md
+$ git commit -m &apos;feature branch&apos;
+</code></pre></div><a href="/2018/04/12/201406-2014-06-30-git-delete-unmerge-branch-notes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201406-2014-06-27-unix-dos-crlf-notes/" class="post-title-link">Linux与Windows的断行符问题</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>在Linux系统中，当我们使用<code>cat -A</code>命令来查看以Windows建立的文件的格式时，可以发现在Windows中使用的断行符是<code>^M$</code>,被称为“CRLF”。而以Linux建立的文件格式却只有LF($)这个断行符号。</p>
+<p>Linux下面的命令在开始执行时，他的判断依据是[ENTER],而且Linux的[ENTER]为LF符号。由于Windows的断行符是CRLF，也就是说多出了一个<code>^M</code>的符号来。这时候，如果去执行一个shell script的脚本文件时，可能就会出现问题。</p></div><a href="/2018/04/12/201406-2014-06-27-unix-dos-crlf-notes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201406-2014-06-27-php-pdo-transaction-notes/" class="post-title-link">PDO事务处理</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>事务是确保数据库一致的机制，作为一个单元的一组有序的数据库操作。在事务的组中哪怕有一个环节操作失败，事务也不成功，则整个事务将被回滚，该事务中的所有操作都将被撤销。只有组中的所有SQL语句都操作成功，则认为事务成功，事务才被提交。</p>
+<p>下面，介绍几个PDO中要用到的关于事务处理的函数：</p>
+<p>###<code>beginTransaction()</code>函数：</p>
+<p>该方法来启动一个事务，标明了回滚起始点。如果底层驱动成程序不支持事务，那么PHP将会抛出一个PDOException的异常。</p></div><a href="/2018/04/12/201406-2014-06-27-php-pdo-transaction-notes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201406-2014-06-27-git-branch-manage-notes/" class="post-title-link">分支管理策略</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>通常，合并分支时，如果可能，Git会用<code>“Fast forward”</code>模式，但这种模式下，删除分支后，会丢掉分支信息。如果要强制禁用<code>“Fast forward”</code>模式，Git就会在merge时生成一个新的commit，这样，从分支历史上就可以看出分支信息。为了保证版本演进的清晰，希望采用这种做法.</p>
+<p>首先，我们创建一个dev分支，并且切换到该分支：</p>
+<pre><code>$ git checkout -b dev
+Switched to a new branch &apos;dev&apos;
+</code></pre><p>修改one.md文件，并提交修改：</p>
+<pre><code>$ echo &apos;add branch manage&apos; &gt;&gt; one.md
+$ git add ./one.md
+$ git commit -m &apos;dev branch&apos;
+</code></pre></div><a href="/2018/04/12/201406-2014-06-27-git-branch-manage-notes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2018/04/12/201406-2014-06-26-git-branch-conflicts-notes/" class="post-title-link">解决分支冲突问题</a></h2><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>我们已经知道了如何去创建分支以及合并分支，但实际工作中合并分支并不总是像我们想象的那么一帆风顺，总会发生这样那样的冲突，下面说明下如何去解决如此的问题。</p>
+<p>首先，创建一个分支dev，并添加新内容：</p>
+<pre><code>$ git checkout -b dev
+$ echo &apos;Hello Php&apos; &gt;&gt; one.md
+</code></pre><p>到此，我们在dev分支上进行添加与提交：</p>
+<pre><code>$ git add ./one.md
+$ git commit -m &apos;I am dev&apos;
+</code></pre></div><a href="/2018/04/12/201406-2014-06-26-git-branch-conflicts-notes/" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"><a href="/page/6/" class="prev">PREV</a><a href="/page/8/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="http://yoursite.com">John Doe</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> PDO事务处理 · Hexo</title><meta name="description" content="PDO事务处理 - John Doe"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="Hexo"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">PDO事务处理</h1><div class="post-info">Apr 12, 2018</div><div class="post-content"><p>事务是确保数据库一致的机制，作为一个单元的一组有序的数据库操作。在事务的组中哪怕有一个环节操作失败，事务也不成功，则整个事务将被回滚，该事务中的所有操作都将被撤销。只有组中的所有SQL语句都操作成功，则认为事务成功，事务才被提交。</p>
+<p>下面，介绍几个PDO中要用到的关于事务处理的函数：</p>
+<p>###<code>beginTransaction()</code>函数：</p>
+<p>该方法来启动一个事务，标明了回滚起始点。如果底层驱动成程序不支持事务，那么PHP将会抛出一个PDOException的异常。</p>
+<a id="more"></a>
+<p>###<code>commit()</code>函数：</p>
+<p>该函数用来提交一个事务，并且执行SQl。</p>
+<p>###<code>rollback()</code>函数：</p>
+<p>该函数用来回滚一个事务。</p>
+<hr>
+<p>下面来构建一个事务处理的程序：</p>
+<p>在淘宝购物时，当我们选好一个价格为100元的宝贝，我们采用网银进行转账。假设用户A向B转账100元。首先在demo数据库准备好一个InnoDB引擎的数据表account。废话不多说，直接上代码：</p>
+<pre><code>&lt;?php
+//PDO事务处理练习
+$dsn = &apos;mysql:host=localhost;dbname=demo&apos;;
+$user = &apos;root&apos;;
+$pwd = &apos;password&apos;;
+$pdo = new PDO($dsn, $user, $pwd);
+$pdo-&gt;setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);      //设置异常处理模式
+$pdo-&gt;setAttribute(PDO::ATTR_AUTOCOMMIT, 0);                        //关闭自动提交
+
+//异常处理转账事务
+try {
+    $price = 100;
+    $pdo-&gt;beginTransaction();          //开启一个事务
+
+    $affected_rows = $pdo-exec(&quot;update account set cash=cash-{$price} where name=&apos;A&apos;&quot;);     //转账
+
+    if ($affected_rows &gt; 0) {
+        echo &apos;A转出{$price}成功&apos;;
+    } else {
+        throw new PDOException (&apos;A转账失败&apos;);       //抛出异常
+    }
+
+    $affected_rows = $pdo-exec(&quot;update account set cash=cash+{$price} where name=&apos;B&apos;&quot;);     //转入
+
+    if ($affected_rows &gt; 0) {
+        echo &apos;B转入{$price}成功&apos;;
+    } else {
+        throw new PDOException (&apos;B转入失败&apos;);       //抛出异常
+    }
+
+    echo &apos;交易成功&apos;;
+    $pdo-&gt;commit();       //事务执行成功
+} catch (PDOException $e) {
+    echo &apos;交易失败&apos; .$e-&gt;getMessage();
+    $pdo-&gt;rollback();     //事务回滚
+}
+?&gt;
+</code></pre><p>这个事务处理的过程需要两条sql更新语句来一起合作完成，所以采用事务处理来确保两条sql语句对数据操作的一致性。一旦发生错误，则catch快就可以捕获异常并进行回滚事务发生的所有更改，并打印一条错误信息。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/04/12/201406-2014-06-27-unix-dos-crlf-notes/" class="prev">PREV</a><a href="/2018/04/12/201406-2014-06-27-git-branch-manage-notes/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2018 <a href="http://yoursite.com">John Doe</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>
