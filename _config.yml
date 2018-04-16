@@ -87,4 +87,4 @@ tag_generator:
 deploy:
   type: git
   repo: git@github.com:fitzix/fitzix.github.io.git
-  branch: gh-pages
+  branch: master
