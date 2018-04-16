@@ -3,6 +3,7 @@ layout : post
 title : 版本控制系统配置别名
 category : Git
 tags : Git
+date: 2014-07-07
 ---
 有时候，会觉得Git的命令太长又不好记住，那么能不能做到简短呢？答案当然是肯定的啦！
 

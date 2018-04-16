@@ -3,6 +3,7 @@ layout : post
 title : Git推送分支和抓取分支
 category : Git
 tags : Git
+date: 2014-07-02
 ---
 当你从远程仓库克隆时，实际上Git自动把本地的master分支和远程的master分支对应起来了，并且，远程仓库的默认名称是origin。
 

@@ -3,6 +3,7 @@ layout : post
 title : "Git实现版本回退功能"
 category : Git
 tags : Git
+date: 2014-06-20
 ---
 现在，我们重新修改下文件并添加和提交到版本库：
 

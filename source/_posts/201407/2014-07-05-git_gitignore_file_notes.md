@@ -3,6 +3,7 @@ layout : post
 title : Gitignore忽略特殊文件操作
 category : Git
 tags : Git
+date: 2014-07-05
 ---
 有些时候，你必须把某些文件放到Git工作目录中，但又不能提交它们，比如保存了数据库密码的配置文件啦，等等，每次`git status`都会显示“`Untracked files ...`”，有强迫症的心里肯定不爽。
 

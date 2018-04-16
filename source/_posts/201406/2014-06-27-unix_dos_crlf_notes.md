@@ -3,6 +3,7 @@ layout : post
 title : Linux与Windows的断行符问题
 category : Linux
 tags : Linux
+date: 2014-06-27
 ---
 
 在Linux系统中，当我们使用`cat -A`命令来查看以Windows建立的文件的格式时，可以发现在Windows中使用的断行符是`^M$`,被称为“CRLF”。而以Linux建立的文件格式却只有LF($)这个断行符号。

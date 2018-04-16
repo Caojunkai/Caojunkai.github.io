@@ -3,6 +3,7 @@ layout : post
 title : 配置篇-玩转Tmux
 category : Tmux
 tags : tmux
+date: 2014-11-30
 ---
 上一篇，我们已经安装好了我们的威猛先生Tmux神器。既然被称为是神器，肯定是其被人称道的地方，那么现在就来动手亲自配置我们的Tmux，初体验她的酷以及可定制化。
 

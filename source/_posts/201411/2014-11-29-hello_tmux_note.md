@@ -3,6 +3,7 @@ layout : post
 title : 初次认识Tmux
 category : Tmux
 tags : tmux
+date: 2014-11-29
 ---
 最近，刚接触了命令行神器[Tmux](http://baike.baidu.com/view/9065064.htm?fr=aladdin),然后瞬间被她的神奇所吸引，真是相见很晚啊！！
 

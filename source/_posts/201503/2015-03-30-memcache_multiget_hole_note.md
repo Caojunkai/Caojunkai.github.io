@@ -3,6 +3,7 @@ layout : post
 title : 缓存无底洞现象
 category : Memcache
 tags : Memcache
+date: 2015-03-30
 ---
 该问题由facebook 的工作人员提出的, facebook 在2010 年左右,memcached 节点就已经达
 3000 个,缓存数千G 内容.

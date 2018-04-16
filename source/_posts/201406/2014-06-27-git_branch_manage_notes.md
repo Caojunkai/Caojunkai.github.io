@@ -3,6 +3,7 @@ layout : post
 title : 分支管理策略
 category : Git
 tags : Git
+date: 2014-06-27
 ---
 通常，合并分支时，如果可能，Git会用`“Fast forward”`模式，但这种模式下，删除分支后，会丢掉分支信息。如果要强制禁用`“Fast forward”`模式，Git就会在merge时生成一个新的commit，这样，从分支历史上就可以看出分支信息。为了保证版本演进的清晰，希望采用这种做法.
 

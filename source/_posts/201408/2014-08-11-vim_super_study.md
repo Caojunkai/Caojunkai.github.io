@@ -3,6 +3,7 @@ layout : post
 title : 简明VIM练级备忘笔记
 category : VIM
 tags : Linux Vim
+date: 2014-08-11
 ---
 特此声明：本文以及链接参考自[左耳朵耗子]的[酷壳站点](coolshell.cn/articles/5426.html)
 

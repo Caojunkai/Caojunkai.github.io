@@ -3,6 +3,7 @@ layout : post
 title : "版本库删除文件操作"
 category : Git
 tags : Git
+date: 2014-06-22
 ---
 首先，我们要知道在Git中任何的操作都是一个修改，那删除文件肯定也是一个修改操作了，在工作区删除一个文件可以使用`rm -f file`的命令来操作：
 

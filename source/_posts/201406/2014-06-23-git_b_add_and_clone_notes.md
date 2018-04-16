@@ -3,6 +3,7 @@ layout : post
 title : "添加远程仓库和从远程仓库克隆"
 category : Git
 tags : Git
+date: 2014-06-23
 ---
 现在，我们已经在本地创建了一个版本库，那么如何在Github创建了一个仓库，并且让这两个仓库进行远程同步呢？
 

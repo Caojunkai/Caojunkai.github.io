@@ -3,6 +3,7 @@ layout : post
 title : 搭建Redis运行环境
 category : Redis
 tags : Redis 
+date: 2014-10-22
 ---
 Redis是一个高性能的`key-value`形式存储的非关系型数据库，可以处理超大量的数据，并且可以运行在便宜的PC服务器集群上，还有它击碎了性能瓶颈，对数据高并发读写的特点奠定了Redis很受欢迎的基础。
 

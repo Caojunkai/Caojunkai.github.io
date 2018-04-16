@@ -3,6 +3,7 @@ layout : post
 title : "PHP对数据库取出和插入数据进行过滤"
 category : PHP
 tags : PHP 递归 
+date: 2014-06-18
 ---
 首先，介绍个很有用的函数htmlspecialchars（），相信大家都不陌生吧，没错，这个函数就是把一些预定义的字符转换为HTML实体输出。
 

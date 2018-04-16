@@ -3,6 +3,7 @@ layout : post
 title : "Linux下搭建PHP环境"
 category : PHP
 tags : Ubuntu PHP
+date: 2014-06-26
 ---
 下面分别介绍使用`apt-get`方式在Linux下搭建PHP+Mysql+Apache运行环境，如果是root权限的话可不加`sudo`,普通用户需要使用`sudo`获取临时root权限来进行安装：
 

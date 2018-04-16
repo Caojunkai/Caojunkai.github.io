@@ -3,6 +3,7 @@ layout : post
 title : 0.1+0.2=0.3？
 category : PHP
 tags : PHP
+date: 2014-07-14
 ---
 先看一段程序代码，判断下输出会是什么：
 	

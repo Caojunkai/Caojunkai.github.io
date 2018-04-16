@@ -3,6 +3,7 @@ layout : post
 title : Feature分支
 category : Git
 tags : Git
+date: 2014-06-30
 ---
 添加一个新功能时，你肯定不希望因为一些实验性质的代码，把主分支搞乱了，所以，每添加一个新功能，最好新建一个feature分支，在上面开发，完成后，合并，最后，删除该feature分支。
 

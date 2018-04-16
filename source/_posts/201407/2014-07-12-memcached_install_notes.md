@@ -3,6 +3,7 @@ layout : post
 title : Memcached缓存技术原理与安装
 category : Memcached
 tags : Memcached
+date: 2014-07-12
 ---
 Memcached 是以LiveJournal旗下Danga Interactive公司的Brad Fitzpatric为首开发的一款内存缓存软件。Memcached是一种缓存技术，它可以把数据放入内存，从而可以通过内存访问提高速度，memcached技术的关键是提速。
 

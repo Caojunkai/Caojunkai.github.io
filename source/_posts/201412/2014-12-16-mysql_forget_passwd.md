@@ -3,6 +3,7 @@ layout : post
 title : MySQL的root密码丢失怎么办？
 category : MySQL
 tags : MySQL
+date: 2014-12-16
 ---
 当我们Linux服务器中的MySQL超级用户密码丢了或者忘记了（唉，真是脑残！），这时候我们应该咋办，下面给出解决方案，分分钟搞定你的烦恼。
 

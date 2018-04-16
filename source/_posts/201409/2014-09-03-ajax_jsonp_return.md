@@ -3,6 +3,7 @@ layout : post
 title : Ajax使用jsonp实现跨域请求
 category : Ajax
 tags : Ajax Jsonp
+date: 2014-09-03
 ---
 Ajax使用XMLHttpRequest对象在无刷新页面的情况下对服务器端进行数据请求，她允许客户端javascript通过HTTP连接到Web服务器。不过，由于收到浏览器的限制，Ajax不允许实现跨域通信，如果尝试从不同的域请求数据，就会出现错误！
 

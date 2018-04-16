@@ -3,6 +3,7 @@ layout : post
 title : PHP性能优化工具–-XHProf安装与使用
 category : php
 tags : php
+date: 2015-04-18
 ---
 XHProf是Facebook开源出来的一个PHP性能测试工具，他是一个轻量级的分析工具，跟xdebug差不多，但比 xdebug 分析的信息更加详细， 包括函数的调用次数，花费的时间（自身花费时间和包含内部函数花费的时间），所占内存/CPU，所占内存的峰值及所占百分比等，而xdebug对性能影响较大，即便是开启了`profiler_enable_trigger`参数，cpu也会立马飙到峰值。
 

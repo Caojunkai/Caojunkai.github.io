@@ -3,6 +3,7 @@ layout : post
 title : PHP如何正常转换中文json格式字符串
 category : php
 tags : php
+date: 2015-07-09
 ---
 如何对json格式的字符串进行转换，在php手册中提供了两个函数：
 

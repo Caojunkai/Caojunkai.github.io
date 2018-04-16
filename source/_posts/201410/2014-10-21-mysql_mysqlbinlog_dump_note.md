@@ -3,6 +3,7 @@ layout : post
 title : MySQL实现增量备份小结
 category : MySQL
 tags : MySQL 增量备份
+date: 2014-10-21
 ---
 当我们误删了MySQL数据库某张表中的数据或者整张表，我们可以使用MySQL的增量备份机制来实现误删数据的恢复，接下来就来总结下MySQL的增量备份技术是如何实现的，以及其中需要我们注意的事项！
 

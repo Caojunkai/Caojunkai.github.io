@@ -3,6 +3,7 @@ layout : post
 title : PHP实现异步执行
 category : php
 tags : php 异步
+date: 2014-10-11
 ---
 对于php而言本身没有提供多线程这个东西，但是可以通过其他方式做出同样的效果，即一中方式就是使用`fsockopen()`函数和`fwrite()`函数来请求一个url，然后不用等待该返回结果，所以当我们在被请求的那个url中做其他事时就相当于异步了。
 

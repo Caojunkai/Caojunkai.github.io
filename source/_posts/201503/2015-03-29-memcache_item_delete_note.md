@@ -3,6 +3,7 @@ layout : post
 title : Memcache过期数据惰性和LRU删除机制
 category : Memcache
 tags : Memcache
+date: 2015-03-29
 ---
 Memcache是缓存，所以数据不会永久保存在服务器上，这也是在服务器上引进Memcache的前提。当我们在memcache中存放数据时会设置超时时间（不设置，默认为永久有效，但不排除会被新数据剔除的可能性），那么当到达超时时间时memcache是如何做到删除数据的呢？这里需要引入**Lazy Expiration**即惰性失效的概念。  
 

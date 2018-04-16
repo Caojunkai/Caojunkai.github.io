@@ -3,6 +3,7 @@ layout : post
 title : PHP程序操作Memcache笔记
 category : PHP
 tags : memcached
+date: 2014-07-30
 ---
 上一篇说明[telnet操作memcache](http://liyafeng.cn/memcache_telnet_notes/)时就提到有两中方式来操作memcache，一种是通过telnet工具，另一种是通过程序控制，下面简单总结下关于使用PHP程序来操作memcache步骤以及细节注意事项。
 

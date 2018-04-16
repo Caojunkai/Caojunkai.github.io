@@ -3,6 +3,7 @@ layout : post
 title : "版本库文件的管理"
 category : Git
 tags : Git
+date: 2014-06-22
 ---
 ##撤销修改
 

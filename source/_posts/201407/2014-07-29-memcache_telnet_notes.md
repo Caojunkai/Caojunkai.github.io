@@ -3,6 +3,7 @@ layout : post
 title : Telnet操作memcached服务
 category : memcached
 tags : telnet memcached
+date: 2014-07-29
 ---
 我们知道，操作memcached有两种方式，分别是通过telnet和php程序来控制，其中php程序控制是主要方面，主要包括三种类型，如下图：
 

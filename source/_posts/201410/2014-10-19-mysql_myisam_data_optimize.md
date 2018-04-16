@@ -3,6 +3,7 @@ layout : post
 title : MyISAM存储引擎的碎片整理问题
 category : MySQL
 tags : MySQL MyISAM
+date: 2014-10-19
 ---
 最近，在使用MySQL数据库的MyISAM存储引擎建表，并且在删除大量数据时，发现在本地硬盘放置的的data文件并没有改变大小。碰到这种情况，笔者甚是郁闷而又感到奇怪，经查阅资料，终于解决了该问题。
 

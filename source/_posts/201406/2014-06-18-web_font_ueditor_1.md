@@ -3,6 +3,7 @@ layout : post
 title : "Web部署UEditor编辑器实现"
 category : 前端
 tags : [UEditor]
+date: 2014-06-18
 ---
 当我们部署自己的博客或者其他内容管理系统站点时，都不可或缺的需要发布内容的编辑器来实现编写内容的功能模块，而网站内容发布编辑器有很多，下面介绍下UEditor的使用：
 

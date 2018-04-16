@@ -3,6 +3,7 @@ layout : post
 title : "安装分布式版本控制系统Git"
 category : Git
 tags : 分布式版本控制 Git
+date: 2014-06-19
 ---
 Git是什么？Git是世界上最先进的分布式版本控制系统。
 

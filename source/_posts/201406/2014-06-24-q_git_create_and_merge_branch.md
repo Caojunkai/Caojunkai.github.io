@@ -3,6 +3,7 @@ layout : post
 title : "创建与合并分支"
 category : Git
 tags : Git
+date: 2014-06-24
 ---
 分支就是科幻电影里面的平行宇宙，当你正在电脑前努力学习Git的时候，另一个你正在另一个平行宇宙里努力学习SVN。
 

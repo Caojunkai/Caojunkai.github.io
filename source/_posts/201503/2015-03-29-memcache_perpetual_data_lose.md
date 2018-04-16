@@ -3,6 +3,7 @@ layout : post
 title : 永久数据丢失现象
 category : Memcache
 tags : Memcache
+date: 2015-03-29
 ---
 有时候，在我们使用memcache过程中会出现"数据丢失"的现象， 也就是说明明数据被设为永久有效，却莫名其妙的丢失了，这是怎么回事呢？
 

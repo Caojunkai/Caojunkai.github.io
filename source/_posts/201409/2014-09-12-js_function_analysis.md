@@ -3,6 +3,7 @@ layout : post
 title : JavaScript之词法分析
 category : javascript
 tags : js
+date: 2014-09-12
 ---
 js是一门简单的严格面向对象语言，对于刚开始学习js的菜鸟来说，要想学好js有两条链是必须要掌握的，它们分别是：
 

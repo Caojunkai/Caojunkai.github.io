@@ -3,6 +3,7 @@ layout : post
 title : SESSION安全性问题
 category : PHP
 tags : SESSION
+date: 2014-08-06
 ---
 一直以来很多开发者都认为php内置的session管理机制是具有一定的安全性，可以对一般的session攻击起到防御。事实上，这是一种误解，php团队只实现了一种方便有效的机制。具体的安全措施，应该有应用程序的开发团队来实施。
 

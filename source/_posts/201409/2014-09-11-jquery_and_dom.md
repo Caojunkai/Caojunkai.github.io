@@ -3,6 +3,7 @@ layout : post
 title : jQuery对象与DOM对象相互转换
 category : jQuery
 tags : jQuery DOM
+date: 2014-09-11
 ---
 对于刚学习jQuery的童鞋来说，可能会一时分不清哪些是jQuery对象，哪些是DOM对象。而且初学者很容易以jQuery和DOM对象混搭的形式来进行js操作，这要求我们能够很好的进行jQuery和DOM对象之间转换，这可是很有必要的奥，下面简单来说明下。
 

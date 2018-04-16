@@ -3,6 +3,7 @@ layout : post
 title : PHP生成扭曲验证码
 category : PHP
 tags : PHP
+date: 2014-07-13
 ---
 为了防止网站被机器人灌水，现在网站的各种验证码广泛存在，为安全性起到了一定的作用。
 

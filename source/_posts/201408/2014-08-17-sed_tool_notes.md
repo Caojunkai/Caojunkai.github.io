@@ -3,6 +3,7 @@ layout : post
 title : Sed数据处理
 category : Linux
 tags : sed linux
+date: 2014-08-17
 ---
 在Linux下有两个非常强大的数据处理工具，一个是sed，另一个是awk。这里暂且介绍sed如何使用好了，作为备忘笔记，以便以后查看。
 

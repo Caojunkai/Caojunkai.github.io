@@ -3,6 +3,7 @@ layout : post
 title : 无锁共享内存---Yac
 category : php
 tags : php
+date: 2015-04-20
 ---
 这几天一直在研究鸟哥[@laruence](http://weibo.com/laruence)的一个产品---**Yac**，它是为PHP实现的一个基于共享内存、并且无锁的User Data Cache。今天比较了下Memcache和Yac的高并发读写性能测试，发现Yac要比Memcache快很多（这里没有比较Yac和Apc的性能情况, 不过据说Yac要比Apc快很多，Apc比Memcache快一倍，待有时间再进行测试吧, 好吧，承认懒了 ^_^)。
 

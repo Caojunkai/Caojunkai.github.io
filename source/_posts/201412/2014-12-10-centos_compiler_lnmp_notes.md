@@ -3,6 +3,7 @@ layout : post
 title : Centos源码编译安装LNMP环境
 category : LNMP
 tags : LNMP
+date: 2014-12-10
 ---
 这里总结下如何在Centos下利用源代码编译安装LNMP环境。
 

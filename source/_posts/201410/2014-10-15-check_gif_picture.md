@@ -3,6 +3,7 @@ layout : post
 title : PHP检测gif图片是否为动态图片
 category : PHP
 tags : php gif
+date: 2014-10-15
 ---
 当我们使用php自带的`getimagesize()`函数来判断一个gif图片是否为动态（动画）时，发现无法判别是否为动态的效果。本文介绍了php是如何判断gif图片是否为动画的方法，具体步骤如下：
 

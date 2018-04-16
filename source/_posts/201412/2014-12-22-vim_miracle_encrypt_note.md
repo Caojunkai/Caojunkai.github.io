@@ -3,6 +3,7 @@ layout : post
 title : Vim使用技巧の快速加密
 category : Vim
 tags : Vim
+date: 2014-12-22
 ---
 我们知道对于Linux服务器来说是支持多用户多任务环境的，聪明的Linux同学给我们每个用户都有各自的权限，彼此工作互不干扰。但是环境中有一个Super man存在呢，谁拥有它的权限就可以*'偷窥'*别人隐私了，真是不讲理。那么问题来了，我既没有super man权限，又不想给super man来看我们隐私，咋办呢？
 

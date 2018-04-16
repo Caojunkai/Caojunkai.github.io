@@ -3,6 +3,7 @@ layout : post
 title : 禁用COOKIE后如何访问SESSION问题
 category : php
 tags : php
+date: 2015-06-04
 ---
 最近看到一个有关在PHP中使用COOKIE会话管理的面试题，不单单是因为这道题很有意思，还有就是自己以前确实没有想到过这个方面（_知识欠缺_:P），所以这里做个记录总结下，该题大概是这样描述的:
 	

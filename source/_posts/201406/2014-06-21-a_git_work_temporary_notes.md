@@ -3,6 +3,7 @@ layout : post
 title : "Git工作区和暂存区"
 category : Git
 tags : Git
+date: 2014-06-21
 ---
 首先，我们要清楚Git和其他版本控制系统如SVN的一个不同之处就是有暂存区的概念。下面来看几个概念：
 

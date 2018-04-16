@@ -3,6 +3,7 @@ layout : post
 title : SSL/TLS协议概述
 category : SSL/TLS
 tags : SSL HTTPS
+date: 2014-11-02
 ---
 不使用SSL/TLS协议的HTTP通信，就是不加密的通信，所有信息都是明文传播。在这个不安全的网络上，当我们涉及金钱的交易时，如果信息使用明文传输，光是想想都觉得可怕（假如支付宝使用明文的HTTP协议，你还敢使用吗？）。
 

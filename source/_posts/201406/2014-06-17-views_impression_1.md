@@ -3,6 +3,7 @@ layout : post
 title : "批判的价值"
 category : 观点和感想
 tags : [Impression]
+date: 2014-06-17
 ---
 Author:YinWang
 

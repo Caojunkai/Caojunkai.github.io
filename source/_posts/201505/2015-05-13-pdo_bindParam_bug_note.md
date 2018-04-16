@@ -3,6 +3,7 @@ layout : post
 title : 关于在PDO中使用bindParam绑定参数的陷阱
 category : php
 tags : php
+date: 2015-05-13
 ---
 今天，在看鸟哥[@laruence](http://weibo.com/laruence)的个人博客时看到了有关在PHP中使用PDO的bindParam绑定方法结合循环语句来使用时会产生一个`BUG`或者小陷阱，这里做个笔记备忘 :)
 

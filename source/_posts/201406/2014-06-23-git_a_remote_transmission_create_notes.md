@@ -3,6 +3,7 @@ layout : post
 title : "Git远程仓库配置"
 category : Git
 tags : Git
+date: 2014-06-23
 ---
 首先，我们要了解[Github](https://github.com/)这个神奇的网站，这个网站就是提供Git仓库托管服务的，所以，只要注册一个GitHub账号，就可以免费获得Git远程仓库。所以我们要先注册一个github帐号。
 

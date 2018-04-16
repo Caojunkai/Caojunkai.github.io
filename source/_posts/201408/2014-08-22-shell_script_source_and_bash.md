@@ -3,6 +3,7 @@ layout : post
 title : Shell脚本的执行方式区别
 category : Shell
 tags : Linux Shell
+date: 2014-08-22
 ---
 不同的Shell脚本执行方式会造成不一样的后果，尤其对bash的环境影响很大。shell脚本的执行方式除了（绝对路径、相对路径、bash、sh）执行外，还可以利用source来执行，那么他们之间有什么不同呢？
 
