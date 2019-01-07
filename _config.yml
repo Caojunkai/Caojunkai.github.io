@@ -74,7 +74,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: apollo-fix
+theme: apollo
 archive_generator:
   per_page: 20 ##归档页面默认20篇文章标题，如果值为0不分页
   yearly: true ##生成年视图

@@ -1,0 +1,40 @@
+# 指定语言环境
+language: node_js
+# 指定需要sudo权限
+sudo: required
+# 指定node_js版本
+node_js: node
+# 指定缓存模块，可选。缓存可加快编译速度。
+cache:
+  directories:
+    - node_modules
+# 指定博客源码分支，因人而异。hexo博客源码托管在独立repo则不用设置此项
+branches:
+  only:
+    - pages
+before_install:
+  - export TZ='Asia/Shanghai'
+  - git clone https://github.com/pinggod/hexo-theme-apollo.git themes/apollo
+  - cp themes/fitzix/apollo.yml themes/apollo/_config.yml
+  - cp themes/fitzix/apollo.css themes/apollo/source/css/apollo.css
+  - npm install hexo-cli -g
+# Start: Build Lifecycle
+install:
+  - npm install
+
+# 执行清缓存，生成网页操作
+script:
+  - hexo clean
+  - hexo generate
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: public
+  name: $GIT_NAME
+  email: $GIT_EMAIL
+  keep-history: true
+  target-branch: master
+  on:
+    branch: pages

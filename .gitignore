@@ -1,7 +1,8 @@
 node_modules/
 .DS_STORE
 .vscode
-themes/
+themes/*
+!themes/fitzix/
 public/
 .deploy_git/
 db.json

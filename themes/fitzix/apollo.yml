@@ -1,0 +1,25 @@
+menu:
+    Blog: /
+    Archive: /archives/
+    GitHub: https://github.com/fitzix
+    # Stackoverflow: /
+    # Rss: /atom.xml
+
+favicon: /favicon.ico
+logo: https://avatars0.githubusercontent.com/u/14334411?s=460&v=4
+
+# Comment
+# e.g disqus: helloworld
+# disqus:
+# duoshuo:
+
+# Analytics
+# google-analytics:
+# ga: UA-65933410-1
+
+# Copyright Infomation
+startyear: 2015
+
+# Styles shoule be found in the list: https://highlightjs.org/static/demo/
+# use the lowercase letters and replace space with -
+codestyle: solarized-dark
