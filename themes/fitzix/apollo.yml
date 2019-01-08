@@ -15,7 +15,7 @@ logo: https://avatars0.githubusercontent.com/u/14334411?s=460&v=4
 gitalk:
     clientID: 0005895a71d0d3de1ae6
     clientSecret: e8a1b830b9588e99b5369bcf5ca60778420aec55
-    repo: gitalk
+    repo: fitzix.github.io
     owner: fitzix
     admin: fitzix
 
