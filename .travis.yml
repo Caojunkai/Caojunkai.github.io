@@ -14,9 +14,8 @@ branches:
     - pages
 before_install:
   - export TZ='Asia/Shanghai'
-  - git clone https://github.com/pinggod/hexo-theme-apollo.git themes/apollo
+  - git clone https://github.com/fitzix/hexo-theme-apollo.git themes/apollo
   - cp themes/fitzix/apollo.yml themes/apollo/_config.yml
-  - cp themes/fitzix/apollo.css themes/apollo/source/css/apollo.css
   - npm install hexo-cli -g
 # Start: Build Lifecycle
 install:

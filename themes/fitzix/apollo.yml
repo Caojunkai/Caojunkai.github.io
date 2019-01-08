@@ -12,6 +12,12 @@ logo: https://avatars0.githubusercontent.com/u/14334411?s=460&v=4
 # e.g disqus: helloworld
 # disqus:
 # duoshuo:
+gitalk:
+    clientID: 0005895a71d0d3de1ae6
+    clientSecret: e8a1b830b9588e99b5369bcf5ca60778420aec55
+    repo: gitalk
+    owner: fitzix
+    admin: fitzix
 
 # Analytics
 # google-analytics:
@@ -19,7 +25,3 @@ logo: https://avatars0.githubusercontent.com/u/14334411?s=460&v=4
 
 # Copyright Infomation
 startyear: 2015
-
-# Styles shoule be found in the list: https://highlightjs.org/static/demo/
-# use the lowercase letters and replace space with -
-codestyle: solarized-dark
