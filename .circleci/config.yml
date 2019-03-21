@@ -26,14 +26,11 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-            - themes/apollo
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run:
-          command: |
-            if [ ! -d "themes/apollo" ] ; then
-              git clone https://github.com/fitzix/hexo-theme-apollo.git themes/apollo
-              cp themes/fitzix/apollo.yml themes/apollo/_config.yml
-            fi
+
+      - run: git clone https://github.com/fitzix/hexo-theme-apollo.git themes/apollo
+      - run: cp themes/fitzix/apollo.yml themes/apollo/_config.yml
+
       - deploy:
           command: |
             git config --global user.email $GIT_EMAIL
