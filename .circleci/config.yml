@@ -32,7 +32,7 @@ workflows:
   build-deploy:
     jobs:
       - build:
-        context: Github
-        filters:
-          branches:
-            only: pages
+          context: Github
+          filters:
+            branches:
+              only: pages
