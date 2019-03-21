@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node
+        environment:
+          TZ: Asia/Shanghai
+    steps:
+      - checkout
+      - restore_cache:
+        keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+      - run: yarn install
+
+      - save_cache:
+        paths:
+         - node_modules
+        key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: git clone https://github.com/fitzix/hexo-theme-apollo.git themes/apollo
+      - run: cp themes/fitzix/apollo.yml themes/apollo/_config.yml
+
+      - deploy:
+          command: |
+            git config --global user.email $GIT_EMAIL
+            git config --global user.name $GIT_NAME
+            yarn deploy
