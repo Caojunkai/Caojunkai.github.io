@@ -6,7 +6,7 @@ jobs:
       - image: circleci/node
         environment:
           TZ: Asia/Shanghai
-          
+
     steps:
       - checkout
 
@@ -42,3 +42,4 @@ workflows:
           filters:
             branches:
               only: pages
+              ignore: master
