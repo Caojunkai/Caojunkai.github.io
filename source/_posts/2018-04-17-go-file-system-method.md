@@ -7,6 +7,8 @@ tags: [go,golang,filesystem]
 Go官方库的文件操作分散在多个包中，比如`os`、`ioutil`包,发现已经有人2015年已经写了一篇这样的文章，写的非常好，我经常在需要使用文件方法的时候回过来查,所以翻译成了中文，记录一下.
 原文[ Working with Files in Go](https://www.devdungeon.com/content/working-files-go#write_bytes), 作者[ NanoDano](https://www.devdungeon.com/blogs/nanodano)
 
+<!--more-->
+
 ## 介绍
 #### 万物皆文件
 UNIX 的一个基础设计就是"万物皆文件"(everything is a file)。我们不必知道一个文件到底映射成什么，操作系统的设备驱动抽象成文件。操作系统为设备提供了文件格式的接口
