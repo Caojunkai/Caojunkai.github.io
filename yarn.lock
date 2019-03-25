@@ -1775,10 +1775,10 @@ hexo-server@^0.3.1:
     opn "^5.3.0"
     serve-static "^1.13.2"
 
-hexo-tag-cloud@^2.0.11:
-  version "2.0.11"
-  resolved "https://registry.yarnpkg.com/hexo-tag-cloud/-/hexo-tag-cloud-2.0.11.tgz#006f52531734115d996efda8451a8d9e9d690e49"
-  integrity sha512-T8CQpM4kthznfuhnkL+1kK+/MXrkk2Up05JXT9d77uCmliuceVN8qciuD7GGfh8ad56Vo+YU8iezg3Skchz85Q==
+hexo-tag-cloud@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/hexo-tag-cloud/-/hexo-tag-cloud-2.1.1.tgz#059423b95149c4641fc1d9f70e02d9f707099c4a"
+  integrity sha512-U6uoxvgPA0i8cwzCG5cPChMFUvDQHwNuWzYWu8kqM+5xgiirMIXG4PrEV0nJMEm5oGbl3zJHGOE71J8ixQYPJQ==
   dependencies:
     hexo-fs "^0.2.2"
     hexo-log "^0.2.0"
