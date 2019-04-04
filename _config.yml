@@ -90,3 +90,6 @@ deploy:
   branch: master
   extend_dirs:
     - .circleci
+
+# google
+googleAnalytics: UA-137176691-1
