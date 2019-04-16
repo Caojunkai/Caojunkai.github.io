@@ -45,7 +45,7 @@ date: 2015-06-12
 
 假设随机拿到该数组的一个key为1，然后让key为1的元素与最后一个元素（key为4）交换
 
-![2015-06-12_223756](https://wx4.sinaimg.cn/large/b09f1c9dgy1g1qkxqrw3wj20mv07dt9b.jpg)
+![2015-06-12_223756](https://ws3.sinaimg.cn/large/b09f1c9dly1g1vlz2msssj20mv07dt9b.jpg)
 
 第一次交换后，数组长度减一，然后只需要对（数组长度-1）的元素执行相同操作即可。代码如下：
 
