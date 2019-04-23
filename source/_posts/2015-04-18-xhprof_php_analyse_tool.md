@@ -1,6 +1,6 @@
 ---
 layout : post
-title : PHP性能优化工具–-XHProf安装与使用
+title : 性能优化工具–-XHProf安装与使用
 category : php
 tags : php
 date: 2015-04-18

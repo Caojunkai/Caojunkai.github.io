@@ -1,6 +1,6 @@
 ---
 layout : post
-title : PHP如何正常转换中文json格式字符串
+title : 如何正常转换中文json格式字符串
 category : php
 tags : php
 date: 2015-07-09
