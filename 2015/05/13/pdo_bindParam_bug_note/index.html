@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 关于在PDO中使用bindParam绑定参数的陷阱 · Fitzix</title><meta name="description" content="关于在PDO中使用bindParam绑定参数的陷阱 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">关于在PDO中使用bindParam绑定参数的陷阱</h1><div class="tags"><a href="/tags/php/" class="tag-title">#php</a></div><div class="post-info">May 13, 2015</div><div class="post-content"><p>今天，在看鸟哥<a href="http://weibo.com/laruence" target="_blank" rel="noopener">@laruence</a>的个人博客时看到了有关在PHP中使用PDO的bindParam绑定方法结合循环语句来使用时会产生一个<code>BUG</code>或者小陷阱，这里做个笔记备忘 :)</p>
+<p>来自PHP官方的BUG报告在这里：<a href="https://bugs.php.net/bug.php?id=63281" target="_blank" rel="noopener">#63281</a></p>
+<a id="more"></a>
+<p>究其原因, 也就是bindParam、bindColum和bindValue的不同之处, bindColum和bindParam要求第二个参数是一个<strong>引用变量(reference)</strong>，这才是关键点。</p>
+<p>具体介绍可以戳这里：<a href="http://www.laruence.com/2012/10/16/2831.html" target="_blank" rel="noopener">Laruence：PDOStatement::bindParam 的一个陷阱</a></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2015/06/04/how_to_use_session_without_cookie/" class="prev">PREV</a><a href="/2015/04/20/yac_study_and_vs_memcache_note/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

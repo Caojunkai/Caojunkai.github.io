@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Ajax实现带进度条文件上传 · Fitzix</title><meta name="description" content="Ajax实现带进度条文件上传 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Ajax实现带进度条文件上传</h1><div class="tags"><a href="/tags/Ajax/" class="tag-title">#Ajax</a></div><div class="post-info">Sep 5, 2014</div><div class="post-content"><p>很多情况下，当我们在网站上传文件至远程的服务器时，都会看到一个上传进度条来告诉我们上传的情况、以及是否上传成功，这样可以极好滴提升用户体验程度！</p>
+<p>那么，这个花哨的进度条是如何做到的呢？html5给出了很好的特性来实现带进度条的Ajax上传文件机制。</p>
+<p>废话不多说，直接上代码，留作笔记，以作备忘：</p>
+<a id="more"></a>
+<p><strong>js代码：</strong></p>
+<pre><code>&lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;
+        function pic () {
+            //创建FormData对象
+            var fd = new FormData();
+            //获取文件对象
+            var pic = document.getElementById(&apos;pic&apos;).files[0];
+            //把文件内容追加到form中
+            fd.append(&apos;pic&apos;, pic);
+            //创建Ajax引擎
+            var xhr = new XMLHttpRequest();
+            xhr.open(&apos;post&apos;, &apos;./upload.php&apos;, true);
+            xhr.setRequestHeader(&quot;Content-Type&quot;,&quot;application/x-www-form-urlencoded&quot;);
+            xhr.onreadystatechange = function () {    //指定回调函数
+                if (this.readyState == 4) {
+                    //window.alert(&apos;上传成功！&apos;);
+                    document.getElementById(&apos;p&apos;).innertText = this.responseText;
+                }
+            };
+
+            //利用xhr2的新标准，为上传过程添加一个监听函数,实现进度条上传效果
+            xhr.upload.onprogress = function (event) {
+                if (ev.lengthComputable) {            //true时
+                    var percent = 100 * ev.loaded / ev.total;
+
+                    document.getElementById(&apos;bar&apos;).style.width = percent + &apos;%&apos;;
+                    document.getElementById(&apos;bar&apos;).innerText = parseInt(percent) + &apos;%&apos;;
+                }
+
+               // console.log(event);
+            };
+
+            xhr.send(fd);
+        }
+    &lt;/script&gt;
+</code></pre><p><strong>html代码：</strong></p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;!--
+    Ajax 带进度条文件上传
+--&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+    &lt;title&gt;Fileapi&lt;/title&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+        #one {
+            width : 500px;
+            height :20px;
+            border = 1px solid green;
+        }
+        #bar {
+            width : 0%;
+            height : 100%;
+            background-color:green;
+        }
+    &lt;/style&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;input type=&quot;file&quot; name=&quot;pic&quot; value=&quot;&quot; id=&quot;pic&quot; onchange=&quot;pic();&quot;&gt;&lt;br /&gt;
+    &lt;div id=&quot;one&quot;&gt;&lt;div id=&quot;bar&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;p id=&quot;p&quot;&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p><strong>php代码：</strong></p>
+<pre><code>&lt;?php
+    /*
+        服务器端测试打印
+    */
+    echo &apos;upload success&apos;;
+?&gt;
+</code></pre><hr>
+<p>(end)</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2014/09/07/ajax_file_slice_upload/" class="prev">PREV</a><a href="/2014/09/03/ajax_jsonp_return/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

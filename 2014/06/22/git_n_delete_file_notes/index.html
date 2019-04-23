@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 版本库删除文件操作 · Fitzix</title><meta name="description" content="版本库删除文件操作 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">版本库删除文件操作</h1><div class="tags"><a href="/tags/Git/" class="tag-title">#Git</a></div><div class="post-info">Jun 22, 2014</div><div class="post-content"><p>首先，我们要知道在Git中任何的操作都是一个修改，那删除文件肯定也是一个修改操作了，在工作区删除一个文件可以使用<code>rm -f file</code>的命令来操作：</p>
+<pre><code>$ rm -f one.txt
+</code></pre><p>此时，Git已经知道你删除了文件，这时候的工作区和版本库也不一样了，可以使用<code>git status</code>来查看：</p>
+<pre><code>hanson@host-linux:~/learngit$ git status 
+# On branch master
+# Changes not staged for commit:
+#   (use &quot;git add/rm &lt;file&gt;...&quot; to update what will be committed)
+#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+#
+#   deleted:    one.txt
+#
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre><a id="more"></a>
+<p>现在有两个选择，一是确实要从版本库中删除该文件，那就用命令<code>git rm</code>删掉，并且commit：</p>
+<pre><code>hanson@host-linux:~/learngit$ git rm one.txt
+rm &apos;one.txt&apos;
+hanson@host-linux:~/learngit$ git commit  -m &apos;delete file&apos;
+[master 3ec942f] delete file
+ 1 file changed, 2 deletions(-)
+ delete mode 100644 one.txt
+</code></pre><p>现在，我们就彻底删除one.txt文件了。</p>
+<p>另一种情况是我们失手删错了，因为我们版本库里还有该文件，我们可以使用<code>git checkout --file</code>来恢复：</p>
+<pre><code>$ git checkout -- one.txt
+</code></pre><p>git checkout其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。</p>
+<hr>
+<p>###小结<br>命令<code>git rm</code>用于删除一个文件。如果一个文件已经被提交到版本库，那么你永远不用担心误删，但是要小心，你只能恢复文件到最新版本，你会丢失最近一次提交后你修改的内容。I</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2014/06/22/git_manage_file_notes/" class="prev">PREV</a><a href="/2014/06/21/a_git_work_temporary_notes/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

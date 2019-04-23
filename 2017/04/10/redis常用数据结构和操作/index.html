@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Redis常用数据结构和操作 · Fitzix</title><meta name="description" content="Redis常用数据结构和操作 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Redis常用数据结构和操作</h1><div class="tags"><a href="/tags/Redis/" class="tag-title">#Redis</a></div><div class="post-info">Apr 10, 2017</div><div class="post-content"><p>Redis常用的数据结构有5种 String Hash List Set SortSet</p>
+<a id="more"></a>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><ul>
+<li>Set name fitz 设置name = fitz 存储</li>
+<li>Get name 获取设置好的name的值</li>
+<li>Setnx name fitz 设置name键值为fitz 如果存在,则返回0 不存在返回1</li>
+<li>Mset name fitz age 23 salary 233333 设置多个键值对 一块存错 全成功,全失败</li>
+<li>Msetnx name fitz age 23 hoby basketball 如果设置多个键值对中有存在返回失败</li>
+<li>Mget name age salary 获取多个键的值</li>
+<li>Getset name fitz 获取name的值,并设置新的值为fitz</li>
+<li>Setrange name 3 fitz 将键name 3字符和面的进行替换 结果为luofitz</li>
+<li>Getrange name 3 6 获取键name的值 结果为luofitz</li>
+<li>Append name .com 给键nane追加.com 结果为fitz.com</li>
+<li>Incr age 设置每个值自增 返回结果为24</li>
+<li>Incrby age 6 给name加上6 如果是负数则键</li>
+<li>Decr 与incr相反</li>
+<li>Decrby 与decrby相反</li>
+<li>Strlen 返回键对应的值得字符长度</li>
+</ul>
+<hr>
+<h2 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h2><ul>
+<li>Hset user:001 name fitz    设置哈表名字user 表里面的001 的name 设置为 fitz</li>
+<li>Hsetnx user name maomao    设置哈希表名字中的name 存在,设置不成功</li>
+<li>Hget user:001 name 获取hash表的user的001的值</li>
+<li>Hmset user:003 name maomao age 23 批量设置</li>
+<li>Hmget user:003 name age 批量获取user:003的值</li>
+<li>Hincrby user:003 age 3     给hash表的age值加上3</li>
+<li>Hexists user:003 name 判断hash表中式否存在name的键</li>
+<li>Hlen user:003 返回hash表的所有的字段的数目</li>
+<li>Hkeys user:003 返回hash表的所有字段</li>
+<li>Hvals user:003 返回hash表中所有的值</li>
+<li>Hgetall user:003 返回所有的字段和值</li>
+<li>Hdel user:003 name 对hash的name的值和键删除</li>
+</ul>
+<hr>
+<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><p><code>栈:先进后出 队列:先进先出</code></p>
+<ul>
+<li>lpush 从头压入<ul>
+<li>Lpush list1 “world”</li>
+<li>lpush list1 ‘hello”</li>
+<li>Lrange list1 0 -1 把链表中的数据从0到尾全部取出</li>
+</ul>
+</li>
+<li>rpush 从尾部压入<ul>
+<li>rpush list2 “world”</li>
+<li>rpush list2 “luowen”</li>
+<li>lrange list2 0 -1</li>
+</ul>
+</li>
+<li>linsert 插入出入数据<ul>
+<li>Linsert list3 before maomao love</li>
+<li>Lrange list3 0 -1</li>
+<li>Linsert list3 after luowen love</li>
+<li>Lrange list3 0 -1</li>
+</ul>
+</li>
+<li>lset 给某个元素赋值<ul>
+<li>Lset list5 0 “deom”</li>
+</ul>
+</li>
+<li>lrem 删除list表中的数据<ul>
+<li>Lrem list6 1 “luowen”</li>
+</ul>
+</li>
+<li>ltrim 对一个列表进行修剪(trim)，就是说，让列表只保留指定区间内的元素，不在指定区间之内的元素都将被删除<ul>
+<li><code>LTRIM KEY_NAME START STOP</code></li>
+</ul>
+</li>
+<li>lpop 从链表的头部弹出一个元素<ul>
+<li><code>LLEN KEY_NAME</code></li>
+</ul>
+</li>
+<li>rpop 从链表的尾部弹出一个元素<ul>
+<li><code>LLEN KEY_NAME</code></li>
+</ul>
+</li>
+<li>rpoplpush 从一个链表弹出,在从头部压入到另一个链表<ul>
+<li><code>RPOPLPUSH SOURCE_KEY_NAME DESTINATION_KEY_NAME</code></li>
+</ul>
+</li>
+<li>lindex 返回一个list小标的索引值</li>
+<li>llen 返回这个链表的元素的长度</li>
+</ul>
+<hr>
+<h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><ul>
+<li>sadd 向集合中插入一条数据</li>
+<li>srem 删除集合中的一个元素</li>
+<li>smembers 查看集合中的元素</li>
+<li>spop 从集合随机弹出一个元素,返回键值</li>
+<li>sdiff 两个集合的差集 返回两个集合不一样的,根据第一个集合为标准</li>
+<li>sdiffstroe 将两个差集存储到另外一个集合        </li>
+<li>sinter 将两个集合的交集</li>
+<li>sinterstore 将两个集合的交集存储到另外一个集合中</li>
+<li>sunion 将两个集合并集</li>
+<li>sunionstore 将两个集合并集并存储到另外一个集合中</li>
+<li>smove 将以个集合中的元素移动到另外一个集合中</li>
+<li>scard 查看集合中元素的个数</li>
+<li>sismember 判断是否是集合中的元素</li>
+<li>srandmember myset14 随机取出myset1 中的元素</li>
+</ul>
+<hr>
+<h2 id="SortSet"><a href="#SortSet" class="headerlink" title="SortSet"></a>SortSet</h2><ul>
+<li>zadd 添加到有序集合中区</li>
+<li>zrem 删除有序集合中的元素</li>
+<li>zincrby myzsent luowen1 3将myzsent luown1的序号更改为4 如果没有,就创建他</li>
+<li>zrank 找到myzsent 对应值得索引</li>
+<li>zrevrank 反过来去索引</li>
+<li>zrangebyscore 返回集合中指定的元素</li>
+<li>zcount 返回指定空间的数量</li>
+<li>zcard 返回集合中所有元素的个数</li>
+<li>zremrangbyrank 删除集合中指定区间的元素,并将索引进行排序</li>
+<li>zremrangbyscore 删除集合中指定元素,按循序进行排序</li>
+<li>sadd 向集合中插入一条数据</li>
+</ul>
+</div></article></div></main><footer><div class="paginator"><a href="/2017/04/19/Golang内存管理/" class="prev">PREV</a><a href="/2017/04/05/redis锁的正确姿势/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

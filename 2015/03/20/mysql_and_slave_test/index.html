@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> MySQL数据库主从复制 · Fitzix</title><meta name="description" content="MySQL数据库主从复制 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">MySQL数据库主从复制</h1><div class="tags"><a href="/tags/MySQL/" class="tag-title">#MySQL</a></div><div class="post-info">Mar 20, 2015</div><div class="post-content"><p>MySQL数据库主从复制的工作方式很简单，一台主机作为主服务器，一台或者多台主机作为从服务器。主服务器会把数据库的变化记录到日志，一旦这些变化被记录到日志，就会马上或者以固定的时间间隔被发送从服务器，使得主从服务器得到同步。</p>
+<p>下面，总结下主从服务器配置原理，作为笔记，首先说明下测试环境（局域网内）：</p>
+<pre><code>Centos 6.5 主 192.168.1.103 (VMware测试)
+Centos 6.5 从 192.168.1.104 (VMware测试)
+MySQL 5.4
+</code></pre><a id="more"></a>
+<p>###MySQL主从复制优点</p>
+<blockquote>
+<ul>
+<li>如果主服务器出现问题，可以快速切换到从服务器提供的服务</li>
+<li>可以在从服务器上执行查询操作，降低主服务器的访问压力</li>
+<li>可以在从服务器上执行备份，以避免备份期间影响主服务器的服务</li>
+</ul>
+</blockquote>
+<p><strong>注意</strong></p>
+<p>一般只有更新不频繁的数据或者对实时性要求不高的数据可以通过从服务器查询，对于实时性要求高的数据仍然要从主服务器上获得。</p>
+<p>在正式开始配置前，先看下摘自网上的一个简单完整的 Mysql 主从复制，读写分离的示意图。</p>
+<p><img src="../../images/201412/bc837715-8d0e-36b4-b659-4389e01f76d0.png" alt=""></p>
+<p>###主服务器配置</p>
+<p>1、登录数据库</p>
+<pre><code>mysql -u root -p *** test
+</code></pre><p>2、给从服务器设置授权用户</p>
+<pre><code>mysql&gt;grant all slave on *.* to slave@192.168.1.104 identified by &apos;123456&apos;;
+mysql&gt;flush privileges
+</code></pre><p>3、修改主服务器配置文件<code>my.cnf</code>:</p>
+<pre><code>vim /etc/my.cnf
+server-id  = 1            #主机标示，整数
+log_bin    = mysql-bin   #开启bin-log
+service mysqld restart   #注意：更改mysql配置文件后一定要重新启动mysqld服务
+</code></pre><p>4、在主服务器上设置读锁定有效，确保没有数据库操作，以便获得一个一致性的快照。</p>
+<pre><code>mysql&gt;flush tables with read lock;
+</code></pre><p>5、目前主服务器已经停止了更新操作，生成主数据库的备份方式有两种：</p>
+<blockquote>
+<ul>
+<li>cp全部的数据文件到从服务器</li>
+<li>mysqldump备份数据方式</li>
+</ul>
+</blockquote>
+<p><em>如果数据库的服务可以停止的话，那么直接使用cp复制数据文件应该是最快的生成快照的方法了。</em></p>
+<p>这里使用mysqldump备份数据文件：</p>
+<pre><code>mysqldump -uroot -p*** test &gt; /tmp/test.sql
+</code></pre><p>6、主数据库备份完毕后，主数据库要进行解锁操作：</p>
+<pre><code>mysql&gt;unlock tables;
+</code></pre><p>7、把数据库备份的一致性文件复制到从服务器,并在从数据库导入数据：</p>
+<pre><code>scp /tmp/test.sql 192.168.1.104:/tmp/        //复制到从服务器    
+mysqldump -uroot -p*** test &lt; /tmp/test.sql
+</code></pre><p>###从服务器配置</p>
+<p>1、修改从服务器数据库的server-id,注意从数据库的server-id的值必须是唯一的，不能和主数据酷的配置相同，如果有多个从服务器，则每个服务器必须有自己唯一的server-id值。</p>
+<pre><code>vim /etc/my.cnf
+//下面是从数据库的配置
+server-id = 2
+master-host     = 192.168.1.103        //注意：这里是主服务器ip
+master-user     = slave                //从数据库用户
+master-password = 123456
+master-port     = 3306
+master-connect-retry=60              //如果从服务器发现主服务器断掉，重新连接的时间差(秒)
+replicate-do-db =test                //只复制某个库
+replicate-ignore-db=mysql            //不复制某个库
+service mysqld restart                 //重新启动mysqld服务
+</code></pre><p>2、在从数据库内开启slave进程：</p>
+<pre><code>mysql&gt;start slave;
+</code></pre><p>3、在从数据库进行<code>show slave status\G</code>进行查看从服务器是否配置成功：</p>
+<p><img src="../../images/201412/2014-12-18_143809.png" alt=""></p>
+<p>4、从数据库常用命令：</p>
+<pre><code>start slave            //启动复制线程
+stop  slave         //停止复制线程
+show  slave  status //查看从数据库状态
+show master logs    //查看主数据酷bin-log日志
+change master to    //动态改变主服务器配置
+show processlist    //查看数据库运行进程
+</code></pre><p>5、现在可以在主数据库进行一些insert、update和delete操作，看看从数据库是不是已经同步完成，答案是肯定的啦。 :)</p>
+<p>（end）</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2015/03/28/memcache_memory_manage_note/" class="prev">PREV</a><a href="/2015/03/07/winter_holiday_conclusion/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

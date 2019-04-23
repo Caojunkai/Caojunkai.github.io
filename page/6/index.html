@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Fitzix</title><meta name="description" content="Fitzix Hexo Bolg"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2014/09/11/jquery_and_dom/" class="post-title-link">jQuery对象与DOM对象相互转换</a></h2><div class="tags"><a href="/tags/jQuery-DOM/" class="tag-title">#jQuery DOM</a></div><div class="post-info">Sep 11, 2014</div><div class="post-content"><p>对于刚学习jQuery的童鞋来说，可能会一时分不清哪些是jQuery对象，哪些是DOM对象。而且初学者很容易以jQuery和DOM对象混搭的形式来进行js操作，这要求我们能够很好的进行jQuery和DOM对象之间转换，这可是很有必要的奥，下面简单来说明下。</p>
+<p>首先，我们先定义好变量的风格，如果是jQuery对象，变量前就加上<code>$</code>符号：</p>
+<pre><code>var $variable = jQuery对象
+</code></pre><p>如果是DOM对象，则不加<code>$</code>符号：</p>
+<pre><code>var variable = DOM对象
+</code></pre></div><a href="/2014/09/11/jquery_and_dom/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2014/09/07/ajax_file_slice_upload/" class="post-title-link">Ajax大文件切割上传</a></h2><div class="tags"><a href="/tags/Ajax/" class="tag-title">#Ajax</a></div><div class="post-info">Sep 7, 2014</div><div class="post-content"><p>对于我们这波电脑控的90后来说，在网上上传照片、压缩文件、视频等等已经是常见的事了。但是，不知道大家有没有疑问，就是说我们可以上传只有几兆的图片、稍大一点的十几兆的打包文件，甚至于几十兆或者几百兆的文件，更有甚者是上G的大视频文件，是不是可以无限制的上传更大的数据文件呢？！</p>
+<p><img src="http://ww3.sinaimg.cn/mw690/bd5a4d63jw1ek3t011i4mj20b003waac.jpg" alt="pic"></p>
+<p>答案正如你所想的，肯定是否定的嘛。服务器端怎么可以任由你上传无限大的文件呢，一般服务器端都会设置最大上传文件的大小来进行限制，那么当我们需要上传大文件时该如何实现呢？</p></div><a href="/2014/09/07/ajax_file_slice_upload/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2014/09/05/ajax_upload_progress/" class="post-title-link">Ajax实现带进度条文件上传</a></h2><div class="tags"><a href="/tags/Ajax/" class="tag-title">#Ajax</a></div><div class="post-info">Sep 5, 2014</div><div class="post-content"><p>很多情况下，当我们在网站上传文件至远程的服务器时，都会看到一个上传进度条来告诉我们上传的情况、以及是否上传成功，这样可以极好滴提升用户体验程度！</p>
+<p>那么，这个花哨的进度条是如何做到的呢？html5给出了很好的特性来实现带进度条的Ajax上传文件机制。</p>
+<p>废话不多说，直接上代码，留作笔记，以作备忘：</p></div><a href="/2014/09/05/ajax_upload_progress/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2014/09/03/ajax_jsonp_return/" class="post-title-link">Ajax使用jsonp实现跨域请求</a></h2><div class="tags"><a href="/tags/Ajax-Jsonp/" class="tag-title">#Ajax Jsonp</a></div><div class="post-info">Sep 3, 2014</div><div class="post-content"><p>Ajax使用XMLHttpRequest对象在无刷新页面的情况下对服务器端进行数据请求，她允许客户端javascript通过HTTP连接到Web服务器。不过，由于收到浏览器的限制，Ajax不允许实现跨域通信，如果尝试从不同的域请求数据，就会出现错误！</p>
+<p>###同源策略</p>
+<p>同源策略，它是由Netscape提出的一个著名的安全策略。现在所有支持JavaScript 的浏览器都会使用这个策略。所谓同源是指域名、协议、端口相同。当一个浏览器的两个tab页中分别打开来百度和谷歌的页面，当一个百度浏览器执行一个脚本的时候会检查这个脚本是属于哪个页面的，即检查是否同源，只有和百度同源的脚本才会被执行。</p>
+<p>同源策略阻止从一个域上加载的脚本获取或操作另一个域上的文档。也就是说，受到请求的URL的域必须与当前 Web 页面的域相同。这意味着浏览器隔离来自不同源的内容，以防止它们之间的操作。</p></div><a href="/2014/09/03/ajax_jsonp_return/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2014/08/22/shell_script_source_and_bash/" class="post-title-link">Shell脚本的执行方式区别</a></h2><div class="tags"><a href="/tags/Linux-Shell/" class="tag-title">#Linux Shell</a></div><div class="post-info">Aug 22, 2014</div><div class="post-content"><p>不同的Shell脚本执行方式会造成不一样的后果，尤其对bash的环境影响很大。shell脚本的执行方式除了（绝对路径、相对路径、bash、sh）执行外，还可以利用source来执行，那么他们之间有什么不同呢？</p>
+<p>###利用直接执行的方式来执行脚本</p>
+<p>当我们利用直接方式（绝对路径、相对路径）或者使用bash命令（或者sh）来执行script时，该script都会使用一个新的bash环境来执行脚本内命令，也就是说，使用该方式执行时，其实script实在其子进程的bash内执行的。那么，我们首先应该知道：<strong>当子进程完成时，子进程内的各个变量或者操作将会结束而不会传回到其父进程中</strong>，这一点很重要，我们得要先明白。</p></div><a href="/2014/08/22/shell_script_source_and_bash/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2014/08/17/sed_tool_notes/" class="post-title-link">Sed数据处理</a></h2><div class="tags"><a href="/tags/sed-linux/" class="tag-title">#sed linux</a></div><div class="post-info">Aug 17, 2014</div><div class="post-content"><p>在Linux下有两个非常强大的数据处理工具，一个是sed，另一个是awk。这里暂且介绍sed如何使用好了，作为备忘笔记，以便以后查看。</p>
+<p>sed本身是一个管道命令，可以分析stdin的，而且sed可以将数据进行替换、删除、新增、选取特定行的功能。这里要明白的是，与awk将一行数据分为“多个字段”来处理相比，sed常常作用于一整行的处理。</p>
+<p>首先，先了解下sed工具的用法：</p>
+<pre><code>hanson@linux-host:~$ sed [-nefir] [动作] 文件
+参数：
+    -n：安静模式，加上-n后只有经过sed特殊处理过的数据才会显示在屏幕上，不加-n很可能会造成重复输出数据
+    -e：直接在命令行模式上进行动作编辑
+    -f：将sed动作写入一个文件，-f filename 则可以执行文件内的动作
+    -r：sed的动作支持的是扩展型正则表达式语法
+    -i：直接修改读取的文件内容，而不是输出到屏幕
+</code></pre></div><a href="/2014/08/17/sed_tool_notes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2014/08/11/linux_code_type_note/" class="post-title-link">Linux下语系编码问题总结</a></h2><div class="tags"><a href="/tags/Linux/" class="tag-title">#Linux</a></div><div class="post-info">Aug 11, 2014</div><div class="post-content"><p>我们都知道，我们操作系统的文件都会有一个编码格式[比如：utf8、gb2312…],但是很多情况下，我们会需要将现有文件的语系编码进行转换，比如将utf8的文件转换为gb2312格式，那该怎么办？难道我们需要将全部文件都打开，然后转存诚所需要的编码格式嘛？那样我们肯定会吐血…</p>
+<p><code>iconv</code>命令就会帮助我们做到，下面介绍下如何使用他来方便我们。</p>
+<p>首先，我们要准备一个utf8格式的文件呢，来<code>file 文件</code>查看下：</p>
+<pre><code>hanson@linux-host:~/Linux_Demo$ file iconv.f
+iconv.f: HTML document, UTF-8 Unicode text, with very long lines
+</code></pre><p>可以看出<code>iconv.f</code>是一个utf8格式的文件。<br></p></div><a href="/2014/08/11/linux_code_type_note/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2014/08/11/vim_super_study/" class="post-title-link">简明VIM练级备忘笔记</a></h2><div class="tags"><a href="/tags/Linux-Vim/" class="tag-title">#Linux Vim</a></div><div class="post-info">Aug 11, 2014</div><div class="post-content"><p>特此声明：本文以及链接参考自[左耳朵耗子]的<a href="coolshell.cn/articles/5426.html">酷壳站点</a></p>
+<p>vim的学习曲线相当的大，所以，如果你一开始看到的是一大堆VIM的命令分类，你一定会对这个编辑器失去兴趣的。所以如果你想以最快的速度学习人类史上最好的文本编辑器vim,你先得懂得如何在VIM幸存下来，然后一点一点地学习各种戏法。</p>
+<p>学习 vim 并且其会成为你最后一个使用的文本编辑器。没有比这个更好的文本编辑器了，非常地难学，但是却不可思议地好用。</p></div><a href="/2014/08/11/vim_super_study/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2014/08/06/session_safe_notes/" class="post-title-link">SESSION安全性问题</a></h2><div class="tags"><a href="/tags/SESSION/" class="tag-title">#SESSION</a></div><div class="post-info">Aug 6, 2014</div><div class="post-content"><p>一直以来很多开发者都认为php内置的session管理机制是具有一定的安全性，可以对一般的session攻击起到防御。事实上，这是一种误解，php团队只实现了一种方便有效的机制。具体的安全措施，应该有应用程序的开发团队来实施。</p>
+<p>现在，我们来看下一个比较常规的针对session的攻击：</p>
+<ul>
+<li><p>用户访问<code>http://www.example.org</code>，并且登录。</p>
+</li>
+<li><p><code>example.org</code>的服务器设置指示客户端设置相关<code>cookie - PHPSESSID=12345</code></p>
+</li>
+<li><p>攻击者这时访问<code>http://www.example.org/</code>,并且在请求中携带了对应的<code>cookie - PHPSESSID=12345</code></p>
+</li>
+</ul></div><a href="/2014/08/06/session_safe_notes/" class="read-more">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a href="/2014/07/30/memcache_php_notes/" class="post-title-link">PHP程序操作Memcache笔记</a></h2><div class="tags"><a href="/tags/memcached/" class="tag-title">#memcached</a></div><div class="post-info">Jul 30, 2014</div><div class="post-content"><p>上一篇说明<a href="http://liyafeng.cn/memcache_telnet_notes/" target="_blank" rel="noopener">telnet操作memcache</a>时就提到有两中方式来操作memcache，一种是通过telnet工具，另一种是通过程序控制，下面简单总结下关于使用PHP程序来操作memcache步骤以及细节注意事项。</p>
+<p>首先，准备工作是要先把<code>php_memcache.dll</code>扩展文件加载到php中，以下是简要步骤：</p>
+<ul>
+<li>将<code>php_memcache.dll</code>文件拷贝到php的ext目录下。</li>
+<li>修改<code>php.ini</code>文件，加载<code>php_memcache.dll</code>文件，添加<code>extension=php_memcache.dll</code>，注意前面不要有<code>；</code>号。</li>
+<li>重新启动apache服务器</li>
+</ul>
+<p><strong>注意：</strong></p>
+<p>不同版本的php所使用的<code>php_memcache.dll</code>文件是不一样的，加载时要注意检查php版本，找到合适的<code>php_memcache.dll</code>文件，否则会出错。</p></div><a href="/2014/07/30/memcache_php_notes/" class="read-more">...more</a></article></li></ul></main><footer><div class="paginator"><a href="/page/5/" class="prev">PREV</a><a href="/page/7/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

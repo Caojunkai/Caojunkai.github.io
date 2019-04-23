@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> MySQL实现增量备份小结 · Fitzix</title><meta name="description" content="MySQL实现增量备份小结 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">MySQL实现增量备份小结</h1><div class="tags"><a href="/tags/MySQL-增量备份/" class="tag-title">#MySQL 增量备份</a></div><div class="post-info">Oct 21, 2014</div><div class="post-content"><p>当我们误删了MySQL数据库某张表中的数据或者整张表，我们可以使用MySQL的增量备份机制来实现误删数据的恢复，接下来就来总结下MySQL的增量备份技术是如何实现的，以及其中需要我们注意的事项！</p>
+<p>首先，对于ddl和dml语句的二进制备份，我们要清楚的是MySQL在5.0还不支持增量备份，5.1开始支持。</p>
+<p>###增量备份的定义</p>
+<p>MySQL数据库会以二进制的形式，自动把用户对MySQL数据库的操作，记录到文件夹，当用户希望恢复的时候可以使用备份文件进行恢复。</p>
+<a id="more"></a>
+<p>下面，我们开始详细说明如何配置增量备份机制。</p>
+<p>首先，要实现增量备份，需要在my.ini文件中配置备份路径，我们可以在<code>[mysqld]</code>下配置：</p>
+<pre><code>#这里指定把备份文件放在哪个目录下
+log-bin=d:/binlog/mylog
+</code></pre><p>然后重启MySQL服务器即可，增量备份就启动了：</p>
+<pre><code>net stop mysql
+net start mysql
+</code></pre><p>此时会在在<code>d:\binlog\</code>下生成两个文件</p>
+<pre><code>mylog.index        //该文件记录索引
+mylog.000001    //该文件记录二进制的详细信息
+</code></pre><p>此时，我们可以使用<code>mysqlbinlog</code>工具来查看生成的二进制文件，在cmd中进入mysql目录下的bin中 使用<code>msyqlbinlog</code>后面加上<code>mylog.000001</code>，可以看到所有<strong>ddl和dml操作(不包括查询操作语句)</strong>，且每一个操作都有具体的位置和时间点的记录。</p>
+<p>接下来，创建数据表进行测试：</p>
+<blockquote>
+<p>create table test(</p>
+</blockquote>
+<blockquote>
+<p>id int primary key auto_increment,</p>
+</blockquote>
+<blockquote>
+<p>name varchar(32) not null default</p>
+</blockquote>
+<blockquote>
+<p>) engine=myisam;</p>
+</blockquote>
+<p>插入数据：</p>
+<pre><code>insert into test values (null, &apos;Leeya&apos;),(null, &apos;Hanson&apos;),(null, &apos;Jack&apos;);
+</code></pre><p>切换到mysql下的bin目录，使用<code>mysqlbinlog</code>查看二进制文件：</p>
+<pre><code>mysqlbinlog d:\binlog\mylog.000001
+</code></pre><p>结果如下图：</p>
+<p><img src="../images/201410/2014-10-21_202809.jpg" alt="pic"></p>
+<p>图中已经显示，mysql已经帮我们把每一个操作（<strong>再次提醒：不记录select查询操作</strong>）的时间记录下来了，同时分配了一个位置position，我们就可以根据时间和位置来恢复数据。</p>
+<p>下面，我们使用<code>drop</code>来删除表;</p>
+<pre><code>drop table test;
+</code></pre><p>此时，数据库中已经不存在test这个数据表了，现在我们可以使用<code>mysqlbinlog</code>来进行恢复了。</p>
+<hr>
+<p>在进行恢复数据之前，先总结下mysql进行恢复数据的两种方式：</p>
+<p>###通过时间来恢复</p>
+<p>一种是：</p>
+<pre><code>//从开始恢复到这个时间点    
+mysqlbinlog --stop-datetime=&quot;2014-10-21 20:39:21&quot; d:/binlog/mylog.000001 | mysql -uroot -p******
+</code></pre><p>另一种是</p>
+<pre><code>//从这个时间点开始恢复到最后
+mysqlbinlog --start-datetime=&quot;2014-10-21 20:39:21&quot; d:/binlog/mylog.000001 | mysql -uroot -p******
+</code></pre><p>值得注意的是，时间格式，使用双引号包裹起来。</p>
+<p>###通过位置来恢复</p>
+<p>一种是：</p>
+<pre><code>//从二进制日志中第1个位置等于N参量时的事件开始读。
+--start-position=N
+</code></pre><p>另一种是:</p>
+<pre><code>//从二进制日志中第1个位置等于和大于N参量时的事件起停止读
+--stop-position=N
+</code></pre><p>下面，我们来进行数据的恢复：</p>
+<pre><code>mysqlbinlog --stop-position=&quot;573&quot; d:\binlog\mylog.000001 | mysql -uroot -p******
+</code></pre><p>然后使用sql查看数据是否已经恢复;</p>
+<pre><code>select * from test;
+</code></pre><p>经测试，发现数据的确恢复成功，同理，我们也可以使用时间来恢复数据。</p>
+<p>###如何关闭增量备份</p>
+<p>把my.ini文件中mysqld下面的<code>log-bin=路径</code>前面添加#号，然后重启mysql服务器即可。</p>
+<hr>
+<p>###注意：</p>
+<p>当随着时间的推移，二进制文件里面的数据会越来越大，所以要定期的做一些清理。</p>
+<ul>
+<li>使用mysql命令<code>reset master</code>来把二进制日志索引文件重新设置为空。</li>
+<li>设置<code>my.ini</code>中的参数[mysqld]下的<code>-EXPIRE_LOGS_DAYS</code>，此参数是设置日志过期的天数，过期的日志将被自动删除。</li>
+</ul>
+<p><strong>建议：</strong></p>
+<p>每周做一个全备份<code>mysqldump</code>，然后同时启用增量备份，把过期时间设为大于等于7。此时，如果出现数据库崩溃，就可以先完全恢复，然后再增量恢复。如果担心误操作，可先查看增量日志，然后再进行增量备份。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2014/10/22/redis-linux_and_windows-setup/" class="prev">PREV</a><a href="/2014/10/19/mysql_myisam_data_optimize/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

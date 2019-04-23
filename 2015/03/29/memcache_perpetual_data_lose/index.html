@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 永久数据丢失现象 · Fitzix</title><meta name="description" content="永久数据丢失现象 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">永久数据丢失现象</h1><div class="tags"><a href="/tags/Memcache/" class="tag-title">#Memcache</a></div><div class="post-info">Mar 29, 2015</div><div class="post-content"><p>有时候，在我们使用memcache过程中会出现”数据丢失”的现象， 也就是说明明数据被设为永久有效，却莫名其妙的丢失了，这是怎么回事呢？</p>
+<p>在上一篇博客<a href="http://liyafeng.cn/memcache_item_delete_note/" target="_blank" rel="noopener">Memcache过期数据惰性和LRU删除机制</a>中已经总结了memcache过期数据是如何被删除的以及根据LRU（最近最少使用机制）来从最近未被使用的记录中搜索，并将其空间分配给新的记录。</p>
+<a id="more"></a>
+<p>所以，遇到这种情况我们只需要从以上两方面来分析，即可得到以下结论：</p>
+<p>1、如果Slab中的很多chunk尚未过期， 且非永久数据比较活跃，此时新增item，则永久数据被踢；</p>
+<p>2、如果Slab中的很多chunk已经过期， 且过期前比较活跃以及过期后未被get过，系统不知道他们已经过期，此时新增item， 则永久数据被踢；</p>
+<p>3、如果Slab中的很多chunk已经过期，且被get过，被标记为expire(过期)，此时新增item，则永久数据不会被踢；</p>
+<p>用图表示如下：</p>
+<p><img src="../../images/201503/2015-03-30_155818.jpg" alt=""></p>
+<p>避免永久数据被踢现象的解决方案：</p>
+<blockquote>
+<p>永久数据和非永久数据分开放，具体如何设计，看具体环境。</p>
+</blockquote>
+<p>(end)</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2015/03/29/memcache_item_delete_note/" class="prev">PREV</a><a href="/2015/03/28/memcache_memory_manage_note/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

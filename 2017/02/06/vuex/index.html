@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Vue目录结构 · Fitzix</title><meta name="description" content="Vue目录结构 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Vue目录结构</h1><div class="tags"><a href="/tags/Vue/" class="tag-title">#Vue</a></div><div class="post-info">Feb 6, 2017</div><div class="post-content"><h2 id="vuex目录结构"><a href="#vuex目录结构" class="headerlink" title="vuex目录结构"></a>vuex目录结构</h2><blockquote>
+<p>|–modules <br><br>  |—–saerch.js <br><br>  |—–searchGrouop.js <br><br>  |–actions.js <br><br>  |–getters.js <br><br>  |–middlewares.js <br><br>  |–mutation-types.js <br><br>  |–store.js <br></p>
+</blockquote>
+<h3 id="各文件使用说明"><a href="#各文件使用说明" class="headerlink" title="各文件使用说明"></a>各文件使用说明</h3><h4 id="modules"><a href="#modules" class="headerlink" title="modules"></a>modules</h4><p>module 也就是vuex概念里的store,这里模块拆分了,存放我们实际项目中要使用的vuex模块,一般可以针对组件级别定义.<br>例如这里我们定义了search.js和searchGroup.js 然而module最后会在store.js中统一使用</p>
+<h4 id="actions"><a href="#actions" class="headerlink" title="actions"></a>actions</h4><p>这里定义我们vue组件要操作的动作事件, 比如请求一个异步操作,获取其他组件的状态等</p>
+<h4 id="getter"><a href="#getter" class="headerlink" title="getter"></a>getter</h4><p>getters 定义公用的getters处理 ,例如正常组件里想computed一个状态但在vuex里面不知道怎么处理，就可以在这里处理</p>
+<h4 id="middlewares"><a href="#middlewares" class="headerlink" title="middlewares"></a>middlewares</h4><p>middlewares中间件处理的东西，这里主要开发时候在控制台查看一些处理日志，vuex本身自带,其他没有研究过</p>
+<h4 id="mutation-types"><a href="#mutation-types" class="headerlink" title="mutation-types"></a>mutation-types</h4><p>定义mutation里用到的方法常量值，统一处理在这里，一般都是业务字符串常量</p>
+<h4 id="store"><a href="#store" class="headerlink" title="store"></a>store</h4><p>store.js核心文件，这里就是vuex基本的写法了，先引用vue和vuex 然后user(Vuex),把定义好的modules,middlewares引入进来然后返回一个Vuex.stor</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2017/03/12/web请求流程/" class="prev">PREV</a><a href="/2017/01/01/你好2017/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

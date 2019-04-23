@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Sed数据处理 · Fitzix</title><meta name="description" content="Sed数据处理 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Sed数据处理</h1><div class="tags"><a href="/tags/sed-linux/" class="tag-title">#sed linux</a></div><div class="post-info">Aug 17, 2014</div><div class="post-content"><p>在Linux下有两个非常强大的数据处理工具，一个是sed，另一个是awk。这里暂且介绍sed如何使用好了，作为备忘笔记，以便以后查看。</p>
+<p>sed本身是一个管道命令，可以分析stdin的，而且sed可以将数据进行替换、删除、新增、选取特定行的功能。这里要明白的是，与awk将一行数据分为“多个字段”来处理相比，sed常常作用于一整行的处理。</p>
+<p>首先，先了解下sed工具的用法：</p>
+<pre><code>hanson@linux-host:~$ sed [-nefir] [动作] 文件
+参数：
+    -n：安静模式，加上-n后只有经过sed特殊处理过的数据才会显示在屏幕上，不加-n很可能会造成重复输出数据
+    -e：直接在命令行模式上进行动作编辑
+    -f：将sed动作写入一个文件，-f filename 则可以执行文件内的动作
+    -r：sed的动作支持的是扩展型正则表达式语法
+    -i：直接修改读取的文件内容，而不是输出到屏幕
+</code></pre><a id="more"></a>
+<pre><code>动作：
+    n1,n2 [function]：选取n1,n2之间的行进行动作操作
+
+function参数：
+    a：新增，会出现在下一行
+    i：插入，会出现在上一行
+    c：替换，c后面接字符串，可以替换n1,n2之间的行
+    s：替换，搭配正则表达式
+    d：删除，通常d后面不解参数
+    p：打印，一般与sed -n一起使用
+</code></pre><p>##新增与删除</p>
+<p>将passwd文件的2,5行删除：</p>
+<pre><code>hanson@linux-host:~$ nl passwd  | sed &apos;2,5d&apos; 
+</code></pre><p><strong>注意：</strong>sed后跟的动作，必须在单引号之间。</p>
+<p>在第一行的上一行新增加一行数据：</p>
+<pre><code>hanson@linux-host:~$ nl passwd  | sed &apos;1i This is a new line.&apos;
+</code></pre><p>当添加多行时，可以使用”\”来进行新行的增加：</p>
+<pre><code>hanson@linux-host:~$ nl passwd  | sed &apos;1a first line...\
+&gt; second line...&apos;
+</code></pre><p>注意：当使用”\”进行新行添加时，”\”后面务必紧跟enter健。</p>
+<p>##替换与显示</p>
+<p>将2,5行替换为“2,5lines”：</p>
+<pre><code>hanson@linux-host:~$ nl passwd  | sed &apos;2,5c 2,5lines&apos;
+</code></pre><p>想要打印出5,10之间的数据呢？</p>
+<pre><code>hanson@linux-host:~$ nl passwd  | sed &apos;5,10p&apos;
+笨的方法是：
+hanson@linux-host:~$ nl passwd  | head -n 10 | tail -n 5
+</code></pre><p>##数据的替换</p>
+<p>sed以行为单位进行数据的替换时，与vim相当类似，格式如下：</p>
+<pre><code>sed &apos;s/要被替换的字符串/新的字符串/g&apos;
+</code></pre><p>下面一个实例，查询出本机的ip地址：</p>
+<pre><code>查看eth0:
+hanson@linux-host:~$ ifconfig eth0
+eth0      Link encap:以太网  硬件地址 08:9e:01:31:a4:8f  
+      inet 地址:192.168.1.102  广播:192.168.1.255  掩码:255.255.255.0
+      inet6 地址: fe80::a9e:1ff:fe31:a48f/64 Scope:Link
+      UP BROADCAST RUNNING MULTICAST  MTU:1500  跃点数:1
+      ...
+
+开始查询：
+hanson@linux-host:~$ ifconfig eth0 | grep &apos;inet 地址&apos; | sed &apos;s/^.*地址://g&apos; | sed &apos;s/广播.*$//g&apos;
+192.168.1.102
+</code></pre><p>##直接修改文件内容</p>
+<p>sed可以直接进行文件的修改，而不用使用管道命令或者重定向，但这是一个危险操作，一定要注意：</p>
+<pre><code>hanson@linux-host:~$ sed -i &apos;$a #this is a new line.&apos; passwd 
+hanson@linux-host:~$ cat passwd | tail -n 1
+#this is a new line.
+</code></pre><p>sed 的”-i”参数可以直接修改文件的内容，这个功能非常有帮助，甚至不需要vim去修改。</p>
+<hr>
+<p>更多关于sed使用讲解，请参考[左耳朵耗子]的<a href="http://coolshell.cn/articles/9104.html" target="_blank" rel="noopener">sed简明教程</a></p>
+<p>(end)</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2014/08/22/shell_script_source_and_bash/" class="prev">PREV</a><a href="/2014/08/11/linux_code_type_note/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

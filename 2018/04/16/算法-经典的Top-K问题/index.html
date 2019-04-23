@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> [算法]经典的Top-K问题 · Fitzix</title><meta name="description" content="[算法]经典的Top-K问题 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">[算法]经典的Top-K问题</h1><div class="tags"><a href="/tags/算法/" class="tag-title">#算法</a></div><div class="post-info">Apr 16, 2018</div><div class="post-content"><p>什么是 Top K 问题？简单来说就是在一堆数据里面找到前 K 大（当然也可以是前 K 小）的数。<br>这个问题也是十分经典的算法问题，不论是面试中还是实际开发中，都非常典型。而这个问题其实也有很多种做法，你真的都懂了么？</p>
+<a id="more"></a>
+<h3 id="立刻就能想到的解法"><a href="#立刻就能想到的解法" class="headerlink" title="立刻就能想到的解法"></a>立刻就能想到的解法</h3><p>既然是要前 K 大的数，那么最直接的当然就是排序了，通过如快排等效率较高的排序算法，可以在平均 O（nlogn）的时间复杂度找到结果。</p>
+<p>这种方式在数据量不大的时候简单可行，但固然不是最优的方法。</p>
+<h3 id="O-n-时间复杂度的方法"><a href="#O-n-时间复杂度的方法" class="headerlink" title="O(n)时间复杂度的方法"></a>O(n)时间复杂度的方法</h3><p>刚刚提到了快排，熟悉算法题的小伙伴应该知道，快排的 partition 划分思想可以用于计算某个位置的数值等问题，例如用来计算中位数；显然，也适用于计算 TopK 问题</p>
+<p><img src="https://ws2.sinaimg.cn/large/b09f1c9dly1g24q5e7ulnj20fo09f3z7.jpg" alt=""></p>
+<p>每次经过划分，如果中间值等于 K ，那么其左边的数就是 Top K 的数据； 当然，如果不等于，只要递归处理左边或者右边的数即可</p>
+<p>该方法的时间复杂度是 O(n) ，简单分析就是第一次划分时遍历数组需要花费 n，而往后每一次都折半（当然不是准确地折半），粗略地计算就是 n + n/2 + n/4 +… &lt; 2n，因此显然时间复杂度是 O(n)</p>
+<p>对比第一个方法显然快了不少，随着数据量的增大，两个方法的时间差距会越来越大</p>
+<p>虽然时间复杂度是 O(n) ，但是缺点也很明显，最主要的就是内存问题，在海量数据的情况下，我们很有可能没办法一次性将数据全部加载入内存，这个时候这个方法就无法完成使命了</p>
+<p>还有一点就是这种思路需要我们修改输入的数组，这也是值得考虑的一点</p>
+<h3 id="利用分布式思想处理海量数据"><a href="#利用分布式思想处理海量数据" class="headerlink" title="利用分布式思想处理海量数据"></a>利用分布式思想处理海量数据</h3><p>面对海量数据，我们就可以放分布式的方向去思考了</p>
+<p>我们可以将数据分散在多台机器中，然后每台机器并行计算各自的 TopK 数据，最后汇总，再计算得到最终的 TopK 数据</p>
+<p>这种数据分片的分布式思想在面试中非常值得一提，在实际项目中也十分常见</p>
+<h3 id="利用最经典的方法，一台机器也能处理海量数据"><a href="#利用最经典的方法，一台机器也能处理海量数据" class="headerlink" title="利用最经典的方法，一台机器也能处理海量数据"></a>利用最经典的方法，一台机器也能处理海量数据</h3><p>其实提到 Top K 问题，最经典的解法还是利用堆。</p>
+<p>维护一个大小为 K 的小顶堆，依次将数据放入堆中，当堆的大小满了的时候，只需要将堆顶元素与下一个数比较：如果大于堆顶元素，则将当前的堆顶元素抛弃，并将该元素插入堆中。遍历完全部数据，Top K 的元素也自然都在堆里面了。</p>
+<p>当然，如果是求前 K 个最小的数，只需要改为大顶堆即可</p>
+<p><img src="https://wx3.sinaimg.cn/large/b09f1c9dly1g24q9cpq6wj20le068mxs.jpg" alt=""><br>将数据插入堆</p>
+<p><img src="https://wx1.sinaimg.cn/large/b09f1c9dly1g24q9ng92dj20lk06a3zb.jpg" alt=""><br>95 大于 20，进行替换</p>
+<p><img src="https://ws1.sinaimg.cn/large/b09f1c9dly1g24q9ywfhhj20lw06et9i.jpg" alt=""></p>
+<p>95 下沉，维持小顶堆</p>
+<p>对于海量数据，我们不需要一次性将全部数据取出来，可以一次只取一部分，因为我们只需要将数据一个个拿来与堆顶比较。</p>
+<p>另外还有一个优势就是对于动态数组，我们可以一直都维护一个 K 大小的小顶堆，当有数据被添加到集合中时，我们就直接拿它与堆顶的元素对比。这样，无论任何时候需要查询当前的前 K 大数据，我们都可以里立刻返回给他。</p>
+<p>整个操作中，遍历数组需要 O(n) 的时间复杂度，一次堆化操作需要 O(logK)，加起来就是 O(nlogK) 的复杂度，换个角度来看，如果 K 远小于 n 的话， O(nlogK) 其实就接近于 O(n) 了，甚至会更快，因此也是十分高效的。</p>
+<p>最后，对于 Java，我们可以直接使用优先队列 PriorityQueue 来实现一个小顶堆，这里给个代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">solutionByHeap</span><span class="params">(<span class="keyword">int</span>[] input, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span> (k &gt; input.length || k == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">    Queue&lt;Integer&gt; queue = <span class="keyword">new</span> PriorityQueue&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> num : input) &#123;</span><br><span class="line">        <span class="keyword">if</span> (queue.size() &lt; k) &#123;</span><br><span class="line">            queue.add(num);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (queue.peek() &lt; num)&#123;</span><br><span class="line">            queue.poll();</span><br><span class="line">            queue.add(num);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (k-- &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        list.add(queue.poll());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/04/17/go-file-system-method/" class="prev">PREV</a><a href="/2018/03/20/go-gc/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

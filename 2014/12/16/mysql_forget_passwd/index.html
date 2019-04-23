@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> MySQL的root密码丢失怎么办？ · Fitzix</title><meta name="description" content="MySQL的root密码丢失怎么办？ - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">MySQL的root密码丢失怎么办？</h1><div class="tags"><a href="/tags/MySQL/" class="tag-title">#MySQL</a></div><div class="post-info">Dec 16, 2014</div><div class="post-content"><p>当我们Linux服务器中的MySQL超级用户密码丢了或者忘记了（唉，真是脑残！），这时候我们应该咋办，下面给出解决方案，分分钟搞定你的烦恼。</p>
+<p>首先，当我们在重新设置MySQL数据库密码期间必须确保此时服务器的安全状态，最安全的方法就是在服务器命令行操作，并且拔掉网线。</p>
+<p>接下来，关闭MySQL服务;</p>
+<pre><code>service mysqld stop
+//或者直接干掉进程
+pkill mysqld
+</code></pre><a id="more"></a>
+<p>然后，我们使用<code>skip-grant-tables</code>绕过权限启动：</p>
+<pre><code>/usr/bin/mysqld_safe --skip-grant-tables --user=mysql &amp;
+</code></pre><p>等几秒钟…</p>
+<p>下面，我们直接使用无密码命令登录MySQL:</p>
+<pre><code>mysql -u root
+</code></pre><p>此时，奇迹般地绕过密码直接进入MySQL了。</p>
+<p>好了，下面开始重新设置密码：</p>
+<pre><code>update user set password=password(&apos;your password&apos;) where user=&apos;root&apos; and host = &apos;localhost&apos;;
+</code></pre><p><strong>注意：</strong></p>
+<p>不要使用<code>set password=password(&#39;your pasword&#39;)</code>的方式来更改密码，会报错，因为使用了<code>skip-grant-tables</code>命令的缘故，切记。</p>
+<p>到此，我们就重设root密码成功了，界面我们重启MySQL服务。</p>
+<pre><code>pkill mysqld
+/usr/bin/mysqld_safe --user=mysql &amp;  或者 service mysqld restart
+mysql -uroot -p your pasword
+</code></pre><p>最终，我们已经给MySQL的root用户重新设置密码成功了，就这么回事，下面碰到这类问题就不是事儿了吧。</p>
+<p>(end)</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2014/12/22/vim_miracle_encrypt_note/" class="prev">PREV</a><a href="/2014/12/10/centos_compiler_lnmp_notes/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

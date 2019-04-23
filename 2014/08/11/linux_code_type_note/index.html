@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Linux下语系编码问题总结 · Fitzix</title><meta name="description" content="Linux下语系编码问题总结 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Linux下语系编码问题总结</h1><div class="tags"><a href="/tags/Linux/" class="tag-title">#Linux</a></div><div class="post-info">Aug 11, 2014</div><div class="post-content"><p>我们都知道，我们操作系统的文件都会有一个编码格式[比如：utf8、gb2312…],但是很多情况下，我们会需要将现有文件的语系编码进行转换，比如将utf8的文件转换为gb2312格式，那该怎么办？难道我们需要将全部文件都打开，然后转存诚所需要的编码格式嘛？那样我们肯定会吐血…</p>
+<p><code>iconv</code>命令就会帮助我们做到，下面介绍下如何使用他来方便我们。</p>
+<p>首先，我们要准备一个utf8格式的文件呢，来<code>file 文件</code>查看下：</p>
+<pre><code>hanson@linux-host:~/Linux_Demo$ file iconv.f
+iconv.f: HTML document, UTF-8 Unicode text, with very long lines
+</code></pre><p>可以看出<code>iconv.f</code>是一个utf8格式的文件。<br><a id="more"></a></p>
+<p>这里介绍下如何使用<code>iconv</code>这个很有用的格式转换的命令:</p>
+<pre><code>参数：
+--list ：列出所有可被iconv转换的语系数据格式
+
+-f ： 后接旧的语系格式
+-t ： 后接新的语系格式
+-o file ： 如果想要保留原本的文件，可以使用-o new file来创建新的编码文件
+</code></pre><p>废话不多说，来实地操作下：</p>
+<pre><code>hanson@linux-host:~/Linux_Demo$ iconv -f utf8 -t gb2312 iconv.f -o iconv.f.gb2312
+
+下面查看下格式：
+hanson@linux-host:~/Linux_Demo$ file iconv*
+iconv.f:        HTML document, UTF-8 Unicode text, with very long lines
+iconv.f.gb2312: HTML document, ISO-8859 text, with very long lines
+</code></pre><p>可以看出，将utf8格式的文件已经成功转换成gb2312格式的文件，是不是很方便啦。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2014/08/17/sed_tool_notes/" class="prev">PREV</a><a href="/2014/08/11/vim_super_study/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

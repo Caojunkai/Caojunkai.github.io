@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Redis内存淘汰策略 · Fitzix</title><meta name="description" content="Redis内存淘汰策略 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Redis内存淘汰策略</h1><div class="tags"><a href="/tags/Redis/" class="tag-title">#Redis</a><a href="/tags/LRU/" class="tag-title">#LRU</a></div><div class="post-info">Nov 25, 2018</div><div class="post-content"><p>当Redis被用作缓存的时候，当往Redis中添加新的数据，但是内存不足时，使用lru测试自动清除老的数据, 这几乎是所有缓存应用的默认特性. 事实上,LRU只是redis支持的淘汰策略的其中一种</p>
+<a id="more"></a>
+<h3 id="Maxmemory-configuration-directive"><a href="#Maxmemory-configuration-directive" class="headerlink" title="Maxmemory configuration directive"></a>Maxmemory configuration directive</h3><blockquote>
+<p>maxmemory 100mb</p>
+</blockquote>
+<p>maxmemory用于配置redis使用的最大内存.将maxmemory设置为零会导致无内存限制,这是64位系统的默认行为，而32位系统则使用3GB的隐式内存限制.<br>当内存占用满时,Redis会根据不同的配置执行不同的淘汰策略,这时Redis可能会只返回会导致内存增长的命令的执行错误或者淘汰一些旧数据来添加新的数据.</p>
+<h3 id="淘汰策略"><a href="#淘汰策略" class="headerlink" title="淘汰策略"></a>淘汰策略</h3><p>使用<code>maxmemory-policy</code>来配置淘汰策略, redis的策略有以下几种:</p>
+<ul>
+<li>noeviction 禁止驱逐数据</li>
+<li>allkeys-lru 从数据集（server.db[i].dict）中挑选最近最少使用的数据淘汰</li>
+<li>volatile-lru 从已设置过期时间的数据集（server.db[i].expires）中挑选最近最少使用 的数据淘汰</li>
+<li>allkeys-random 从数据集（server.db[i].dict）中任意选择数据淘汰</li>
+<li>volatile-random 从已设置过期时间的数据集（server.db[i].expires）中任意选择数据 淘汰</li>
+<li>volatile-ttl 从已设置过期时间的数据集（server.db[i].expires）中挑选将要过期的数 据淘汰</li>
+</ul>
+<h3 id="Approximated-LRU-algorithm"><a href="#Approximated-LRU-algorithm" class="headerlink" title="Approximated LRU algorithm"></a>Approximated LRU algorithm</h3><p>redis使用的不是真正的lru算法。它使用的是近似的lru算法，通过抽样少量的keys，然后根据lru算法删除其中某个key。因此redis根据lru算法清除的key不一定是整个实例中”最近最少使用的”，而只是抽样中最近最少使用的.</p>
+<p>redis 3.0开始redis的lru算法已经被改进了，提高了性能，更接近于真正的lru算法了。</p>
+<h3 id="新的LFU模式"><a href="#新的LFU模式" class="headerlink" title="新的LFU模式"></a>新的LFU模式</h3><p>从Redis 4.0开始，可以使用新的最少使用的逐出模式。在某些情况下，这种模式可能效果更好（提供更好的命中/未命中率），因为使用LFU Redis将尝试追踪数据的访问频率，以便很少使用的数据被驱逐，而使用的数据往往有更高的机会被保留.</p>
+<p>在LRU中,有些数据可能从未被访问,但由于随机性可能依然不会被清除.新的LFU将不会存在这个问题, 而且通常情况下可以适应不同的访问模式.</p>
+<p>LFU的配置有以下两种:</p>
+<ul>
+<li>volatile-lfu</li>
+<li>allkeys-lfu</li>
+</ul>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/12/26/Redis持久化/" class="prev">PREV</a><a href="/2018/10/22/AVL平衡二叉树中旋转/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Feature分支 · Fitzix</title><meta name="description" content="Feature分支 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Feature分支</h1><div class="tags"><a href="/tags/Git/" class="tag-title">#Git</a></div><div class="post-info">Jun 30, 2014</div><div class="post-content"><p>添加一个新功能时，你肯定不希望因为一些实验性质的代码，把主分支搞乱了，所以，每添加一个新功能，最好新建一个feature分支，在上面开发，完成后，合并，最后，删除该feature分支。</p>
+<p>假设我们创建了一个feature分支来开发新功能：</p>
+<pre><code>$ git checkout -b feature
+</code></pre><p>当我们开发好新功能，并且已经提交完成：</p>
+<pre><code>$ git add two.md
+$ git commit -m &apos;feature branch&apos;
+</code></pre><a id="more"></a>
+<p>此时，切换到master分支：</p>
+<pre><code>$ git checkout master
+</code></pre><p>如果一切顺利的话，feature分支和bug分支是类似的，合并，然后删除。</p>
+<p>但是，就在此时接到通知，要删除这个新功能：</p>
+<pre><code>$ git branch -d feature
+error: The branch &apos;feature&apos; is not fully merged.
+If you are sure you want to delete it, run &apos;git branch -D feature&apos;.
+</code></pre><p>销毁失败。Git友情提醒，feature分支还没有被合并，如果删除，将丢失掉修改，如果要强行删除，需要使用命令<code>git branch -D feature</code>。</p>
+<p>现在我们强行删除：</p>
+<pre><code>$ git branch -D feature
+Deleted branch feature (was 80ab808).
+</code></pre><p>终于删除成功！</p>
+<hr>
+<p>###小结</p>
+<p>当开发一个新功能时，最好新创建一feature分支。</p>
+<p>如果要丢弃一个没有被合并过的分支，可以通过<code>git branch -D name</code>强行删除。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2014/07/02/git_collaboration_notes/" class="prev">PREV</a><a href="/2014/06/28/git_bug_branch_notes/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

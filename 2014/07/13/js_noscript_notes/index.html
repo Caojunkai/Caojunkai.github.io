@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> noscript元素 · Fitzix</title><meta name="description" content="noscript元素 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">noscript元素</h1><div class="tags"><a href="/tags/js/" class="tag-title">#js</a></div><div class="post-info">Jul 13, 2014</div><div class="post-content"><p>今天，我把自己的浏览器脚本给禁用了，为了想看下他们是如何处理的，然后登录了一些网站：</p>
+<p>百度帐号都无法登录，163邮箱无法登录也没给出任何的友好显示，淘宝、京东也是一团糟，新浪还好些，新浪邮箱给出了HTML文档提示：</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/bd5a4d63tw1eib12a25aij20co049jrr.jpg" alt="pic"></p>
+<p>潦潦看了一下，爆出的毛病都是些不友好的界面，大家都知道“一切input都是邪恶的，js验证只是给君子使用的”.<br><a id="more"></a></p>
+<p>早期浏览器都面临一个特殊的问题，就是当浏览器不支持js或者js脚本被禁用时如何让页面平稳的退化。对这个问题的最终解决办法是创建一个&lt;noscript>元素，用以在不支持js或禁用js脚本的浏览器中使用。这个元素能够包含出现在文档<body>中的任何html元素---&lt;script>元素除外，&lt;noscript>元素只有在以下条件下才会显示出来：</body></p>
+<ul>
+<li>浏览器不支持脚本</li>
+<li>浏览器支持脚本，但脚本被禁用</li>
+</ul>
+<p>符合以上任何一个条件，浏览器就会显示noscript中的内容，除此之外的任何情况下，都不会呈现noscript中的内容，下面看一个例子：</p>
+<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+    &lt;head&gt;
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+    &lt;title&gt;Noscript&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot; defer=&quot;defer&quot; src=&quot;./js/noscript.js&quot;&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;noscript&gt;
+        &lt;h1&gt;本页面已禁用js脚本&lt;/h1&gt;
+    &lt;/noscript&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>这个页面会在脚本无效的情况下向用户显示一条信息，而在启用了脚本的浏览器中，用户永远也不会看到他，尽管他是页面的一部分。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2014/07/14/php_float_false_notes/" class="prev">PREV</a><a href="/2014/07/13/php_distorted_code/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

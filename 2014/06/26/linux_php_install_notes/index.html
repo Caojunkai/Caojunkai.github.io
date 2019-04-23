@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Linux下搭建PHP环境 · Fitzix</title><meta name="description" content="Linux下搭建PHP环境 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Linux下搭建PHP环境</h1><div class="tags"><a href="/tags/Ubuntu-PHP/" class="tag-title">#Ubuntu PHP</a></div><div class="post-info">Jun 26, 2014</div><div class="post-content"><p>下面分别介绍使用<code>apt-get</code>方式在Linux下搭建PHP+Mysql+Apache运行环境，如果是root权限的话可不加<code>sudo</code>,普通用户需要使用<code>sudo</code>获取临时root权限来进行安装：</p>
+<p>###安装Mysql</p>
+<pre><code>sudo apt-get install mysql-server
+sudo apt-get install mysql-client
+</code></pre><p>###安装Apache</p>
+<pre><code>sudo apt-get install apache2
+</code></pre><a id="more"></a>
+<p>###安装PHP</p>
+<pre><code>sudo apt-get install php5
+sudo apt-get install libapache2-mod-auth-mysql
+sudo apt-get install php5-mysql
+</code></pre><p>到此，基本就已经安装成功了，下面进行一些测试与权限修改：</p>
+<p><strong>检测Mysql是否正常</strong></p>
+<p>在终端中输入：<code>mysql -uusername -ppassword</code>(将username和password替换为你所设置的)看是否可以正常登陆</p>
+<p><strong>检测Apache是否正常</strong></p>
+<p>在浏览器中打开：<a href="http://localhost/" target="_blank" rel="noopener">http://localhost/</a></p>
+<p>如果出现如下信息，则表明正常。</p>
+<pre><code>It works!
+</code></pre><p><strong>检测PHP是否正常</strong></p>
+<p>Ubuntu下Apache的默认安装路径为/var/www/html/，到其目录下新建test.php文件，文件内容为：</p>
+<pre><code>&lt;?php
+    phpinfo();
+?&gt;
+</code></pre><p>然后在浏览器中打开：<a href="http://localhost/test.php" target="_blank" rel="noopener">http://localhost/test.php</a> 看是否正常,若能显示PHP版本等其他模块一些信息则代表正常。</p>
+<p><strong>注意：</strong></p>
+<p>在默认情况下，该/var/www目录是有权限的，只能是root管理员进行修改和创建，<br>我们可以把权限修改下：</p>
+<pre><code>su -
+</code></pre><p>输入root用户密码，然后进入/var目录下，输入：</p>
+<pre><code>chmod -R 0777 ./www/
+</code></pre><p>切回普通用户：</p>
+<pre><code>su - username
+</code></pre><p>查看权限：</p>
+<pre><code>ls -al
+</code></pre><p>普通用户也就有权限了。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2014/06/26/git_branch_conflicts_notes/" class="prev">PREV</a><a href="/2014/06/24/php_a_use_function_notes/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

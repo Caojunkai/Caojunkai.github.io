@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 关于PHP生成验证码字符串的一点思考 · Fitzix</title><meta name="description" content="关于PHP生成验证码字符串的一点思考 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">关于PHP生成验证码字符串的一点思考</h1><div class="tags"><a href="/tags/PHP内置方法/" class="tag-title">#PHP内置方法</a></div><div class="post-info">Jun 24, 2014</div><div class="post-content"><p>在PHP中创建验证码很方便，创建好验证字符串和使用GD库函数创建图像就ok了。这里不说明怎么去创建验证码，其中当我们来创建验证字符时，我们是怎么做到的呢？</p>
+<p>下面比较下作者见到的两种方式来生成字符：</p>
+<p><strong>第一种方式</strong></p>
+<pre><code>&lt;?php
+$str = &apos;abcdefghigkmnprstuvwxyABCDEFGHGKLMNPQRSTUVWXY3456789&apos;;    
+$n = 6;        //生成字符的个数
+$code = &apos;&apos;;
+$length = strlen($str);
+for ($i=0; $i &lt; $n; $i++) { 
+    $code .= $str[mt_rand(0, $length-1)];
+}
+echo $code;
+?&gt;
+</code></pre><a id="more"></a>
+<p><strong>第二种方式</strong></p>
+<pre><code>&lt;?php
+$str = &apos;abcdefghigkmnprstuvwxyABCDEFGHGKLMNPQRSTUVWXY3456789&apos;;    
+$n = 6;        //生成字符的个数
+$str = str_shuffle($str);
+$code = substr($str, 0, $n);
+echo $code;
+?&gt;
+</code></pre><p>观察这两种方式，有没有觉得第二种方式很简洁、清晰呢，是的，在第一种方式中我们使用了for循环以及定义了额外临时变量。再看第二种方式，我们只是充分使用了PHP自带的<code>str_shuffle</code>（打乱字符串顺序）和<code>substr</code>（截取字符串）函数，就达到了我们想要的目的。</p>
+<hr>
+<p>###作者的观点</p>
+<p>学习某一种语言或者技术，我们不仅要学好其本身的语法与规范，还要充分利用好该语言或者技术自身的优点和捷径来达到我们的目的。比如，当我们费了很大力气终于完成某个功能，没准其内部已经提供好了方法或者接口，只等着我们来调用就ok了。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2014/06/26/linux_php_install_notes/" class="prev">PREV</a><a href="/2014/06/24/php_b_upload_file_notes/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

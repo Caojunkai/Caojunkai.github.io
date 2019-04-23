@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 正则表达式---环视 · Fitzix</title><meta name="description" content="正则表达式---环视 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">正则表达式---环视</h1><div class="tags"><a href="/tags/正则表达式/" class="tag-title">#正则表达式</a></div><div class="post-info">Oct 7, 2014</div><div class="post-content"><p>在正则表达式中，<strong>断言用来声明一个应该为真的事实</strong>，只有断言为真时才会继续进行匹配。不过要记得哦，断言只是匹配一个事实，而不是内容。这里介绍的断言，他们用于查找在某些内容之前或者之后，也就是一个位置应该满足的一定条件。</p>
+<p>这里介绍四种断言：</p>
+<ul>
+<li>顺序肯定环视     <code>(?=exp)</code></li>
+<li>逆序肯定环视    <code>(?&lt;=exp)</code></li>
+<li>顺序否定环视    <code>(?!exp)</code></li>
+<li>逆序否定环视    <code>(?&lt;!exp)</code></li>
+</ul>
+<a id="more"></a>
+<p>##顺序肯定环视</p>
+<p>断言自身出现的位置的后面只能匹配表达式exp.</p>
+<p>比如，匹配”ing”结尾的单词前面部分（即除了ing以外的部分）</p>
+<pre><code>\b\w+(?=ing\b)
+</code></pre><p>上面表达式查找以下句子时，会匹配”sing”和”danc”:</p>
+<pre><code>I&apos;m singsing while you&apos;re dancing.
+</code></pre><p>##逆序否定环视</p>
+<p>断言自身出现位置的前面智能匹配表达式exp。</p>
+<p>比如，以re开头的单词的后半部分（即除了re以外的部分）</p>
+<pre><code>(?&lt;\bre)\w+\b
+</code></pre><p>上面的表达式在查找以下句子时，会匹配”ading”:</p>
+<pre><code>I&apos;m reading book.
+</code></pre><p>下面这个例子同时使用以上两种环视操作，匹配以空格间隔的数字（<strong>再次强调，不包括这些空格，断言是匹配的只是事实，而不是内容</strong>）。</p>
+<pre><code>(?&lt;=\s)\d+(?=\s)
+</code></pre><p>##顺序否定环视</p>
+<p>断言此位置的后面不能匹配表达式exp。</p>
+<p>1、匹配3位数字，而且这三位数字的后面不能是数字：</p>
+<pre><code>\d{3}(?!\d)
+</code></pre><p>2、匹配不包含连续字符串abc的单词：</p>
+<pre><code>\b((?!abc)\w)+\b
+</code></pre><p>#逆序否定环视</p>
+<p>断言此位置的前面不能匹配表达式exp。</p>
+<p>例如，前面不能是小写字母的7为数字：</p>
+<pre><code>(?&lt;![a-z])\d{7}
+</code></pre><p>匹配不包括属性的简单HTML标签的内容：</p>
+<pre><code>(?&lt;=&lt;(\w+)&gt;).*(?=&lt;\/\1&gt;)
+</code></pre><p>以上表达式最能表现断言的真正用途。<code>(?&lt;=&lt;(\w+)&gt;)</code>指定前缀是被尖括号括起来的单词（比如<code>&lt;b&gt;</code>）,然后是<code>.*</code>实际内容（即任意的字符串），最后是一个后缀<code>(?=&lt;\/\1&gt;)</code>。注意后缀<code>\/</code>用到了字符转义，<code>\1</code>则是反向引用，引用的是捕获的第一组子表达式，即前面<code>(\w+)</code>的内容，如果前面匹配的是<code>&lt;b&gt;</code>，那么这里就是<code>&lt;/b&gt;</code>。整个表达式匹配的就是<code>&lt;b&gt;</code>和<code>&lt;/b&gt;</code>之间的内容（再次提醒，不包括前缀和后缀本身，他们只是一个事实）。</p>
+<hr>
+<p>###总结</p>
+<p>总体来说，环视相当于对所在位置附加了一个条件，<strong>难点就在于找到这个位置</strong>，这点解决了，那么环视就没什么神秘可言了！</p>
+<p>（end）</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2014/10/10/mysql_grant_and_manage_notes/" class="prev">PREV</a><a href="/2014/09/26/details_with_attitude/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

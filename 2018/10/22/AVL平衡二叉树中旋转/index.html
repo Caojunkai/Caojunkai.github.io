@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> AVL平衡二叉树中旋转 · Fitzix</title><meta name="description" content="AVL平衡二叉树中旋转 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">AVL平衡二叉树中旋转</h1><div class="tags"><a href="/tags/AVL/" class="tag-title">#AVL</a></div><div class="post-info">Oct 22, 2018</div><div class="post-content"><p>最近面试被问到平衡二叉树如何保证平衡即失衡后是如何调整的, 之前也只是在leetcode上做过判断是否为平衡二叉树和树的深度搜索之类的题目,对AVL保证平衡的旋转方法及实现并不不了解,所以答不上来.回去后仔细了解了下,记录一下.</p>
+<a id="more"></a>
+<h2 id="AvlTree的定义"><a href="#AvlTree的定义" class="headerlink" title="AvlTree的定义"></a>AvlTree的定义</h2><p>AVL (Adelson Velskii和 Landis)树是带有平衡条件的二叉查找树。这个平衡条件必须容易保持，而且它必须保证树的深度是O(log N). 最简单的想法是要求左右子树具有相同的高度.</p>
+<p>一般限制为：一棵AVL树是其每个节点的左子树和右子树的高度最多差1的二叉查找树(空树的高度定义为-1，树中叶子的高度为0，往根上递增).</p>
+<h2 id="插入操作的问题"><a href="#插入操作的问题" class="headerlink" title="插入操作的问题"></a>插入操作的问题</h2><p>在对AVL树进行插入操作的时候,隐含的困难在于,插入一个节点可能破坏AVL树的平衡特性.</p>
+<p>所以一般发生这种情况，我们需要把AVL树的平衡性质恢复之后才能算是插入这一步骤完成。事实上，我们只需要根据树的实际结构进行几种简单的旋转（rotation）操作就可以让树恢复AVL树的平衡性质。</p>
+<h2 id="四种旋转的情况"><a href="#四种旋转的情况" class="headerlink" title="四种旋转的情况"></a>四种旋转的情况</h2><p>若平衡二叉树种某个结点的左子树和右子树的高度相差大于1，该树就是失衡了，该结点称为失衡点，就要通过旋转来保持二叉树的平衡</p>
+<p>一共分四种情况导致结点失衡：</p>
+<ul>
+<li>在结点的左孩子的左子树中插入数据（LL）</li>
+<li>在结点的左孩子的右子树中插入数据（LR）</li>
+<li>在结点的右孩子的左子树中插入数据（RL）</li>
+<li>在结点的右孩子的右子树中插入数据（RR)</li>
+</ul>
+<p>第1和4种情况是对称的，可用单旋来解决，而第2和3种情况也是对称的，要用双旋来解决</p>
+<h3 id="LL型（左孩子的左子树）通过右旋解决"><a href="#LL型（左孩子的左子树）通过右旋解决" class="headerlink" title="LL型（左孩子的左子树）通过右旋解决"></a>LL型（左孩子的左子树）通过右旋解决</h3><p>对于LL型的情况，要使用右旋来解决，将失衡点右旋到其左孩子的右孩子的位置，失衡点的左子树更新为其原来左孩子的右子树</p>
+<p><img src="https://wx2.sinaimg.cn/large/b09f1c9dly1g1bkynzhsgj20dw051jrj.jpg" alt=""><br><img src="https://ws2.sinaimg.cn/large/b09f1c9dly1g1bl1qxnv3j20m806w0t1.jpg" alt=""></p>
+<h3 id="RR型（右孩子的右子树）通过左旋解决"><a href="#RR型（右孩子的右子树）通过左旋解决" class="headerlink" title="RR型（右孩子的右子树）通过左旋解决"></a>RR型（右孩子的右子树）通过左旋解决</h3><p>对于RR型的情况，要使用左旋来解决，将失衡点左旋到其右孩子的左孩子的位置，失衡点的右子树更新为其原来右孩子的左子树</p>
+<p><img src="https://ws1.sinaimg.cn/large/b09f1c9dly1g1bl2a76tgj20dw055mxc.jpg" alt=""><br><img src="https://wx1.sinaimg.cn/large/b09f1c9dly1g1bl2m1vxtj20m807r0t1.jpg" alt=""></p>
+<h3 id="LR型（左孩子的右子树）通过先左旋再右旋解决"><a href="#LR型（左孩子的右子树）通过先左旋再右旋解决" class="headerlink" title="LR型（左孩子的右子树）通过先左旋再右旋解决"></a>LR型（左孩子的右子树）通过先左旋再右旋解决</h3><p>对于LR型的情况，要使用先对失衡点的左孩子进行左旋，然后再对失衡点进行右旋来解决</p>
+<p><img src="https://ws1.sinaimg.cn/large/b09f1c9dly1g1bl36bhifj20f704fabj.jpg" alt=""><br><img src="https://wx3.sinaimg.cn/large/b09f1c9dly1g1bl3eseehj20m806owez.jpg" alt=""></p>
+<h3 id="RL型（右孩子的左子树）通过先右旋再左旋解决"><a href="#RL型（右孩子的左子树）通过先右旋再左旋解决" class="headerlink" title="RL型（右孩子的左子树）通过先右旋再左旋解决"></a>RL型（右孩子的左子树）通过先右旋再左旋解决</h3><p>对于RL型的情况，要使用先对失衡点的右孩子进行右旋，然后再对失衡点进行左旋来解决</p>
+<p><img src="https://wx2.sinaimg.cn/large/b09f1c9dly1g1bl3t68fhj20fm04tq4j.jpg" alt=""><br><img src="https://wx1.sinaimg.cn/large/b09f1c9dly1g1bl3yeruzj20m806fmxo.jpg" alt=""></p>
+<blockquote>
+<p>以上图片来自 <a href="https://segmentfault.com/a/1190000006123188#articleHeader6" target="_blank" rel="noopener">AVL平衡二叉树详解与实现</a></p>
+</blockquote>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/11/25/Redis内存淘汰策略/" class="prev">PREV</a><a href="/2018/08/16/channel底层原理/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

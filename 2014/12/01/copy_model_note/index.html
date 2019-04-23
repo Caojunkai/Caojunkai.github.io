@@ -1,0 +1,38 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Tmux进阶篇 · Fitzix</title><meta name="description" content="Tmux进阶篇 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Tmux进阶篇</h1><div class="tags"><a href="/tags/Tmux/" class="tag-title">#Tmux</a></div><div class="post-info">Dec 1, 2014</div><div class="post-content"><p>今天是12月1日，昨天是今年沈阳下的第一场雪，阴沉沉的天气下了整整一天，虽然不是很大但却是刺骨的冷，由于特么太冷我上午钻进实验室，一天几乎没出去，懒人就是这样。另外就是觉得现在的天气真是扭曲（天气不正常），记得去年沈阳这里下雪很早，连双十一都是踩着雪去取包裹的，今年整整晚了将近一个月，你们懂吧…</p>
+<p>好了，闲话少说，进入正题吧。上一篇介绍了Tmux的常用命令和个性配置，切记不要一口吃一个胖子，厚积薄发每天练习一点就可以了。今天来介绍Tmux的进阶，功能更强大的配置，让我们开始吧。</p>
+<a id="more"></a>
+<p>##复制模式</p>
+<blockquote>
+<ul>
+<li><code>前缀+[</code> 进入复制模式</li>
+<li>按<code>space</code>开始复制，移动光标选择复制区域</li>
+<li>按<code>Enter</code>复制并退出复制模式</li>
+<li>将光标移动到指定位置，按<code>前缀+]</code>粘贴</li>
+</ul>
+</blockquote>
+<p>如果把tmux比作vim的话，那么我们大部分时间都是处于编辑模式，我们复制的时候可不可以像 vim一样移动呢？当然可以拉，只需要在配置文件(<code>~/.tmux.conf</code>)中加入如下行即可：</p>
+<pre><code>#copy-mode 将快捷键设置为vi 模式
+setw -g mode-keys vi
+</code></pre><p>然后就可以像使用vim一样操作编辑了，快哉快哉！</p>
+<p>##滚屏</p>
+<p>滚屏要进入复制模式，即<code>前缀+[</code>，然后就可以用上下键来滚动屏幕，<strong>如果配置了vi快捷键模式，就 可以像操作vi一样来滚动屏幕</strong>，非常的方便，退出直接按<code>q</code>键即可。</p>
+<p>##当前pane最大化</p>
+<p><a href="http://mingxinglai.com/cn/2012/09/tmux/" target="_blank" rel="noopener">参考赖明星的博客</a></p>
+<p>就像vim里的ZommWinPlugin.vim插件一样，你按下某键，当前窗口就最大化了，获得最大可视界面。当目前为止，就还没有发现我有需求而别人没有的，同样，已有前人找到的解决办法，方法如下：</p>
+<pre><code># zoom pane &lt;-&gt; window
+#http://tmux.svn.sourceforge.net/viewvc/tmux/trunk/examples/tmux-zoom.sh
+bind ^z run &quot;tmux-zoom&quot;
+</code></pre><p>好了，今天就到这吧。拜~~~</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2014/12/10/centos_compiler_lnmp_notes/" class="prev">PREV</a><a href="/2014/12/01/program_with_each_other/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

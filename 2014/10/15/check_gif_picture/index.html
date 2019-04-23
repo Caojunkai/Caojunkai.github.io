@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> PHP检测gif图片是否为动态图片 · Fitzix</title><meta name="description" content="PHP检测gif图片是否为动态图片 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">PHP检测gif图片是否为动态图片</h1><div class="tags"><a href="/tags/php-gif/" class="tag-title">#php gif</a></div><div class="post-info">Oct 15, 2014</div><div class="post-content"><p>当我们使用php自带的<code>getimagesize()</code>函数来判断一个gif图片是否为动态（动画）时，发现无法判别是否为动态的效果。本文介绍了php是如何判断gif图片是否为动画的方法，具体步骤如下：</p>
+<p>经过GOOGLE搜索可以查到，gif动态图的文件中包含:<code>chr(0×21).chr(0xff).chr(0×0b).&#39;NETSCAPE2.0&#39;</code>。所以，我们就可以使用<code>fopen()</code>和字符串系列函数来检测文件中是否包含这些字符串就可以判断该gif图是否动态的。</p>
+<a id="more"></a>
+<p>编码实现如下：</p>
+<pre><code>&lt;?php
+//检测一个图片是否为gif动态图   
+function check_gif ($path) {
+    $str = file_get_contents($path);        //获取全部文件内容
+    if (stripos($str, chr(0x21).chr(0xff).chr(0x0b).&apos;NETSCAPE2.0&apos;)) {
+        echo &apos;是gif动态图&apos;;
+    } else {
+       echo &apos;不是gif动态图&apos;;
+       }
+}
+check_gif(&apos;./test.gif&apos;);
+</code></pre><p>上述代码就已经可以检测一个gif图是否为动画的了，但是还是可以在优化的。</p>
+<p>因为实际上 <code>chr(0×21).chr(0xff).chr(0×0b).&#39;NETSCAPE2.0&#39;</code> 只在文件头部出现，可以 <code>echo</code>来看看 ，但不是最头部，是在头部的某一个位置，所以，<strong>严格来说需要读取一部分文件</strong>，但不用全部，这样可以加快速度和节省内存。</p>
+<p>经测试，读取1024字节足够了，因为此时读取的数据流中正好包含了 <code>chr(0×21).chr(0xff).chr(0×0b).&#39;NETSCAPE2.0&#39;</code>.</p>
+<p>代码优化后：</p>
+<pre><code>&lt;?php    
+function check_gif ($path) {
+    $fh = fopen($path, &apos;rb&apos;);
+    $str = fread($fh, 1024);    //读取1024个字节
+    fclose($fh);
+    if (stripos($str, chr(0x21).chr(0xff).chr(0x0b).&apos;NETSCAPE2.0&apos;)) {
+        echo &apos;是gif动态图&apos;;
+    } else {
+        echo &apos;不是gif动态图&apos;;
+    }
+}
+check_gif(&apos;./test.gif&apos;);
+</code></pre><p>这样就可以很好的判断一个gif图是否为动画了，而且很高效。</p>
+<p>（end）</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2014/10/19/mysql_myisam_data_optimize/" class="prev">PREV</a><a href="/2014/10/11/php_simulation_asynchroous/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

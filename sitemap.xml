@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://github.com/fitzix/2015/03/20/mysql_and_slave_test/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2015/03/28/memcache_memory_manage_note/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2015/03/29/memcache_item_delete_note/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2015/03/07/winter_holiday_conclusion/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2015/03/29/memcache_perpetual_data_lose/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2015/03/30/memcache_multiget_hole_note/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2015/04/18/xhprof_php_analyse_tool/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2015/05/13/pdo_bindParam_bug_note/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2015/04/20/yac_study_and_vs_memcache_note/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2015/06/07/mysql_str_binary/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2015/06/12/shuffle_array_note/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2015/06/04/how_to_use_session_without_cookie/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2015/06/20/mysql_save_ip/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2015/07/09/use_json_note/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2017/01/01/%E4%BD%A0%E5%A5%BD2017/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2015/09/23/difference_of_MyISAM_and_Innodb/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2017/02/06/vuex/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2017/04/10/redis%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E6%93%8D%E4%BD%9C/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2017/04/05/redis%E9%94%81%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2018/04/16/%E7%AE%97%E6%B3%95-%E7%BB%8F%E5%85%B8%E7%9A%84Top-K%E9%97%AE%E9%A2%98/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2018/04/17/go-file-system-method/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2018/06/10/Goroutine%E7%9A%84%E8%B0%83%E5%BA%A6/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2018/10/22/AVL%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E6%97%8B%E8%BD%AC/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2018/11/25/Redis%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2018/08/16/channel%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2019/03/19/Go%E4%B8%ADinterface%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2018/03/20/go-gc/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2018/12/26/Redis%E6%8C%81%E4%B9%85%E5%8C%96/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2017/03/12/web%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2017/04/19/Golang%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.710Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/18/a_php_traits_notes_1/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/18/b_php_5_data_filter_1/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/18/web_font_ueditor_1/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/19/git_install_process_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/21/a_git_work_temporary_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/20/git_version_back_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/19/git_kcreate_repository_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/22/git_manage_file_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/23/git_a_remote_transmission_create_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/22/git_n_delete_file_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/23/git_b_add_and_clone_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/24/php_a_use_function_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/24/php_b_upload_file_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/26/git_branch_conflicts_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/24/q_git_create_and_merge_branch/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/26/linux_php_install_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/27/unix_dos_crlf_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/27/php_pdo_transaction_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/27/git_branch_manage_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/28/git_bug_branch_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/30/git_delete_unmerge_branch_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/07/07/git_config_aliase_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/07/02/git_collaboration_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/07/04/git_create_tag_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/07/05/git_gitignore_file_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/07/12/memcached_install_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/07/13/js_noscript_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/07/13/php_distorted_code/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/07/15/git_summary_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/07/14/php_float_false_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/07/15/git_create_git_server_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/07/21/life_essay_3/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/07/29/memcache_telnet_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/08/11/linux_code_type_note/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/08/17/sed_tool_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/07/30/memcache_php_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/08/22/shell_script_source_and_bash/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/08/11/vim_super_study/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/09/03/ajax_jsonp_return/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/09/05/ajax_upload_progress/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/09/07/ajax_file_slice_upload/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/09/11/jquery_and_dom/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/09/12/js_function_analysis/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/09/26/details_with_attitude/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/10/07/the_regular_expression_look_around/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/10/19/mysql_myisam_data_optimize/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/10/11/php_simulation_asynchroous/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/10/10/mysql_grant_and_manage_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/10/15/check_gif_picture/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/10/21/mysql_mysqlbinlog_dump_note/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/10/22/redis-linux_and_windows-setup/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/11/02/ssl_tls_secure_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/11/29/hello_tmux_note/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/10/30/how_to_manage_our_time/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/11/30/happy_tmux_note/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/12/01/copy_model_note/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/12/01/program_with_each_other/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/12/16/mysql_forget_passwd/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/12/22/vim_miracle_encrypt_note/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/17/views_impression_1/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/07/10/life_essay_2/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/07/28/php_web_pay_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/08/06/session_safe_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/09/23/dropbox_mit_speech/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/12/10/centos_compiler_lnmp_notes/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2015/02/07/experience_of_kindle/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.706Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/17/php_5_static_bind_1/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.702Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/fitzix/2014/06/16/life_essay_1/</loc>
+    
+    <lastmod>2019-04-23T04:52:59.702Z</lastmod>
+    
+  </url>
+  
+</urlset>

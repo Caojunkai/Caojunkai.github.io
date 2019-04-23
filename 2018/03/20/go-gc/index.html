@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 常见GC算法及Golang GC · Fitzix</title><meta name="description" content="常见GC算法及Golang GC - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">常见GC算法及Golang GC</h1><div class="tags"><a href="/tags/go/" class="tag-title">#go</a><a href="/tags/golang/" class="tag-title">#golang</a><a href="/tags/gc/" class="tag-title">#gc</a></div><div class="post-info">Mar 20, 2018</div><div class="post-content"><p>Go语言能够支持实时的，高并发的消息系统，在高达百万级别的消息系统中能够将延迟降低到100ms以下，这一切很大一部分需要归功于Go的高效的垃圾回收系统.</p>
+<a id="more"></a>
+<h3 id="GC-算法简介"><a href="#GC-算法简介" class="headerlink" title="GC 算法简介"></a>GC 算法简介</h3><h4 id="GC-自动垃圾回收-的主要问题"><a href="#GC-自动垃圾回收-的主要问题" class="headerlink" title="GC(自动垃圾回收)的主要问题"></a>GC(自动垃圾回收)的主要问题</h4><ul>
+<li>额外的开销(内存/CPU)</li>
+<li>执行GC的时机无法预测，在实时性要求高的场景或事务处理来说可能是不可容忍的</li>
+<li>部分GC算法会Stop-the-world</li>
+</ul>
+<h4 id="GC三种经典的算法："><a href="#GC三种经典的算法：" class="headerlink" title="GC三种经典的算法："></a>GC三种经典的算法：</h4><ul>
+<li>引用计数(reference counting)</li>
+<li>标记-清扫(mark &amp; sweep)</li>
+<li>节点复制(Copying Garbage Collection)</li>
+<li>分代收集(Generational Garbage Collection)</li>
+</ul>
+<h5 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h5><p>引用计数的思想非常简单：每个单元维护一个域，保存其它单元指向它的引用数量（类似有向图的入度）。当引用数量为 0 时，将其回收。引用计数是渐进式的，能够将内存管理的开销分布到整个程序之中。C++ 的 share_ptr 使用的就是引用计算方法。<br>引用计数算法实现一般是把所有的单元放在一个单元池里，比如类似 free list。这样所有的单元就被串起来了，就可以进行引用计数了。新分配的单元计数值被设置为 1（注意不是 0，因为申请一般都说 ptr = new object 这种）。每次有一个指针被设为指向该单元时，该单元的计数值加 1；而每次删除某个指向它的指针时，它的计数值减 1。当其引用计数为 0 的时候，该单元会被进行回收。虽然这里说的比较简单，实现的时候还是有很多细节需要考虑，比如删除某个单元的时候，那么它指向的所有单元都需要对引用计数减 1。那么如果这个时候，发现其中某个指向的单元的引用计数又为 0，那么是递归的进行还是采用其他的策略呢？递归处理的话会导致系统颠簸。</p>
+<blockquote>
+<p>优点</p>
+</blockquote>
+<ul>
+<li>GC开销将被均摊到程序运行期，不会有长时间的回收周期</li>
+<li>每个对象的生命周期被明确定义，可用于某些编译器的runtime优化</li>
+<li>算法简单，易于实现</li>
+<li>即时回收，不会等内存状态到达某个阀值再执行回收</li>
+</ul>
+<blockquote>
+<p>缺点</p>
+</blockquote>
+<ul>
+<li>引用计数会频繁更新，带来效率开销</li>
+<li>原生的引用计数算法无法回收循环引用的对象链</li>
+</ul>
+<h5 id="标记-清扫-Mark-and-Sweep"><a href="#标记-清扫-Mark-and-Sweep" class="headerlink" title="标记-清扫(Mark-and-Sweep)"></a>标记-清扫(Mark-and-Sweep)</h5><p>标记-清扫算法为每个对象预留一个Flag位，分为两个阶段，标记阶段会从Root向下递归遍历所有对象，并将所有可达对象的Flag位设为”正在使用”。第二阶段，清扫阶段，遍历所有内存，回收那些所有未被标记为”正在使用”的对象。整个算法的思路很简单，也基本上避免了引用计数法的缺点，但最大的缺点在于回收期间整个系统必须暂停(Stop-the-world)。</p>
+<h5 id="三色标记法-Tri-color-marking"><a href="#三色标记法-Tri-color-marking" class="headerlink" title="三色标记法(Tri-color marking)"></a>三色标记法(Tri-color marking)</h5><p>三色标记算法是对标记阶段的改进，原理如下：</p>
+<ol>
+<li>起初所有对象都是白色。</li>
+<li>从根出发扫描所有可达对象，标记为灰色，放入待处理队列。</li>
+<li>从队列取出灰色对象，将其引用对象标记为灰色放入队列，自身标记为黑色。</li>
+<li>重复 3，直到灰色对象队列为空。此时白色对象即为垃圾，进行回收。</li>
+</ol>
+<h5 id="分代收集"><a href="#分代收集" class="headerlink" title="分代收集"></a>分代收集</h5><p>基于追踪的垃圾回收算法（标记-清扫、节点复制）一个主要问题是在生命周期较长的对象上浪费时间（长生命周期的对象是不需要频繁扫描的）。同时，内存分配存在这么一个事实 “most object die young”。基于这两点，分代垃圾回收算法将对象按生命周期长短存放到堆上的两个（或者更多）区域，这些区域就是分代（generation）。对于新生代的区域的垃圾回收频率要明显高于老年代区域.</p>
+<p>分配对象的时候从新生代里面分配，如果后面发现对象的生命周期较长，则将其移到老年代，这个过程叫做 promote。随着不断 promote，最后新生代的大小在整个堆的占用比例不会特别大。收集的时候集中主要精力在新生代就会相对来说效率更高，STW 时间也会更短。</p>
+<h3 id="Golang-GC"><a href="#Golang-GC" class="headerlink" title="Golang GC"></a>Golang GC</h3><h4 id="写屏障"><a href="#写屏障" class="headerlink" title="写屏障"></a>写屏障</h4><p>golang采用三色法作为GC的计算方式, 对于已经扫描过的对象, 如果检测是否由于用户逻辑的变化而引起的数据变化呢, golang中采用了写屏障的方式, 对扫描过后的对象使⽤操作系统写屏障功能⽤来监控⽤户逻辑这段内存。任何时候这段内存发⽣引⽤改变的时候就会造成写屏障发⽣⼀个信号，垃圾回收器会捕获到这样的信号后就知道这个对象发⽣改变，然后重新扫描这个对象，看看它的引⽤或者被引⽤是否被改变，这样利⽤状态的重置从⽽实现当对象状态发⽣改变的时候依然可以判断它是活着的还是死的</p>
+<h4 id="go语言垃圾回收总体采用的是经典的mark-and-sweep算法"><a href="#go语言垃圾回收总体采用的是经典的mark-and-sweep算法" class="headerlink" title="go语言垃圾回收总体采用的是经典的mark and sweep算法"></a>go语言垃圾回收总体采用的是经典的mark and sweep算法</h4><ul>
+<li><p>v1.3以前版本 STW（Stop The World)  </p>
+<p>  golang的垃圾回收算法都非常简陋，然后其性能也广被诟病:go runtime在一定条件下（内存超过阈值或定期如2min），暂停所有任务的执行，进行mark&amp;sweep操作，操作完成后启动所有任务的执行。在内存使用较多的场景下，go程序在进行垃圾回收时会发生非常明显的卡顿现象（Stop The World）。在对响应速度要求较高的后台服务进程中，这种延迟简直是不能忍受的！这个时期国内外很多在生产环境实践go语言的团队都或多或少踩过gc的坑。当时解决这个问题比较常用的方法是尽快控制自动分配内存的内存数量以减少gc负荷，同时采用手动管理内存的方法处理需要大量及高频分配内存的场景  </p>
+</li>
+<li><p>v1.3 Mark STW, Sweep 并行  </p>
+<p>  1.3版本中，go runtime分离了mark和sweep操作，和以前一样，也是先暂停所有任务执行并启动mark，mark完成后马上就重新启动被暂停的任务了，而是让sweep任务和普通协程任务一样并行的和其他任务一起执行。如果运行在多核处理器上，go会试图将gc任务放到单独的核心上运行而尽量不影响业务代码的执行。go team自己的说法是减少了50%-70%的暂停时间  </p>
+</li>
+<li><p>v1.5 三色标记法  </p>
+<p>  go 1.5正在实现的垃圾回收器是“非分代的、非移动的、并发的、三色的标记清除垃圾收集器”。引入了上文介绍的三色标记法，这种方法的mark操作是可以渐进执行的而不需每次都扫描整个内存空间，可以减少stop the world的时间。 由此可以看到，一路走来直到1.5版本，go的垃圾回收性能也是一直在提升，但是相对成熟的垃圾回收系统（如java jvm和javascript v8），go需要优化的路径还很长（但是相信未来一定是美好的~）  </p>
+</li>
+<li><p>v1.8 混合写屏障（hybrid write barrier）  </p>
+<p>  这个版本的 GC 代码相比之前改动还是挺大的，采用一种混合的 write barrier 方式 （Yuasa-style deletion write barrier [Yuasa ‘90] 和 Dijkstra-style insertion write barrier [Dijkstra ‘78]）来避免 堆栈重新扫描。</p>
+<p>  如果检测是否由于用户逻辑的变化而引起的数据变化呢, golang中采用了写屏障的方式, 对扫描过后的对象使⽤操作系统写屏障功能⽤来监控⽤户逻辑这段内存。任何时候这段内存发⽣引⽤改变的时候就会造成写屏障发⽣⼀个信号，垃圾回收器会捕获到这样的信号后就知道这个对象发⽣改变，然后重新扫描这个对象，看看它的引⽤或者被引⽤是否被改变，这样利⽤状态的重置从⽽实现当对象状态发⽣改变的时候依然可以判断它是活着的还是死的</p>
+<p>  混合屏障的优势在于它允许堆栈扫描永久地使堆栈变黑（没有STW并且没有写入堆栈的障碍），这完全消除了堆栈重新扫描的需要，从而消除了对堆栈屏障的需求。重新扫描列表。特别是堆栈障碍在整个运行时引入了显着的复杂性，并且干扰了来自外部工具（如GDB和基于内核的分析器）的堆栈遍历。</p>
+<p>  此外，与Dijkstra风格的写屏障一样，混合屏障不需要读屏障，因此指针读取是常规的内存读取; 它确保了进步，因为物体单调地从白色到灰色再到黑色。</p>
+<p>  混合屏障的缺点很小。它可能会导致更多的浮动垃圾，因为它会在标记阶段的任何时刻保留从根（堆栈除外）可到达的所有内容。然而，在实践中，当前的Dijkstra障碍可能几乎保留不变。混合屏障还禁止某些优化：特别是，如果Go编译器可以静态地显示指针是nil，则Go编译器当前省略写屏障，但是在这种情况下混合屏障需要写屏障。这可能会略微增加二进制大小。</p>
+</li>
+</ul>
+<p>通过go team多年对gc的不断改进和忧化，GC的卡顿问题在1.8 版本基本上可以做到 1 毫秒以下的 GC 级别。 实际上，gc低延迟是有代价的，其中最大的是吞吐量的下降。由于需要实现并行处理，线程间同步和多余的数据生成复制都会占用实际逻辑业务代码运行的时间。GHC的全局停止GC对于实现高吞吐量来说是十分合适的，而Go则更擅长与低延迟。 </p>
+<p>并行GC的第二个代价是不可预测的堆空间扩大。程序在GC的运行期间仍能不断分配任意大小的堆空间，因此我们需要在到达最大的堆空间之前实行一次GC，但是过早实行GC会造成不必要的GC扫描，这也是需要衡量利弊的。因此在使用Go时，需要自行保证程序有足够的内存空间</p>
+<h3 id="如何提高GC的性能"><a href="#如何提高GC的性能" class="headerlink" title="如何提高GC的性能"></a>如何提高GC的性能</h3><h4 id="触发GC"><a href="#触发GC" class="headerlink" title="触发GC"></a>触发GC</h4><p>GC触发的时机：2分钟或者内存占用达到一个阈值（当前堆内存占用是上次gc后对内存占用的两倍，当GOGC=100时）</p>
+<h4 id="GC的总时间"><a href="#GC的总时间" class="headerlink" title="GC的总时间"></a>GC的总时间</h4><blockquote>
+<p>Tgc = Tseq + Tmark + Tsweep(T表示time)</p>
+</blockquote>
+<p>Tseq表示是停止用户的goroutine和做一些准备活动（通常很小）需要的时间<br>Tmark是堆标记时间，标记发生在所有用户goroutine停止时，因此可以显著地影响处理的延迟<br>Tsweep是堆清除时间，清除通常与正常的程序运行同时发生，所以对延迟来说是不太关键的</p>
+<p>goroutine被停止后, GC将要开始的是时候会做一些准备工作,如写屏障设置等会执行STW<br>re-scan的时候执行STW,停止用户程序,检验已经扫描的元素是否发生引用的变化</p>
+<p>当前GC的算法是固定的, 用户不能够配置垃圾回收的算法,唯一能够更改就是垃圾回收的阀值, 即GOGC, 用来表示触发GC的条件。当前能够提升垃圾回收效率的唯一方式就是减少垃圾的产生,可通过下面的方式</p>
+<ul>
+<li>内存分配合理</li>
+<li>sync.Pool对象池,重复使用对象, 减少内存分配</li>
+<li>append使用, 提前设置cap的数量, 避免无故扩容</li>
+</ul>
+<h3 id="实践中的一些问题"><a href="#实践中的一些问题" class="headerlink" title="实践中的一些问题"></a>实践中的一些问题</h3><blockquote>
+<p>当停止大量的请求之后, 内存使用量并没有立即停止下来 原因可能如下:</p>
+</blockquote>
+<ul>
+<li>go的垃圾回收有个触发阈值，这个阈值会随着每次内存使用变大而逐渐增大（如初始阈值是10MB则下一次就是20MB，再下一次就成为了40MB…），如果长时间没有触发gc go会主动触发一次（2min）。高峰时内存使用量上去后，除非持续申请内存，靠阈值触发gc已经基本不可能，而是要等最多2min主动gc开始才能触发gc</li>
+<li>go语言在向系统交还内存时只是告诉系统这些内存不需要使用了，可以回收；同时操作系统会采取“拖延症”策略，并不是立即回收，而是等到系统内存紧张时才会开始回收这样该程序又重新申请内存时就可以获得极快的分配速度</li>
+</ul>
+<blockquote>
+<p>gc时间长的问题</p>
+</blockquote>
+<p>尽量避免频繁创建临时堆对象（如&amp;abc{}, new, make等）以减少垃圾收集时的扫描时间，对于需要频繁使用的临时对象考虑直接通过数组缓存进行重用</p>
+<blockquote>
+<p>goroutine泄露的问题</p>
+</blockquote>
+<p>我们的一个服务需要处理很多长连接请求，实现时，对于每个长连接请求各开了一个读取和写入协程，全部采用endless for loop不停地处理收发数据。当连接被远端关闭后，如果不对这两个协程做处理，他们依然会一直运行，并且占用的channel也不会被释放…这里就必须十分注意，在不使用协程后一定要把他依赖的channel close并通过再协程中判断channel是否关闭以保证其退出</p>
+<blockquote>
+<p>少量使用<code>+</code>连接string</p>
+</blockquote>
+<p><code>+</code>来进行string的连接会生成新的对象，降低gc的效率，好的方式是通过append函数来进行。</p>
+<blockquote>
+<p>string与[]byte转化 </p>
+</blockquote>
+<p>在stirng与[]byte之间进行转换，会给gc造成压力 通过gdb，可以先对比下两者的数据结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">type = struct []uint8 &#123; uint8 *array; int len; int cap;&#125;</span><br><span class="line">type = struct string &#123; uint8 *str; int len;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>两者发生转换的时候，底层数据结结构会进行复制，因此导致gc效率会变低。<br>解决策略上，一种方式是一直使用<code>[]byte</code>，特别是在数据传输方面，[]byte中也包含着许多string会常用到的有效的操作。<br>另一种是使用更为底层的操作直接进行转化，避免复制行为的发生。主要是使用unsafe.Pointer直接进行转化</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/04/16/算法-经典的Top-K问题/" class="prev">PREV</a><a href="/2017/04/19/Golang内存管理/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

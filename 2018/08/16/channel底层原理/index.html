@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> channel底层原理 · Fitzix</title><meta name="description" content="channel底层原理 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">channel底层原理</h1><div class="tags"><a href="/tags/go/" class="tag-title">#go</a><a href="/tags/channel/" class="tag-title">#channel</a></div><div class="post-info">Aug 16, 2018</div><div class="post-content"><p>Golang使用Groutine和channels实现了CSP(Communicating Sequential Processes)模型，channles在goroutine的通信和同步中承担着重要的角色。</p>
+<a id="more"></a>
+<h2 id="channel的整体结构图"><a href="#channel的整体结构图" class="headerlink" title="channel的整体结构图"></a>channel的整体结构图</h2><p><img src="https://ws3.sinaimg.cn/large/b09f1c9dly1g24g49tkszj20oy0ipwgr.jpg" alt=""></p>
+<ul>
+<li>buf是有缓冲的channel所特有的结构，用来存储缓存数据。是个循环链表</li>
+<li>sendx和recvx用于记录buf这个循环链表中的~发送或者接收的~index</li>
+<li>lock是个互斥锁</li>
+<li>recvq和sendq分别是接收(&lt;-channel)或者发送(channel &lt;- xxx)的goroutine抽象出来的结构体(sudog)的队列。是个双向链表</li>
+</ul>
+<p>源码位于/runtime/chan.go中(目前版本：1.11) 结构体为hchan</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> hchan <span class="keyword">struct</span> &#123;</span><br><span class="line">	qcount   <span class="keyword">uint</span>           <span class="comment">// total data in the queue</span></span><br><span class="line">	dataqsiz <span class="keyword">uint</span>           <span class="comment">// size of the circular queue</span></span><br><span class="line">	buf      unsafe.Pointer <span class="comment">// points to an array of dataqsiz elements</span></span><br><span class="line">	elemsize <span class="keyword">uint16</span></span><br><span class="line">	closed   <span class="keyword">uint32</span></span><br><span class="line">	elemtype *_type <span class="comment">// element type</span></span><br><span class="line">	sendx    <span class="keyword">uint</span>   <span class="comment">// send index</span></span><br><span class="line">	recvx    <span class="keyword">uint</span>   <span class="comment">// receive index</span></span><br><span class="line">	recvq    waitq  <span class="comment">// list of recv waiters</span></span><br><span class="line">	sendq    waitq  <span class="comment">// list of send waiters</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// lock protects all fields in hchan, as well as several</span></span><br><span class="line">	<span class="comment">// fields in sudogs blocked on this channel.</span></span><br><span class="line">	<span class="comment">//</span></span><br><span class="line">	<span class="comment">// Do not change another G's status while holding this lock</span></span><br><span class="line">	<span class="comment">// (in particular, do not ready a G), as this can deadlock</span></span><br><span class="line">	<span class="comment">// with stack shrinking.</span></span><br><span class="line">	lock mutex</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="先从创建开始"><a href="#先从创建开始" class="headerlink" title="先从创建开始"></a>先从创建开始</h2><p>创建一个channel<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure></p>
+<p>创建channel实际上就是在内存中实例化了一个hchan的结构体，并返回一个ch指针，我们使用过程中channel在函数之间的传递都是用的这个指针，这就是为什么函数传递中无需使用channel的指针，而直接用channel就行了，因为channel本身就是一个指针</p>
+<h3 id="channel中发送send-ch-lt-xxx-和recv-lt-ch-接收"><a href="#channel中发送send-ch-lt-xxx-和recv-lt-ch-接收" class="headerlink" title="channel中发送send(ch &lt;- xxx)和recv(&lt;- ch)接收"></a>channel中发送send(ch &lt;- xxx)和recv(&lt;- ch)接收</h3><p>先考虑一个问题，如果你想让goroutine以先进先出(FIFO)的方式进入一个结构体中，你会怎么操作？ 加锁！对的！channel就是用了一个锁。hchan本身包含一个互斥锁mutex</p>
+<h4 id="channel中队列是如何实现的"><a href="#channel中队列是如何实现的" class="headerlink" title="channel中队列是如何实现的"></a>channel中队列是如何实现的</h4><p>channel中有个缓存buf，是用来缓存数据的(假如实例化了带缓存的channel的话)队列。我们先来看看是如何实现“队列”的。 还是刚才创建的那个channel</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://wx1.sinaimg.cn/large/b09f1c9dly1g24hm3v1q2j20m80goabf.jpg" alt=""></p>
+<p>当使用<code>send (ch &lt;- xx)</code>或者<code>recv ( &lt;-ch)</code>的时候，首先要锁住hchan这个结构体。</p>
+<p><img src="https://wx3.sinaimg.cn/large/b09f1c9dly1g24hrd009zj20m80gowf6.jpg" alt=""></p>
+<p>然后开始send (ch &lt;- xx)数据</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ch &lt;- <span class="number">1</span></span><br><span class="line">ch &lt;- <span class="number">1</span></span><br><span class="line">ch &lt;- <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>队列塞不进去了 动态图表示为:</p>
+<p><img src="https://ws1.sinaimg.cn/large/b09f1c9dly1g24hsjihb5g20m80got9a.gif" alt=""></p>
+<p>然后是取recv ( &lt;-ch)的过程，是个逆向的操作，也是需要加锁。</p>
+<p><img src="https://ws4.sinaimg.cn/large/b09f1c9dly1g24htditfzj20m80got9q.jpg" alt=""></p>
+<p>然后开始recv (&lt;-ch)数据</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;-ch</span><br><span class="line">&lt;-ch</span><br><span class="line">&lt;-ch</span><br></pre></td></tr></table></figure>
+<p><img src="https://wx1.sinaimg.cn/large/b09f1c9dly1g24hur7e1vg20m80gojry.gif" alt=""></p>
+<p>注意以上两幅图中buf和recvx以及sendx的变化，recvx和sendx是根据循环链表buf的变动而改变的。<br>至于为什么channel会使用循环链表作为缓存结构，我个人认为是在缓存列表在动态的send和recv过程中，定位当前send或者recvx的位置、选择send的和recvx的位置比较方便吧，只要顺着链表顺序一直旋转操作就好。  </p>
+<p>缓存中按链表顺序存放，取数据的时候按链表顺序读取，符合FIFO的原则。</p>
+<h4 id="send-recv的细化操作"><a href="#send-recv的细化操作" class="headerlink" title="send/recv的细化操作"></a>send/recv的细化操作</h4><p>缓存链表中以上每一步的操作，都是需要加锁操作的！<br>每一步的操作的细节可以细化为：</p>
+<ul>
+<li>加锁</li>
+<li>把数据从goroutine中copy到“队列”中(或者从队列中copy到goroutine中）</li>
+<li>释放锁</li>
+</ul>
+<p>每一步的操作总结为动态图为：(发送过程)</p>
+<p><img src="https://ws2.sinaimg.cn/large/b09f1c9dly1g24hxrj6n4g20m80got9l.gif" alt=""></p>
+<p>接收过程</p>
+<p><img src="https://ws1.sinaimg.cn/large/b09f1c9dly1g24hy8pegxg20m80go3zg.gif" alt=""></p>
+<p>所以不难看出，Go中那句经典的话：<code>Do not communicate by sharing memory; instead, share memory by communicating.</code>的具体实现就是利用channel把数据从一端copy到了另一端！<br>还真是符合channel的英文含义：</p>
+<p><img src="https://wx2.sinaimg.cn/large/b09f1c9dly1g24hz09s7kg20m80go74v.gif" alt=""></p>
+<h4 id="当channel缓存满了之后会发生什么？这其中的原理是怎样的？"><a href="#当channel缓存满了之后会发生什么？这其中的原理是怎样的？" class="headerlink" title="当channel缓存满了之后会发生什么？这其中的原理是怎样的？"></a>当channel缓存满了之后会发生什么？这其中的原理是怎样的？</h4><p>使用的时候，我们都知道，当channel缓存满了，或者没有缓存的时候，我们继续send(ch &lt;- xxx)或者recv(&lt;- ch)会阻塞当前goroutine，但是，是如何实现的呢？</p>
+<p>我们知道，Go的goroutine是用户态的线程(user-space threads)，用户态的线程是需要自己去调度的，Go有运行时的scheduler去帮我们完成调度这件事情。关于Go的调度模型GMP模型我在此不做赘述，如果不了解，可以看另一篇文章(<a href="https://fitzix.github.io/2019/01/10/Goroutine%E7%9A%84%E8%B0%83%E5%BA%A6/" target="_blank" rel="noopener">Goroutine的调度</a>)</p>
+<p>goroutine的阻塞操作，实际上是调用send (ch &lt;- xx)或者recv ( &lt;-ch)的时候主动触发的，具体请看以下内容：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//goroutine1 中，记做G1</span></span><br><span class="line"></span><br><span class="line">ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">ch &lt;- <span class="number">1</span></span><br><span class="line">ch &lt;- <span class="number">1</span></span><br><span class="line">ch &lt;- <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://wx2.sinaimg.cn/large/b09f1c9dly1g24i38jrwuj20m80goq41.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/b09f1c9dly1g24i3hgvzbj20m80goabk.jpg" alt=""></p>
+<p>这个时候G1正在正常运行,当再次进行send操作(ch&lt;-1)的时候，会主动调用Go的调度器,让G1等待，并让出M，让其他G去使用</p>
+<p><img src="https://wx4.sinaimg.cn/large/b09f1c9dly1g24i4ztmzyj20m80gotc5.jpg" alt=""></p>
+<p>同时G1也会被抽象成含有G1指针和send元素的sudog结构体保存到hchan的sendq中等待被唤醒。</p>
+<p><img src="https://wx4.sinaimg.cn/large/b09f1c9dly1g24i5v4k3kg20m80go3zu.gif" alt=""></p>
+<p>那么，G1什么时候被唤醒呢？这个时候G2隆重登场。</p>
+<p><img src="https://ws2.sinaimg.cn/large/b09f1c9dly1g24i7hnwndj20m80gogmw.jpg" alt=""></p>
+<p>G2执行了recv操作p := &lt;-ch，于是会发生以下的操作：</p>
+<p><img src="https://wx2.sinaimg.cn/large/b09f1c9dly1g24i7sel6gg20m80godhw.gif" alt=""></p>
+<p>G2从缓存队列中取出数据，channel会将等待队列中的G1推出，将G1当时send的数据推到缓存中，然后调用Go的scheduler，唤醒G1，并把G1放到可运行的Goroutine队列中。</p>
+<p><img src="https://ws1.sinaimg.cn/large/b09f1c9dly1g24i8qxueig20m80gogmj.gif" alt=""></p>
+<p>假如是先进行执行recv操作的G2会怎么样？</p>
+<p><img src="https://wx4.sinaimg.cn/large/b09f1c9dly1g24iafv9ipj20m80go41h.jpg" alt=""></p>
+<p>这个时候G2会主动调用Go的调度器,让G2等待，并从让出M，让其他G去使用。 G2还会被抽象成含有G2指针和recv空元素的sudog结构体保存到hchan的recvq中等待被唤醒</p>
+<p><img src="https://wx4.sinaimg.cn/large/b09f1c9dly1g24iaxmr7ag20m80go0tt.gif" alt=""></p>
+<p>此时恰好有个goroutine G1开始向channel中推送数据 ch &lt;- 1。 此时，非常有意思的事情发生了：</p>
+<p><img src="https://wx1.sinaimg.cn/large/b09f1c9dly1g24ibc8cs3g20m80gojst.gif" alt=""></p>
+<p>G1并没有锁住channel，然后将数据放到缓存中，而是直接把数据从G1直接copy到了G2的栈中。 这种方式非常的赞！在唤醒过程中，G2无需再获得channel的锁，然后从缓存中取数据。减少了内存的copy，提高了效率。</p>
+<p>之后的事情显而易见</p>
+<p><img src="https://ws4.sinaimg.cn/large/b09f1c9dly1g24iprdqb9g20m80go757.gif" alt=""></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/10/22/AVL平衡二叉树中旋转/" class="prev">PREV</a><a href="/2018/06/10/Goroutine的调度/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>

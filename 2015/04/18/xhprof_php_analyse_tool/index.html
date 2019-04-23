@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="zh"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 性能优化工具–-XHProf安装与使用 · Fitzix</title><meta name="description" content="性能优化工具–-XHProf安装与使用 - fitzix"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/apollo.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="search" type="application/opensearchdescription+xml" href="https://github.com/fitzix/atom.xml" title="Fitzix"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="https://avatars0.githubusercontent.com/u/14334411?s=460&amp;v=4" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/fitzix" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">性能优化工具–-XHProf安装与使用</h1><div class="tags"><a href="/tags/php/" class="tag-title">#php</a></div><div class="post-info">Apr 18, 2015</div><div class="post-content"><p>XHProf是Facebook开源出来的一个PHP性能测试工具，他是一个轻量级的分析工具，跟xdebug差不多，但比 xdebug 分析的信息更加详细， 包括函数的调用次数，花费的时间（自身花费时间和包含内部函数花费的时间），所占内存/CPU，所占内存的峰值及所占百分比等，而xdebug对性能影响较大，即便是开启了<code>profiler_enable_trigger</code>参数，cpu也会立马飙到峰值。</p>
+<a id="more"></a>
+<p>关于如何下载、编译、安装、配置、使用、测试等的使用方法，这里贴出几篇比较好的博客供自己日后查看和备用，希望也可以方便到你们 :)</p>
+<p><a href="http://www.chenglin.name/php/optimization/439.html" target="_blank" rel="noopener">http://www.chenglin.name/php/optimization/439.html</a></p>
+<p><a href="http://www.cnblogs.com/bluefrog/archive/2012/03/01/2374922.html" target="_blank" rel="noopener">http://www.cnblogs.com/bluefrog/archive/2012/03/01/2374922.html</a></p>
+<p><a href="http://www.cnblogs.com/casatwy/archive/2013/01/17/2865241.html" target="_blank" rel="noopener">http://www.cnblogs.com/casatwy/archive/2013/01/17/2865241.html</a></p>
+<p><a href="http://www.onexin.net/php-practical-performance-analysis-tools-xhprof-facebook/" target="_blank" rel="noopener">http://www.onexin.net/php-practical-performance-analysis-tools-xhprof-facebook/</a></p>
+<p>(end)</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2015/04/20/yac_study_and_vs_memcache_note/" class="prev">PREV</a><a href="/2015/03/30/memcache_multiget_hole_note/" class="next">NEXT</a></div><div id="gitalk-container"></div><script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script><script>const gitalk = new Gitalk({
+    clientID: '0005895a71d0d3de1ae6',
+    clientSecret: 'e8a1b830b9588e99b5369bcf5ca60778420aec55',
+    repo: 'fitzix.github.io',
+    owner: 'fitzix',
+    admin: ['fitzix'],
+    id: location.pathname.substring(1, 51),
+    distractionFreeMode: false  // Facebook-like distraction free mode
+});
+gitalk.render('gitalk-container');</script><div class="copyright"><p>© 2015 - 2019 <a href="https://github.com/fitzix">fitzix</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/fitzix/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-137176691-1"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date())
+gtag('config', 'UA-137176691-1');</script></body></html>
